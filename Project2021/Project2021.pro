@@ -9,13 +9,36 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    bar_chart.cpp \
+    cartesian_chart.cpp \
+    chart.cpp \
+    comparison_chart.cpp \
+    dialog_entrance.cpp \
+    dot_chart.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    pie_chart.cpp \
+    radar_chart.cpp \
+    simple_bar_chart.cpp \
+    stacked_bar_chart.cpp \
+    time_chart.cpp
 
 HEADERS += \
-    mainwindow.h
+    bar_chart.h \
+    cartesian_chart.h \
+    chart.h \
+    comparison_chart.h \
+    dialog_entrance.h \
+    dot_chart.h \
+    mainwindow.h \
+    pie_chart.h \
+    radar_chart.h \
+    simple_bar_chart.h \
+    stacked_bar_chart.h \
+    time_chart.h
 
 FORMS += \
+    dialog_entrance.ui \
     mainwindow.ui
 
 TRANSLATIONS += \
@@ -27,3 +50,5 @@ CONFIG += embed_translations
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+DISTFILES +=

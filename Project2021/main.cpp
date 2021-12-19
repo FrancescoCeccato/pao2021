@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include "dialog_entrance.h"
 
 #include <QApplication>
 #include <QLocale>
@@ -17,7 +18,8 @@ int main(int argc, char *argv[])
             break;
         }
     }
-    MainWindow w;
+    //MainWindow w;
+    Dialog_Entrance w;
     w.show();
     return a.exec();
 }
