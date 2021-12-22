@@ -12,17 +12,22 @@ private:
         float x;
         float y;
 
-        bool operator==(const point& p) const;
-        bool operator<(const point&p) const;
+        bool operator==(const point&) const;
+        bool operator<(const point&) const;
+        point(float=0, float=0);
     };
-
-    std::set<point> points;
     std::string label_x, label_y;
 
-public:
-    cartesian_chart(std::string x = "X", std::string y = "Y");
+protected:
+    std::set<point> points;
 
-    virtual void add_point() = 0;
+public:
+
+    cartesian_chart(const std::string&, const std::string&, const std::string&);
+
+    virtual void add_point(float, float) = 0;
+    std::pair<float,float> get_point(uint index) const;
+    uint get_points_amount() const;
 };
 
 #endif // CARTESIAN_CHART_H

@@ -18,7 +18,8 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     pie_chart.cpp \
-    radar_chart.cpp \
+    polar_chart.cpp \
+    segmented_bar_chart.cpp \
     simple_bar_chart.cpp \
     stacked_bar_chart.cpp \
     time_chart.cpp
@@ -32,7 +33,8 @@ HEADERS += \
     dot_chart.h \
     mainwindow.h \
     pie_chart.h \
-    radar_chart.h \
+    polar_chart.h \
+    segmented_bar_chart.h \
     simple_bar_chart.h \
     stacked_bar_chart.h \
     time_chart.h

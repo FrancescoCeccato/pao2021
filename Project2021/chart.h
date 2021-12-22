@@ -7,8 +7,8 @@ class chart
 private:
     std::string title;
 public:
-    chart(std::string t = "");
-    virtual ~chart() {}
+    chart(const std::string&);
+    virtual ~chart();
 };
 
 #endif // CHART_H

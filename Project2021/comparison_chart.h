@@ -4,30 +4,35 @@
 #include <string>
 #include "chart.h"
 
-#define unsigned short uint
-
 class comparison_chart: public chart
 {
 private:
+
     class entry
     {
     private:
         std::string label;
-        std::vector<double> values;
+        double* values;
+        uint n_values;
 
-        double sum_values() const;
+        double give_sum() const;
     public:
-        entry();
-        double give_percentage(uint vindex) const;
+        entry(const std::string&, double* = nullptr);
+        ~entry();
+        operator double() const;
+        double give_value(uint) const;
+        double give_percentage(uint) const;
     };
 
-    std::vector<entry> entries;
-    uint entries_amt;
+protected:
+
+    std::vector<entry*> entries;
+    uint values_per_entry;
 
 public:
-    comparison_chart();
+    comparison_chart(uint, const std::string&);
 
-    virtual void addEntry(std::string title,std::vector<double> values);
+    virtual void add_entry(double*,const std::string& = "") = 0;
 };
 
 #endif // COMPARISON_CHART_H
