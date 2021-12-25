@@ -1,9 +1,6 @@
 #include "comparison_chart.h"
 
-comparison_chart::entry::entry(const std::string& title, double* val) : label(title)
-{
-
-}
+comparison_chart::entry::entry(uint num, double* val,const std::string& title) : label(title), values(val), n_values(num) {}
 
 comparison_chart::entry::~entry()
 {
@@ -22,14 +19,20 @@ double comparison_chart::entry::give_sum() const {
 }
 
 double comparison_chart::entry::give_value(uint index) const {
-    //exception handling?
-    return values[index];
+    if(index<n_values)
+        return values[index];
+    else return 0;
 }
 
 double comparison_chart::entry::give_percentage(uint index) const {
-    //exception handling?
-    return 100*values[index] / give_sum();
+    if(index<n_values)
+        return 100*values[index] / give_sum();
+    else return 0;
 }
 
 comparison_chart::comparison_chart(uint amt, const std::string& t) : chart(t), values_per_entry(amt) {}
 
+comparison_chart::~comparison_chart() {
+    for(auto it = entries.begin(); it != entries.end(); ++it)
+        delete *it;
+}

@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>newchart.png</file>
+        <file>openchart.png</file>
+    </qresource>
+</RCC>

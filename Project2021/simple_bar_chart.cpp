@@ -32,6 +32,17 @@ double simple_bar_chart::midrange() const {
     std::vector<double> v;
     for(uint i = 0; i<entries.size(); i++)
         v.push_back(*(entries[i]));
-    auto pair = std::minmax(v.begin(),v.end());
-    return (pair.second - pair.first);
+    auto pair = std::minmax_element(v.begin(),v.end());
+    return (*(pair.second) - *(pair.first));
+}
+
+void simple_bar_chart::add_entry(double* val,const std::string& label) {
+    entry* e = new entry(1,val,label);
+    entries.push_back(e);
+}
+
+void simple_bar_chart::add_entry(double val,const std::string& label) {
+    double* d = new double[1] {val};
+    entry* e = new entry(1,d,label);
+    entries.push_back(e);
 }

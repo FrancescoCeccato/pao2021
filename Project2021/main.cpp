@@ -1,9 +1,10 @@
-#include "mainwindow.h"
 #include "dialog_entrance.h"
 
 #include <QApplication>
 #include <QLocale>
 #include <QTranslator>
+
+#include <iostream>
 
 int main(int argc, char *argv[])
 {
@@ -18,8 +19,9 @@ int main(int argc, char *argv[])
             break;
         }
     }
-    //MainWindow w;
+
     Dialog_Entrance w;
     w.show();
     return a.exec();
+
 }

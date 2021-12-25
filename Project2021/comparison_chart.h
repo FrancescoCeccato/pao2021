@@ -6,7 +6,7 @@
 
 class comparison_chart: public chart
 {
-private:
+protected:
 
     class entry
     {
@@ -17,20 +17,19 @@ private:
 
         double give_sum() const;
     public:
-        entry(const std::string&, double* = nullptr);
+        entry(uint, double*, const std::string& ="");
         ~entry();
         operator double() const;
         double give_value(uint) const;
         double give_percentage(uint) const;
     };
 
-protected:
-
     std::vector<entry*> entries;
     uint values_per_entry;
 
 public:
     comparison_chart(uint, const std::string&);
+    ~comparison_chart();
 
     virtual void add_entry(double*,const std::string& = "") = 0;
 };

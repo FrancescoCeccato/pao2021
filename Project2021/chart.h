@@ -8,7 +8,9 @@ private:
     std::string title;
 public:
     chart(const std::string&);
-    virtual ~chart();
+    virtual ~chart() = default;
+
+    std::string get_title() const;
 };
 
 #endif // CHART_H

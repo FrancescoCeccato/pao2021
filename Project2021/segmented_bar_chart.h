@@ -9,7 +9,7 @@ private:
 public:
     segmented_bar_chart(uint);
 
-    void add_entry(const std::string&, double*) override;
+    void add_entry(double*, const std::string&) override;
 
 };
 
