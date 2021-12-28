@@ -1,5 +1,6 @@
 #ifndef CHART_H
 #define CHART_H
+typedef unsigned int uint;
 #include <string>
 
 class chart

@@ -24,6 +24,10 @@ double comparison_chart::entry::give_value(uint index) const {
     else return 0;
 }
 
+std::string comparison_chart::entry::give_label() const {
+    return label;
+}
+
 double comparison_chart::entry::give_percentage(uint index) const {
     if(index<n_values)
         return 100*values[index] / give_sum();

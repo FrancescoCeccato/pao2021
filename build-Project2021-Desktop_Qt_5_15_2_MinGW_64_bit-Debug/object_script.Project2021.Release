@@ -1,0 +1,16 @@
+release/bar_chart.o
+release/cartesian_chart.o
+release/chart.o
+release/comparison_chart.o
+release/dialog_entrance.o
+release/dot_chart.o
+release/main.o
+release/pie_chart.o
+release/polar_chart.o
+release/segmented_bar_chart.o
+release/simple_bar_chart.o
+release/stacked_bar_chart.o
+release/time_chart.o
+release/qrc_Resources.o
+release/qrc_qmake_qmake_qm_files.o
+release/moc_dialog_entrance.o
