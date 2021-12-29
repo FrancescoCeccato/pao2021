@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 6.0.1, 2021-12-29T02:54:25. -->
+<!-- Written by QtCreator 6.0.1, 2021-12-28T19:40:34. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
-  <value type="QByteArray">{be9db7e5-6662-42ad-b8b3-c971e6319393}</value>
+  <value type="QByteArray">{dccfa77d-16da-47c0-843a-cd1db53bce65}</value>
  </data>
  <data>
   <variable>ProjectExplorer.Project.ActiveTarget</variable>
@@ -70,21 +70,20 @@
    <valuemap type="QVariantMap" key="AutoTest.CheckStates"/>
    <value type="int" key="AutoTest.RunAfterBuild">0</value>
    <value type="bool" key="AutoTest.UseGlobal">true</value>
-   <valuelist type="QVariantList" key="ClangCodeModel.CustomCommandLineKey"/>
+   <valuelist type="QVariantList" key="ClangCodeModel.CustomCommandLineKey">
+    <value type="QString">-fno-delayed-template-parsing</value>
+   </valuelist>
    <value type="bool" key="ClangCodeModel.UseGlobalConfig">true</value>
    <value type="QString" key="ClangCodeModel.WarningConfigId">Builtin.BuildSystem</value>
    <valuemap type="QVariantMap" key="ClangTools">
     <value type="bool" key="ClangTools.AnalyzeOpenFiles">true</value>
     <value type="bool" key="ClangTools.BuildBeforeAnalysis">true</value>
     <value type="QString" key="ClangTools.DiagnosticConfig">Builtin.DefaultTidyAndClazy</value>
-    <value type="int" key="ClangTools.ParallelJobs">2</value>
+    <value type="int" key="ClangTools.ParallelJobs">4</value>
     <valuelist type="QVariantList" key="ClangTools.SelectedDirs"/>
     <valuelist type="QVariantList" key="ClangTools.SelectedFiles"/>
     <valuelist type="QVariantList" key="ClangTools.SuppressedDiagnostics"/>
     <value type="bool" key="ClangTools.UseGlobalSettings">true</value>
-   </valuemap>
-   <valuemap type="QVariantMap" key="CppEditor.QuickFix">
-    <value type="bool" key="UseGlobalSettings">true</value>
    </valuemap>
   </valuemap>
  </data>
@@ -241,8 +240,8 @@
     <valuelist type="QVariantList" key="CustomOutputParsers"/>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/home/kikkoceccato/Scrivania/pao2021/Project2021/Project2021.pro</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/kikkoceccato/Scrivania/pao2021/Project2021/Project2021.pro</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:D:/Users/mstoc/Documents/Progetto Programmazione/pao2021/pao2021/Project2021/Project2021.pro</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">D:/Users/mstoc/Documents/Progetto Programmazione/pao2021/pao2021/Project2021/Project2021.pro</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
     <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>

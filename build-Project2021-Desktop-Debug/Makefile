@@ -59,6 +59,7 @@ SOURCES       = ../Project2021/bar_chart.cpp \
 		../Project2021/dialog_entrance.cpp \
 		../Project2021/dot_chart.cpp \
 		../Project2021/main.cpp \
+		../Project2021/main_window.cpp \
 		../Project2021/pie_chart.cpp \
 		../Project2021/polar_chart.cpp \
 		../Project2021/segmented_bar_chart.cpp \
@@ -66,7 +67,8 @@ SOURCES       = ../Project2021/bar_chart.cpp \
 		../Project2021/stacked_bar_chart.cpp \
 		../Project2021/time_chart.cpp qrc_Resources.cpp \
 		qrc_qmake_qmake_qm_files.cpp \
-		moc_dialog_entrance.cpp
+		moc_dialog_entrance.cpp \
+		moc_main_window.cpp
 OBJECTS       = bar_chart.o \
 		cartesian_chart.o \
 		chart.o \
@@ -74,6 +76,7 @@ OBJECTS       = bar_chart.o \
 		dialog_entrance.o \
 		dot_chart.o \
 		main.o \
+		main_window.o \
 		pie_chart.o \
 		polar_chart.o \
 		segmented_bar_chart.o \
@@ -82,7 +85,8 @@ OBJECTS       = bar_chart.o \
 		time_chart.o \
 		qrc_Resources.o \
 		qrc_qmake_qmake_qm_files.o \
-		moc_dialog_entrance.o
+		moc_dialog_entrance.o \
+		moc_main_window.o
 DIST          = ../Project2021/newchart.png \
 		../Project2021/openchart.png \
 		/usr/lib/qt6/mkspecs/features/spec_pre.prf \
@@ -266,6 +270,7 @@ DIST          = ../Project2021/newchart.png \
 		../Project2021/comparison_chart.h \
 		../Project2021/dialog_entrance.h \
 		../Project2021/dot_chart.h \
+		../Project2021/main_window.h \
 		../Project2021/pie_chart.h \
 		../Project2021/polar_chart.h \
 		../Project2021/segmented_bar_chart.h \
@@ -278,6 +283,7 @@ DIST          = ../Project2021/newchart.png \
 		../Project2021/dialog_entrance.cpp \
 		../Project2021/dot_chart.cpp \
 		../Project2021/main.cpp \
+		../Project2021/main_window.cpp \
 		../Project2021/pie_chart.cpp \
 		../Project2021/polar_chart.cpp \
 		../Project2021/segmented_bar_chart.cpp \
@@ -675,8 +681,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents ../Project2021/Project2021_it_IT.ts $(DISTDIR)/
 	$(COPY_FILE) --parents ../Project2021/Resources.qrc qmake_qmake_qm_files.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/qt6/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../Project2021/bar_chart.h ../Project2021/cartesian_chart.h ../Project2021/chart.h ../Project2021/comparison_chart.h ../Project2021/dialog_entrance.h ../Project2021/dot_chart.h ../Project2021/pie_chart.h ../Project2021/polar_chart.h ../Project2021/segmented_bar_chart.h ../Project2021/simple_bar_chart.h ../Project2021/stacked_bar_chart.h ../Project2021/time_chart.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../Project2021/bar_chart.cpp ../Project2021/cartesian_chart.cpp ../Project2021/chart.cpp ../Project2021/comparison_chart.cpp ../Project2021/dialog_entrance.cpp ../Project2021/dot_chart.cpp ../Project2021/main.cpp ../Project2021/pie_chart.cpp ../Project2021/polar_chart.cpp ../Project2021/segmented_bar_chart.cpp ../Project2021/simple_bar_chart.cpp ../Project2021/stacked_bar_chart.cpp ../Project2021/time_chart.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../Project2021/bar_chart.h ../Project2021/cartesian_chart.h ../Project2021/chart.h ../Project2021/comparison_chart.h ../Project2021/dialog_entrance.h ../Project2021/dot_chart.h ../Project2021/main_window.h ../Project2021/pie_chart.h ../Project2021/polar_chart.h ../Project2021/segmented_bar_chart.h ../Project2021/simple_bar_chart.h ../Project2021/stacked_bar_chart.h ../Project2021/time_chart.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../Project2021/bar_chart.cpp ../Project2021/cartesian_chart.cpp ../Project2021/chart.cpp ../Project2021/comparison_chart.cpp ../Project2021/dialog_entrance.cpp ../Project2021/dot_chart.cpp ../Project2021/main.cpp ../Project2021/main_window.cpp ../Project2021/pie_chart.cpp ../Project2021/polar_chart.cpp ../Project2021/segmented_bar_chart.cpp ../Project2021/simple_bar_chart.cpp ../Project2021/stacked_bar_chart.cpp ../Project2021/time_chart.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../Project2021/Project2021_it_IT.ts $(DISTDIR)/
 
 
@@ -727,13 +733,18 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /usr/lib/qt6/mkspecs/features/data/dummy.cpp
 	g++ -pipe -g -Wall -Wextra -dM -E -o moc_predefs.h /usr/lib/qt6/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_dialog_entrance.cpp
+compiler_moc_header_make_all: moc_dialog_entrance.cpp moc_main_window.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_dialog_entrance.cpp
+	-$(DEL_FILE) moc_dialog_entrance.cpp moc_main_window.cpp
 moc_dialog_entrance.cpp: ../Project2021/dialog_entrance.h \
 		moc_predefs.h \
 		/usr/lib/qt6/moc
 	/usr/lib/qt6/moc $(DEFINES) --include /home/kikkoceccato/Scrivania/pao2021/build-Project2021-Desktop-Debug/moc_predefs.h -I/usr/lib/qt6/mkspecs/linux-g++ -I/home/kikkoceccato/Scrivania/pao2021/Project2021 -I/usr/include/qt6 -I/usr/include/qt6/QtWidgets -I/usr/include/qt6/QtGui -I/usr/include/qt6/QtCore -I. -I/usr/include/c++/11.1.0 -I/usr/include/c++/11.1.0/x86_64-pc-linux-gnu -I/usr/include/c++/11.1.0/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/include-fixed -I/usr/include ../Project2021/dialog_entrance.h -o moc_dialog_entrance.cpp
+
+moc_main_window.cpp: ../Project2021/main_window.h \
+		moc_predefs.h \
+		/usr/lib/qt6/moc
+	/usr/lib/qt6/moc $(DEFINES) --include /home/kikkoceccato/Scrivania/pao2021/build-Project2021-Desktop-Debug/moc_predefs.h -I/usr/lib/qt6/mkspecs/linux-g++ -I/home/kikkoceccato/Scrivania/pao2021/Project2021 -I/usr/include/qt6 -I/usr/include/qt6/QtWidgets -I/usr/include/qt6/QtGui -I/usr/include/qt6/QtCore -I. -I/usr/include/c++/11.1.0 -I/usr/include/c++/11.1.0/x86_64-pc-linux-gnu -I/usr/include/c++/11.1.0/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/include-fixed -I/usr/include ../Project2021/main_window.h -o moc_main_window.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -775,8 +786,11 @@ dot_chart.o: ../Project2021/dot_chart.cpp ../Project2021/dot_chart.h \
 		../Project2021/chart.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o dot_chart.o ../Project2021/dot_chart.cpp
 
-main.o: ../Project2021/main.cpp ../Project2021/dialog_entrance.h
+main.o: ../Project2021/main.cpp ../Project2021/main_window.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../Project2021/main.cpp
+
+main_window.o: ../Project2021/main_window.cpp ../Project2021/main_window.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main_window.o ../Project2021/main_window.cpp
 
 pie_chart.o: ../Project2021/pie_chart.cpp ../Project2021/pie_chart.h \
 		../Project2021/comparison_chart.h \
@@ -817,6 +831,9 @@ qrc_qmake_qmake_qm_files.o: qrc_qmake_qmake_qm_files.cpp
 
 moc_dialog_entrance.o: moc_dialog_entrance.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_dialog_entrance.o moc_dialog_entrance.cpp
+
+moc_main_window.o: moc_main_window.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_main_window.o moc_main_window.cpp
 
 ####### Install
 

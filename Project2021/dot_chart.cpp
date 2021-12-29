@@ -59,6 +59,14 @@ float dot_chart::variance_y() const {
     }
     else return 0;
 }
-float dot_chart::covariance() const {
 
+float dot_chart::covariance() const {
+    if(!points.empty())
+    {
+        float Ex = mean_x(), Ey = mean_y(), sum = 0;
+        for(uint i = 0; i<points.size(); i++)
+            sum += (points[i].x - Ex)*(points[i].y - Ey);
+        return sum/points.size();
+    }
+    else return 0;
 }

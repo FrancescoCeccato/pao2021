@@ -20,9 +20,10 @@ protected:
         entry(uint, double*, const std::string& ="");
         ~entry();
         operator double() const;
+
         double give_value(uint) const;
-        std::string give_label() const;
         double give_percentage(uint) const;
+        std::string give_label() const;
     };
 
     std::vector<entry*> entries;

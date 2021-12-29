@@ -1,5 +1,4 @@
 QT       += core gui charts
-
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++11
@@ -16,6 +15,7 @@ SOURCES += \
     dialog_entrance.cpp \
     dot_chart.cpp \
     main.cpp \
+    main_window.cpp \
     pie_chart.cpp \
     polar_chart.cpp \
     segmented_bar_chart.cpp \
@@ -30,6 +30,7 @@ HEADERS += \
     comparison_chart.h \
     dialog_entrance.h \
     dot_chart.h \
+    main_window.h \
     pie_chart.h \
     polar_chart.h \
     segmented_bar_chart.h \
@@ -37,7 +38,8 @@ HEADERS += \
     stacked_bar_chart.h \
     time_chart.h
 
-FORMS +=
+FORMS += \
+    test.ui
 
 TRANSLATIONS += \
     Project2021_it_IT.ts
