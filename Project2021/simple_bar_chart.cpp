@@ -2,7 +2,7 @@
 #include <map>
 #include "simple_bar_chart.h"
 
-simple_bar_chart::simple_bar_chart(const std::string& title): bar_chart(1,title) {}
+simple_bar_chart::simple_bar_chart(const std::string& title, bool h): bar_chart(1,title,h) {}
 
 double simple_bar_chart::mean() const {
     return give_mean(0);

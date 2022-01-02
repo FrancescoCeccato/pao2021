@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <math.h>
 #include "dot_chart.h"
 
@@ -6,6 +7,18 @@ dot_chart::dot_chart(const std::string& title, const std::string& x, const std::
 void dot_chart::add_point(float x, float y){
     points.push_back(point(x,y));
 }
+
+void dot_chart::delete_point(float a, float b)
+{
+    auto it = std::find(points.begin(), points.end(), point(a,b));
+    if(it != points.end())
+        points.erase(it);
+    else
+    {
+        //throw exception
+    }
+}
+
 std::vector<std::pair<float,float>> dot_chart::get_points() const {
     std::vector<std::pair<float,float>> v;
     for(uint i = 0; i<points.size(); i++)
@@ -49,6 +62,7 @@ float dot_chart::variance_x() const {
     }
     else return 0;
 }
+
 float dot_chart::variance_y() const {
     if(!points.empty())
     {

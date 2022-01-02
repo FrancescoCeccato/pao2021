@@ -1,4 +1,4 @@
-#include "main_window.h"
+#include "charts_main_window.h"
 
 #include <QApplication>
 #include <QLocale>
@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
     }
 
     //Dialog_Entrance w;
-    Main_Window w;
+    Charts_Main_Window w;
     w.show();
     return a.exec();
 

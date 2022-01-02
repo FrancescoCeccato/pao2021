@@ -11,7 +11,7 @@ double pie_chart::give_total_sum() const {
     return sum;
 }
 
-double pie_chart::give_slice_percentage(uint index) const{
+double pie_chart::give_slice_percentage(uint index) const {
     auto size = entries.size();
     if(index<size){
         return 100*(*entries[index])/give_total_sum();
@@ -19,7 +19,7 @@ double pie_chart::give_slice_percentage(uint index) const{
         return 0;
 }
 
-std::pair<double, std::string> pie_chart::give_max() const{
+std::pair<double, std::string> pie_chart::give_max() const {
     std::vector<std::pair<double,std::string>> v;
     for(uint i = 0; i<entries.size(); ++i){
         v.push_back(std::pair<double,std::string>(*entries[i], entries[i]->give_label()));

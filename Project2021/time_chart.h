@@ -17,12 +17,13 @@ public:
     time_chart(const std::string& ="Grafico", const std::string& ="X", const std::string& ="Y");
 
     void add_point(float, float) override;
+    void delete_point(float,float) override;
     std::vector<std::pair<float,float>> get_points() const override;
     uint get_points_amount() const override;
 
     float give_balance(float,float) const;
-    float give_max() const;
     float give_min() const;
+    float give_max() const;
 };
 
 #endif // TIME_CHART_H

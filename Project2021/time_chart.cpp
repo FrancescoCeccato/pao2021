@@ -5,11 +5,20 @@
 time_chart::time_chart(const std::string& title, const std::string& x, const std::string& y): cartesian_chart(title,x,y) {}
 
 void time_chart::add_point(float x, float y){
-    auto a = points.insert((point(x,y)));
+    auto a = points.insert(point(x,y));
     if(!a.second)
     {
         std::cout<<"Porcodio!";
         //lancia eccezione?
+    }
+}
+
+void time_chart::delete_point(float x, float y)
+{
+    auto result = points.erase(point(x,y));
+    if(result == 0)
+    {
+        //throw exception;
     }
 }
 
@@ -33,6 +42,7 @@ float time_chart::give_balance(float a,float b) const {
     if(it != points.end())
         first = it->y;
     else std::cout << "oof";
+    //lancia eccezione
 
 
     it = std::find_if(
@@ -41,6 +51,7 @@ float time_chart::give_balance(float a,float b) const {
     if(it != points.end())
         last = it->y;
     else std::cout << "oof";
+    //lancia eccezione
 
     return last-first;
 }
