@@ -14,6 +14,7 @@ public:
 
     void add_entry(double*,const std::string& = "") override;
     void add_entry(double,const std::string& = "");
+    void remove_entry(uint) override;
 };
 
 #endif // SIMPLE_BAR_CHART_H

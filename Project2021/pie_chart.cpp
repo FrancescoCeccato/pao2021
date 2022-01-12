@@ -1,5 +1,6 @@
 #include <vector>
 #include <algorithm>
+#include <stdexcept>
 #include "pie_chart.h"
 
 pie_chart::pie_chart(const std::string& title): comparison_chart(1,title){}
@@ -40,5 +41,13 @@ void pie_chart::add_entry(double val,const std::string& label) {
     entry* e = new entry(1,d,label);
     entries.push_back(e);
 }
+
+void pie_chart::remove_entry(uint index){
+    if(index >= entries.size())
+        throw std::out_of_range("Index greater than the number of entries");
+    else
+        entries.erase(entries.begin()+index);
+}
+
 
 

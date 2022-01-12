@@ -46,3 +46,10 @@ void simple_bar_chart::add_entry(double val,const std::string& label) {
     entry* e = new entry(1,d,label);
     entries.push_back(e);
 }
+
+void simple_bar_chart::remove_entry(uint index){
+    if(index >= entries.size())
+        throw std::out_of_range("Index greater than the number of entries");
+    else
+        entries.erase(entries.begin()+index);
+}

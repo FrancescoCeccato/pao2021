@@ -18,8 +18,10 @@ SOURCES += \
     dialog_entrance.cpp \
     dot_chart.cpp \
     main.cpp \
+    model.cpp \
     pie_chart.cpp \
     polar_chart.cpp \
+    presenter_chart_view.cpp \
     simple_bar_chart.cpp \
     stacked_bar_chart.cpp \
     time_chart.cpp
@@ -34,8 +36,10 @@ HEADERS += \
     comparison_chart.h \
     dialog_entrance.h \
     dot_chart.h \
+    model.h \
     pie_chart.h \
     polar_chart.h \
+    presenter_chart_view.h \
     simple_bar_chart.h \
     stacked_bar_chart.h \
     time_chart.h

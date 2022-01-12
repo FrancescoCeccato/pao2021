@@ -34,6 +34,22 @@ double comparison_chart::entry::give_percentage(uint index) const {
     else return 0;
 }
 
+comparison_chart::entry* comparison_chart::get_entry(uint index) const{
+    if(index < entries.size())
+        return entries[index];
+    else{
+        //throw exception
+    }
+}
+
+uint comparison_chart::get_entries_size() const{
+    return entries.size();
+}
+
+uint comparison_chart::get_nvalues() const{
+    return values_per_entry;
+}
+
 comparison_chart::comparison_chart(uint amt, const std::string& t) : chart(t), values_per_entry(amt) {}
 
 comparison_chart::~comparison_chart() {

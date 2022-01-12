@@ -13,6 +13,7 @@ public:
 
     void add_entry(double*,const std::string& = "") override;
     void add_entry(double,const std::string& = "");
+    void remove_entry(uint) override;
 };
 
 #endif // PIE_CHART_H

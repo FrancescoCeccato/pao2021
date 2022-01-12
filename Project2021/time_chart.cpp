@@ -24,8 +24,12 @@ void time_chart::delete_point(float x, float y)
 
 std::vector<std::pair<float,float>> time_chart::get_points() const {
     std::vector<std::pair<float,float>> v;
-    for(auto it = points.begin(); it != points.end(); it++)
+    for(auto it = points.begin(); it != points.end(); it++){
         v.push_back(std::pair<float,float>(it->x,it->y));
+    }
+    std::sort(v.begin(),v.end(),
+              [](const std::pair<const float, const float>& p1, const std::pair<const float, const float>& p2) {
+                                return p1.first < p2.first; });
     return v;
 }
 

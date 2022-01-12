@@ -6,8 +6,7 @@
 
 class comparison_chart: public chart
 {
-protected:
-
+public:
     class entry
     {
     private:
@@ -25,17 +24,20 @@ protected:
         double give_percentage(uint) const;
         std::string give_label() const;
     };
-
+protected:
     std::vector<entry*> entries;
     uint values_per_entry;
 
 public:
     comparison_chart(uint, const std::string&);
     ~comparison_chart();
-
+    entry* get_entry(uint)const;
+    uint get_nvalues() const;
+    uint get_entries_size() const;
     virtual void add_entry(double*,const std::string& = "") = 0;
-    virtual void update_entry(uint,double*) = 0;
-    virtual void delete_entry(uint) = 0;
+    //virtual void update_entry(uint,double*) = 0;
+    //virtual void delete_entry(uint) = 0;
+    virtual void remove_entry(uint) = 0;
 };
 
 #endif // COMPARISON_CHART_H
