@@ -8,16 +8,14 @@
 class Charts_Main_Window : public QMainWindow
 {
     Q_OBJECT
-private:
+public:
     QChartView *chartView;
-    QTreeView *valuesList;
-    QListView *statsList;
+    QTreeWidget *valuesList;
+    QListWidget *statsList;
     QPushButton *zoomIn, *zoomOut, *repaint, *settings, *TC_Calculate;
     QLabel *TC_Result;
     QSpinBox *TC_SpinBox1, *TC_SpinBox2;
     QToolBar *toolBarBottom;
-
-public:
     explicit Charts_Main_Window(QWidget *parent = nullptr);
 
 signals:

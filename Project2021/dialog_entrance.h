@@ -11,13 +11,9 @@ class Dialog_Entrance : public QWidget
 {
     Q_OBJECT
 
-private:
-    QVBoxLayout *main, *lLeft, *lRight;
-    QHBoxLayout *container;
+public: 
     QPushButton *btnLeft, *btnRight;
     QLabel *lblLeft1, *lblRight1,*lblLeft2, *lblRight2;
-
-public:
     explicit Dialog_Entrance(QWidget *parent = nullptr);
 
 signals:

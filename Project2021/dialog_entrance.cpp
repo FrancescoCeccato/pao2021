@@ -5,19 +5,19 @@
 Dialog_Entrance::Dialog_Entrance(QWidget *parent)
     : QWidget{parent}
 {
-    main = new QVBoxLayout();
+    QVBoxLayout* main = new QVBoxLayout();
     QPalette pal = QPalette();
     pal.setColor(QPalette::Window, QColor(135,235,255));
 
-    container = new QHBoxLayout();
-    lLeft = new QVBoxLayout();
+    QHBoxLayout* container = new QHBoxLayout();
+    QVBoxLayout* lLeft = new QVBoxLayout();
     lLeft->setAlignment(Qt::AlignRight);
-    lRight = new QVBoxLayout();
+    QVBoxLayout* lRight = new QVBoxLayout();
     lRight->setAlignment(Qt::AlignLeft);
 
     btnLeft = new QPushButton();
     btnLeft->setFixedSize(BTN_SIDE,BTN_SIDE);
-    QPixmap pixmap1(":/images/newchart.png");
+    QPixmap pixmap1(":/images/new.png");
     QIcon ButtonIcon1(pixmap1);
     btnLeft->setIconSize(QSize(0.75*BTN_SIDE,0.75*BTN_SIDE));
     btnLeft->setIcon(ButtonIcon1);
@@ -32,7 +32,7 @@ Dialog_Entrance::Dialog_Entrance(QWidget *parent)
 
     btnRight = new QPushButton();
     btnRight->setFixedSize(BTN_SIDE,BTN_SIDE);
-    QPixmap pixmap2(":/images/openchart.png");
+    QPixmap pixmap2(":/images/open.png");
     QIcon ButtonIcon2(pixmap2);
     btnRight->setIconSize(QSize(0.75*BTN_SIDE,0.75*BTN_SIDE));
     btnRight->setIcon(ButtonIcon2);

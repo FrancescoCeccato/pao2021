@@ -37,6 +37,17 @@ double comparison_chart::entry::give_percentage(uint index) const {
 comparison_chart::comparison_chart(uint amt, const std::string& t) : chart(t), values_per_entry(amt) {}
 
 comparison_chart::~comparison_chart() {
-    for(auto it = entries.begin(); it != entries.end(); ++it)
-        delete *it;
+    for(uint i = 0; i<entries.size(); i++)
+        delete entries[i];
+}
+
+void comparison_chart::update_entry(uint index, double *values) {
+    auto string = entries[index]->give_label();
+    delete entries[index];
+    entries[index] =
+}
+
+void comparison_chart::delete_entry(uint index) {
+    delete entries[index];
+    entries.erase(entries.begin()+index);
 }

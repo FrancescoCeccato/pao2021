@@ -5,7 +5,7 @@
 class simple_bar_chart: public bar_chart
 {
 public:
-    simple_bar_chart(const std::string& ="", bool = false);
+    simple_bar_chart(const std::string& = "", bool = false);
 
     double mean() const;
     double median() const;

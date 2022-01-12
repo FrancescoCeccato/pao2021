@@ -30,7 +30,7 @@ void polar_chart::add_entry(double* val,const std::string& label) {
 }
 
 void polar_chart::add_entry(double val,const std::string& label) {
-    double* d = new double[1] {std::round(val)};
-    entry* e = new entry(1,d,label);
-    entries.push_back(e);
+    double* d = new double[1] {val};
+    add_entry(d,label);
 }
+

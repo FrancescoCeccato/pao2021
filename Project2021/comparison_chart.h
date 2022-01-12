@@ -35,7 +35,7 @@ public:
 
     virtual void add_entry(double*,const std::string& = "") = 0;
     virtual void update_entry(uint,double*) = 0;
-    virtual void delete_entry(uint) = 0;
+    void delete_entry(uint);
 };
 
 #endif // COMPARISON_CHART_H

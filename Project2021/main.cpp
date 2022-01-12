@@ -1,4 +1,7 @@
 #include "charts_main_window.h"
+#include "charts_comparisonchart_editor.h"
+#include "charts_cartesianchart_addpoints.h"
+#include "charts_chartcreation.h"
 
 #include <QApplication>
 #include <QLocale>
@@ -21,9 +24,12 @@ int main(int argc, char *argv[])
         }
     }
 
-    //Dialog_Entrance w;
-    Charts_Main_Window w;
-    w.show();
+    Charts_Cartesianchart_AddPoints* w = new Charts_Cartesianchart_AddPoints();
+    //Charts_Comparisonchart_Editor* w = new Charts_Comparisonchart_Editor();
+    //Charts_ChartCreation* w = new Charts_ChartCreation();
+    //Charts_Main_Window* w = new Charts_Main_Window();
+
+    w->show();
     return a.exec();
 
 }
