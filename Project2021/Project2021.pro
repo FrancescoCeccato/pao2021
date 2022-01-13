@@ -11,6 +11,8 @@ SOURCES += \
     bar_chart.cpp \
     cartesian_chart.cpp \
     chart.cpp \
+    charts_cartesianchart_addpoints.cpp \
+    charts_chartcreation.cpp \
     charts_comparisonchart_editor.cpp \
     charts_main_window.cpp \
     charts_presenter.cpp \
@@ -30,6 +32,8 @@ HEADERS += \
     bar_chart.h \
     cartesian_chart.h \
     chart.h \
+    charts_cartesianchart_addpoints.h \
+    charts_chartcreation.h \
     charts_comparisonchart_editor.h \
     charts_main_window.h \
     charts_presenter.h \
@@ -58,7 +62,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
-    newchart.png \
     openchart.png
 
 RESOURCES += \

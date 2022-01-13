@@ -1,6 +1,12 @@
 <RCC>
     <qresource prefix="/images">
-        <file>newchart.png</file>
-        <file>openchart.png</file>
+        <file>new.png</file>
+        <file>open.png</file>
+        <file>pencil.png</file>
+        <file>save.png</file>
+        <file>paint.png</file>
+        <file>dot.png</file>
+        <file>square.png</file>
     </qresource>
+    <qresource prefix="/"/>
 </RCC>

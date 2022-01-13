@@ -13,44 +13,62 @@
 #include <time_chart.h>
 
 
-#define BTN_SIDE 150
+#define BTN_SIDE 100
 
 Charts_Main_Window::Charts_Main_Window(QWidget *parent)
     : QMainWindow{parent}
 {
     this->statusBar()->showMessage("porcodio");
-    auto menu = new QMenu();
-    menu->addMenu("porcodio");
-    menu->addMenu("oof");
-    menu->setTitle("uno");
-    this->menuBar()->addMenu(menu);
-    this->menuBar()->addMenu("Due");
+    this->menuBar()->addAction("Guida...");
 
     QPalette pal1 = QPalette();
-    pal1.setColor(QPalette::Window, QColor(135,235,255));
+    pal1.setColor(QPalette::Window, QColor(200,235,255));
     QPalette pal2 = QPalette();
-    pal2.setColor(QPalette::Background, QColor::fromRgb(255,255,255));
+    pal2.setColor(QPalette::Background, QColor(255,255,255));
 
 
     chartView = new QChartView();
     chartView->setRenderHint(QPainter::Antialiasing);
     this->setCentralWidget(chartView);
 
-
     QDockWidget* dock1 = new QDockWidget("LISTA DEI VALORI",this);
     dock1->setFeatures(QDockWidget::DockWidgetMovable | QDockWidget::DockWidgetFloatable);
     dock1->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
-    valuesList = new QTreeView();
+    valuesList = new QTreeWidget();
+    QList<QString> list;
+    list.append("oof");
+    list.append("mock statale");
+    list.append("vafangul");
+    QStringList strings(list);
+    auto item1 = new QTreeWidgetItem();
+    item1->setText(0,"oof");
+    QPixmap p(":/images/square.png");
+    QIcon iconDot(p);
+    item1->setIcon(0,iconDot);
+    auto item2 = new QTreeWidgetItem();
+    item2->setText(0,"demented");
+    auto item = new QTreeWidgetItem(list);
+    item1->addChild(item2);
+    valuesList->addTopLevelItem(item1);
+
 
     QDockWidget* dock2 = new QDockWidget("MODIFICA COLLEZIONE...",this);
     dock2->setFeatures(QDockWidget::DockWidgetMovable | QDockWidget::DockWidgetFloatable);
     dock2->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
     settings = new QPushButton();
+    QPixmap pixmap1(":/images/pencil.png");
+    QIcon ButtonIcon1(pixmap1);
+    settings->setIconSize(QSize(0.75*BTN_SIDE,0.75*BTN_SIDE));
+    settings->setIcon(ButtonIcon1);
+    settings->setCursor(Qt::CursorShape::PointingHandCursor);
 
     QDockWidget* dock3 = new QDockWidget("STATISTICHE DI RIEPILOGO",this);
     dock3->setFeatures(QDockWidget::DockWidgetMovable | QDockWidget::DockWidgetFloatable);
     dock3->setAllowedAreas(Qt::BottomDockWidgetArea | Qt::TopDockWidgetArea);
-    statsList = new QListView();
+    statsList = new QListWidget();
+    statsList->addItem("oof");
+    statsList->addItem("ouch");
+    statsList->setStyleSheet("QListWidget::item { border-bottom: 1px solid lightgray; padding: 2px; }");
 
     QDockWidget* dock4 = new QDockWidget("CALCOLO BILANCIO",this);
     dock4->setFeatures(QDockWidget::DockWidgetMovable | QDockWidget::DockWidgetFloatable);
@@ -101,9 +119,33 @@ Charts_Main_Window::Charts_Main_Window(QWidget *parent)
     setCorner(Qt::TopLeftCorner,Qt::LeftDockWidgetArea);
 
     QToolBar* toolBarTop = new QToolBar();
-    QPixmap pixmap1(":/images/newchart.png");
-    QIcon ButtonIcon1(pixmap1);
-    toolBarTop->addAction(ButtonIcon1, "porcoddio");
+    QPixmap pixmap2(":/images/new.png");
+    QIcon ButtonIcon2(pixmap2);
+    toolBarTop->addAction(ButtonIcon2, "Crea nuovo...");
+    addToolBar(Qt::TopToolBarArea,toolBarTop);
+
+    QPixmap pixmap4(":/images/save.png");
+    QIcon ButtonIcon4(pixmap4);
+    toolBarTop->addAction(ButtonIcon4, "Salva grafico corrente...");
+    addToolBar(Qt::TopToolBarArea,toolBarTop);
+
+    QPixmap pixmap5(":/images/open.png");
+    QIcon ButtonIcon5(pixmap5);
+    toolBarTop->addAction(ButtonIcon5, "Apri grafico da file...");
+    addToolBar(Qt::TopToolBarArea,toolBarTop);
+
+    toolBarTop->addSeparator();
+
+    QPixmap pixmap3(":/images/pencil.png");
+    QIcon ButtonIcon3(pixmap3);
+    toolBarTop->addAction(ButtonIcon3, "Modifica collezione...");
+    addToolBar(Qt::TopToolBarArea,toolBarTop);
+
+    toolBarTop->addSeparator();
+
+    QPixmap pixmap6(":/images/paint.png");
+    QIcon ButtonIcon6(pixmap6);
+    toolBarTop->addAction(ButtonIcon6, "Imposta schema colori...");
     addToolBar(Qt::TopToolBarArea,toolBarTop);
 
     this->setPalette(pal1);

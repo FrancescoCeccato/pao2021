@@ -11,22 +11,29 @@ class presenter_chart_view;
 class Charts_Main_Window : public QMainWindow
 {
     Q_OBJECT
+<<<<<<< HEAD
 
 private:
     presenter_chart_view* c;
+=======
+public:
+>>>>>>> main
     QChartView *chartView;
-    QTreeView *valuesList;
-    QListView *statsList;
+    QTreeWidget *valuesList;
+    QListWidget *statsList;
     QPushButton *zoomIn, *zoomOut, *repaint, *settings, *TC_Calculate;
     QLabel *TC_Result;
     QSpinBox *TC_SpinBox1, *TC_SpinBox2;
     QToolBar *toolBarBottom;
+<<<<<<< HEAD
     //test
 public:
     QLineEdit *prova;
     QPushButton *crea;
 
 public:
+=======
+>>>>>>> main
     explicit Charts_Main_Window(QWidget *parent = nullptr);
     void set_chart_presenter(presenter_chart_view* ccw);
     void set_text(std::string);
