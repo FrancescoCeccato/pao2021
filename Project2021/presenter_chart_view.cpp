@@ -28,8 +28,6 @@ void presenter_chart_view::add_entry_comparison(){
 }
 
 void presenter_chart_view::show_title(){
-    //charts_mw->set_text(mod->get_title());
-    //charts_mw->set_text("Prova");
     std::string t = mod->get_title();
     charts_mw->set_text(t);
 }

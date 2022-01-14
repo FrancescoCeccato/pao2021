@@ -1,7 +1,8 @@
 release/bar_chart.o
 release/cartesian_chart.o
 release/chart.o
-release/chart_factory.o
+release/charts_cartesianchart_addpoints.o
+release/charts_chartcreation.o
 release/charts_comparisonchart_editor.o
 release/charts_main_window.o
 release/charts_presenter.o
@@ -18,6 +19,8 @@ release/stacked_bar_chart.o
 release/time_chart.o
 release/qrc_Resources.o
 release/qrc_qmake_qmake_qm_files.o
+release/moc_charts_cartesianchart_addpoints.o
+release/moc_charts_chartcreation.o
 release/moc_charts_comparisonchart_editor.o
 release/moc_charts_main_window.o
 release/moc_charts_presenter.o

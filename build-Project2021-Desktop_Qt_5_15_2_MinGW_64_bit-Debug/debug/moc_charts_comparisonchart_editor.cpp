@@ -21,25 +21,25 @@
 QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
-struct qt_meta_stringdata_charts_comparisonchart_editor_t {
+struct qt_meta_stringdata_Charts_Comparisonchart_Editor_t {
     QByteArrayData data[1];
     char stringdata0[30];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
-    qptrdiff(offsetof(qt_meta_stringdata_charts_comparisonchart_editor_t, stringdata0) + ofs \
+    qptrdiff(offsetof(qt_meta_stringdata_Charts_Comparisonchart_Editor_t, stringdata0) + ofs \
         - idx * sizeof(QByteArrayData)) \
     )
-static const qt_meta_stringdata_charts_comparisonchart_editor_t qt_meta_stringdata_charts_comparisonchart_editor = {
+static const qt_meta_stringdata_Charts_Comparisonchart_Editor_t qt_meta_stringdata_Charts_Comparisonchart_Editor = {
     {
-QT_MOC_LITERAL(0, 0, 29) // "charts_comparisonchart_editor"
+QT_MOC_LITERAL(0, 0, 29) // "Charts_Comparisonchart_Editor"
 
     },
-    "charts_comparisonchart_editor"
+    "Charts_Comparisonchart_Editor"
 };
 #undef QT_MOC_LITERAL
 
-static const uint qt_meta_data_charts_comparisonchart_editor[] = {
+static const uint qt_meta_data_Charts_Comparisonchart_Editor[] = {
 
  // content:
        8,       // revision
@@ -55,7 +55,7 @@ static const uint qt_meta_data_charts_comparisonchart_editor[] = {
        0        // eod
 };
 
-void charts_comparisonchart_editor::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void Charts_Comparisonchart_Editor::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     Q_UNUSED(_o);
     Q_UNUSED(_id);
@@ -63,30 +63,30 @@ void charts_comparisonchart_editor::qt_static_metacall(QObject *_o, QMetaObject:
     Q_UNUSED(_a);
 }
 
-QT_INIT_METAOBJECT const QMetaObject charts_comparisonchart_editor::staticMetaObject = { {
+QT_INIT_METAOBJECT const QMetaObject Charts_Comparisonchart_Editor::staticMetaObject = { {
     QMetaObject::SuperData::link<QWidget::staticMetaObject>(),
-    qt_meta_stringdata_charts_comparisonchart_editor.data,
-    qt_meta_data_charts_comparisonchart_editor,
+    qt_meta_stringdata_Charts_Comparisonchart_Editor.data,
+    qt_meta_data_Charts_Comparisonchart_Editor,
     qt_static_metacall,
     nullptr,
     nullptr
 } };
 
 
-const QMetaObject *charts_comparisonchart_editor::metaObject() const
+const QMetaObject *Charts_Comparisonchart_Editor::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
-void *charts_comparisonchart_editor::qt_metacast(const char *_clname)
+void *Charts_Comparisonchart_Editor::qt_metacast(const char *_clname)
 {
     if (!_clname) return nullptr;
-    if (!strcmp(_clname, qt_meta_stringdata_charts_comparisonchart_editor.stringdata0))
+    if (!strcmp(_clname, qt_meta_stringdata_Charts_Comparisonchart_Editor.stringdata0))
         return static_cast<void*>(this);
     return QWidget::qt_metacast(_clname);
 }
 
-int charts_comparisonchart_editor::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int Charts_Comparisonchart_Editor::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QWidget::qt_metacall(_c, _id, _a);
     return _id;

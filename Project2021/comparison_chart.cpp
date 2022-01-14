@@ -57,11 +57,11 @@ comparison_chart::~comparison_chart() {
         delete entries[i];
 }
 
-void comparison_chart::update_entry(uint index, double *values) {
+/*void comparison_chart::update_entry(uint index, double *values) {
     auto string = entries[index]->give_label();
     delete entries[index];
     entries[index] =
-}
+}*/
 
 void comparison_chart::delete_entry(uint index) {
     delete entries[index];

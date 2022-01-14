@@ -15,7 +15,7 @@ public:
 
     void add_entry(double*,const std::string& = "") override;
     void add_entry(double,const std::string& = "");
-    void remove_entry(uint) override;
+    //void remove_entry(uint) override;
 };
 
 #endif // POLAR_CHART_H

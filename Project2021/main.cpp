@@ -1,13 +1,9 @@
 #include "charts_main_window.h"
-<<<<<<< HEAD
 #include "presenter_chart_view.h"
 #include "model.h"
-=======
 #include "charts_comparisonchart_editor.h"
 #include "charts_cartesianchart_addpoints.h"
 #include "charts_chartcreation.h"
->>>>>>> main
-
 #include <QApplication>
 #include <QLocale>
 #include <QTranslator>
@@ -28,7 +24,6 @@ int main(int argc, char *argv[])
         }
     }
 
-<<<<<<< HEAD
     presenter_chart_view c;
     model m;
     Charts_Main_Window w;
@@ -38,14 +33,12 @@ int main(int argc, char *argv[])
     //Dialog_Entrance w;
 
     w.show();
-=======
-    Charts_Cartesianchart_AddPoints* w = new Charts_Cartesianchart_AddPoints();
+    //Charts_Cartesianchart_AddPoints* w = new Charts_Cartesianchart_AddPoints();
     //Charts_Comparisonchart_Editor* w = new Charts_Comparisonchart_Editor();
     //Charts_ChartCreation* w = new Charts_ChartCreation();
     //Charts_Main_Window* w = new Charts_Main_Window();
 
-    w->show();
->>>>>>> main
+    //w->show();
     return a.exec();
 
 }
