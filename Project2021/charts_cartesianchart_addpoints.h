@@ -17,6 +17,7 @@ public:
     QLabel* signalLabel;
     explicit Charts_Cartesianchart_AddPoints(QWidget *parent = nullptr);
 
+
 signals:
 
 };

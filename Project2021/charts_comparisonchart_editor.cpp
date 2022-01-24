@@ -1,4 +1,7 @@
 #include "charts_comparisonchart_editor.h"
+#include <presenter_chart_view.h>
+#include <charts_main_window.h>
+#include "iostream"
 
 Charts_Comparisonchart_Editor::Charts_Comparisonchart_Editor(QWidget *parent)
     : QWidget{parent}
@@ -39,3 +42,11 @@ Charts_Comparisonchart_Editor::Charts_Comparisonchart_Editor(QWidget *parent)
     p.setColor(QPalette::Window, QColor(200,235,255));
     this->setPalette(p);
 }
+
+void Charts_Comparisonchart_Editor::set_chart_presenter(presenter_chart_view* ccw){
+    c = ccw;
+    connect(okButton, SIGNAL(clicked()), c, SLOT(add_entry_comparison()));
+}
+
+void Charts_Comparisonchart_Editor::set_mainchart_view(Charts_Main_Window* cmw){charts_mw = cmw;}
+

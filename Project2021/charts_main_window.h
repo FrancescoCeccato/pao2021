@@ -5,8 +5,10 @@
 #include <QtCharts>
 #include <QHBoxLayout>
 #include <chart.h>
+#include <charts_comparisonchart_editor.h>
 
 class presenter_chart_view;
+
 
 class Charts_Main_Window : public QMainWindow
 {
@@ -14,6 +16,7 @@ class Charts_Main_Window : public QMainWindow
 
 private:
     presenter_chart_view* c;
+    Charts_Comparisonchart_Editor* comp_editor;
 public:
     QChartView *chartView;
     QTreeWidget *valuesList;
@@ -24,19 +27,22 @@ public:
     QToolBar *toolBarBottom;
     //test
 public:
-    QLineEdit *prova;
-    QPushButton *crea;
-
-public:
     explicit Charts_Main_Window(QWidget *parent = nullptr);
     void set_chart_presenter(presenter_chart_view* ccw);
+    void set_comparison_editor(Charts_Comparisonchart_Editor* cce);
     void set_text(std::string);
-    void show_simple_bar_chart(const chart*);
-    void show_stacked_bar_chart(const chart*);
-    void show_pie_chart(const chart*);
-    void show_time_chart(const chart*);
+    void show_charts(chart*);
+    void show_simple_bar_chart(chart*);
+    void show_stacked_bar_chart(chart*);
+    void show_pie_chart(chart*);
+    void show_time_chart(chart*);
+    void showParent_list_values(chart*);
+    void showChild_list_values(QTreeWidgetItem* ,const chart*, uint);
 
 signals:
+
+public slots:
+    void open_settings();
 
 };
 

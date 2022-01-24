@@ -64,6 +64,8 @@ comparison_chart::~comparison_chart() {
 }*/
 
 void comparison_chart::delete_entry(uint index) {
-    delete entries[index];
-    entries.erase(entries.begin()+index);
+    if(index<entries.size()){
+        delete entries[index];
+        entries.erase(entries.begin()+index);
+    }
 }

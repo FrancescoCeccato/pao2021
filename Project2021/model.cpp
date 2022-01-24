@@ -8,7 +8,7 @@
 
 model::model(const std::string& title) : c(new chart(title)){}
 
-void model::add_comparison_charts(uint code, std::string title, uint amt, bool h, bool seg){
+void model::add_charts(uint code, std::string title, uint amt, bool h, bool seg, std::string x, std::string y){
     switch (code) {
     case 1:
         c = new simple_bar_chart(title,h);
@@ -22,15 +22,10 @@ void model::add_comparison_charts(uint code, std::string title, uint amt, bool h
     case 4:
         c = new polar_chart(title);
         break;
-    }
-}
-
-void model::add_cartesian_charts(uint code, std::string title, std::string x, std::string y){
-    switch (code) {
-    case 1:
+    case 5:
         c = new time_chart(title, x, y);
         break;
-    case 2:
+    case 6:
         c = new dot_chart(title, x, y);
         break;
     }
@@ -64,9 +59,14 @@ void model::add_entry_comparison(uint code, double * val, std::string label){
     }
 }
 
+void model::delete_entries(uint i){
+    comparison_chart* cc = static_cast<comparison_chart*>(c);
+    cc->delete_entry(i);
+}
+
 std::string model::get_title() const {return c->get_title();}
 
-const chart* model::get_chart() const{
+chart* model::get_chart() const{
     return c;
 }
 

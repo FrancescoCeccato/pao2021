@@ -1,4 +1,5 @@
 #include "charts_chartcreation.h"
+#include <presenter_chart_view.h>
 
 Charts_ChartCreation::Charts_ChartCreation(QWidget *parent)
     : QWidget{parent}
@@ -9,6 +10,9 @@ Charts_ChartCreation::Charts_ChartCreation(QWidget *parent)
     auto vlButtons = new QVBoxLayout();
 
     imageView = new QGraphicsView();
+    scene = new QGraphicsScene();
+    imageView->setScene(scene);
+    imageView->scale(0.85,0.85);
     auto labelTitle = new QLabel("Titolo");
     labelTitle->setStyleSheet("font-weight: bold;");
     labelTitle->setAlignment(Qt::AlignCenter);
@@ -73,4 +77,31 @@ Charts_ChartCreation::Charts_ChartCreation(QWidget *parent)
     QPalette p = QPalette();
     p.setColor(QPalette::Window, QColor(200,235,255));
     this->setPalette(p);
+    connect(radioGroup , SIGNAL(buttonClicked(QAbstractButton*)), this, SLOT(set_chart()));
+
+}
+
+void Charts_ChartCreation::set_chart_presenter(presenter_chart_view* ccw){
+    c = ccw;
+    connect(btnCreate, SIGNAL(clicked()), c, SLOT(add_charts()));
+}
+
+void Charts_ChartCreation::set_chart(){
+    if(b1->isChecked())
+        selected = 1;
+    else if(b2->isChecked()){
+        selected = 2;
+        scene->clear();
+        QPixmap px(":/images/StackedBar.png");
+        scene->addPixmap(px);
+        scene->setSceneRect(0,0,1440,724);
+    }
+    else if(b3->isChecked())
+        selected = 3;
+    else if(b4->isChecked())
+        selected = 4;
+    else if(b5->isChecked())
+        selected = 5;
+    else if(b1->isChecked())
+        selected = 6;
 }

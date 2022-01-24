@@ -26,13 +26,21 @@ int main(int argc, char *argv[])
 
     presenter_chart_view c;
     model m;
-    Charts_Main_Window w;
-    c.set_chart_view(&w);
+    Charts_Main_Window* mw = new Charts_Main_Window();
+    Charts_ChartCreation* w = new Charts_ChartCreation();
+    Charts_Comparisonchart_Editor* e = new Charts_Comparisonchart_Editor();
+    c.set_chartcreation_view(w);
+    c.set_mainchart_view(mw);
+    c.set_comparisoneditor_view(e);
     c.set_model(&m);
-    w.set_chart_presenter(&c);
+    mw->set_comparison_editor(e);
+    w->set_chart_presenter(&c);
+    e->set_mainchart_view(mw);
+    e->set_chart_presenter(&c);
+
     //Dialog_Entrance w;
 
-    w.show();
+    w->show();
     //Charts_Cartesianchart_AddPoints* w = new Charts_Cartesianchart_AddPoints();
     //Charts_Comparisonchart_Editor* w = new Charts_Comparisonchart_Editor();
     //Charts_ChartCreation* w = new Charts_ChartCreation();

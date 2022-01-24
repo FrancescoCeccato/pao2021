@@ -23,7 +23,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_presenter_chart_view_t {
     QByteArrayData data[5];
-    char stringdata0[76];
+    char stringdata0[65];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -33,14 +33,14 @@ struct qt_meta_stringdata_presenter_chart_view_t {
 static const qt_meta_stringdata_presenter_chart_view_t qt_meta_stringdata_presenter_chart_view = {
     {
 QT_MOC_LITERAL(0, 0, 20), // "presenter_chart_view"
-QT_MOC_LITERAL(1, 21, 21), // "add_comparison_charts"
-QT_MOC_LITERAL(2, 43, 0), // ""
-QT_MOC_LITERAL(3, 44, 20), // "add_entry_comparison"
-QT_MOC_LITERAL(4, 65, 10) // "show_title"
+QT_MOC_LITERAL(1, 21, 10), // "add_charts"
+QT_MOC_LITERAL(2, 32, 0), // ""
+QT_MOC_LITERAL(3, 33, 20), // "add_entry_comparison"
+QT_MOC_LITERAL(4, 54, 10) // "show_title"
 
     },
-    "presenter_chart_view\0add_comparison_charts\0"
-    "\0add_entry_comparison\0show_title"
+    "presenter_chart_view\0add_charts\0\0"
+    "add_entry_comparison\0show_title"
 };
 #undef QT_MOC_LITERAL
 
@@ -76,7 +76,7 @@ void presenter_chart_view::qt_static_metacall(QObject *_o, QMetaObject::Call _c,
         auto *_t = static_cast<presenter_chart_view *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->add_comparison_charts(); break;
+        case 0: _t->add_charts(); break;
         case 1: _t->add_entry_comparison(); break;
         case 2: _t->show_title(); break;
         default: ;

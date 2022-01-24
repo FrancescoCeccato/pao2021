@@ -35,7 +35,7 @@ Charts_Main_Window::Charts_Main_Window(QWidget *parent)
     dock1->setFeatures(QDockWidget::DockWidgetMovable | QDockWidget::DockWidgetFloatable);
     dock1->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
     valuesList = new QTreeWidget();
-    QList<QString> list;
+    /*QList<QString> list;
     list.append("oof");
     list.append("mock statale");
     list.append("vafangul");
@@ -47,9 +47,9 @@ Charts_Main_Window::Charts_Main_Window(QWidget *parent)
     item1->setIcon(0,iconDot);
     auto item2 = new QTreeWidgetItem();
     item2->setText(0,"demented");
-    auto item = new QTreeWidgetItem(list);
+    //auto item = new QTreeWidgetItem(list);
     item1->addChild(item2);
-    valuesList->addTopLevelItem(item1);
+    valuesList->addTopLevelItem(item1);*/
 
 
     QDockWidget* dock2 = new QDockWidget("MODIFICA COLLEZIONE...",this);
@@ -82,10 +82,7 @@ Charts_Main_Window::Charts_Main_Window(QWidget *parent)
     TC_Result->setAlignment(Qt::AlignCenter);
     TC_Result->setFrameShape(QFrame::Panel);
     TC_Result->setFrameShadow(QFrame::Sunken);
-    prova = new QLineEdit("");
-    prova->setPlaceholderText("insert chart title...");
-    prova->setAlignment(Qt::AlignCenter);
-    crea = new QPushButton("Crea");
+
 
 
     auto label1 = new QLabel("INIZIO");
@@ -96,8 +93,6 @@ Charts_Main_Window::Charts_Main_Window(QWidget *parent)
     grid->addWidget(TC_SpinBox2,1,1);
     grid->addWidget(TC_Calculate,2,0);
     grid->addWidget(TC_Result,2,1);
-    grid->addWidget(prova, 3,0);
-    grid->addWidget(crea,3,1);
     grid->setRowStretch(0|1|2|3,1);
     grid->setColumnStretch(0|1,1);
     auto widgetMock = new QWidget();
@@ -152,7 +147,15 @@ Charts_Main_Window::Charts_Main_Window(QWidget *parent)
     this->menuBar()->setPalette(pal2);
     this->statusBar()->setPalette(pal2);
     statusBar()->setStyleSheet("background-color: white");
-    /*time_chart t = time_chart("Test", "X", "Y");
+    connect(settings, SIGNAL(clicked()), this, SLOT(open_settings()));
+    /*simple_bar_chart sb = simple_bar_chart("prova", false);
+    sb.add_entry(5, "A");
+    sb.add_entry(6, "B");
+    sb.add_entry(4, "C");
+    sb.add_entry(7, "D");
+    sb.add_entry(9, "E");
+    show_charts(&sb);
+    time_chart t = time_chart("Test", "X", "Y");
     t.add_point(3,8);
     t.add_point(5,4);
     t.add_point(4,6);
@@ -161,26 +164,29 @@ Charts_Main_Window::Charts_Main_Window(QWidget *parent)
     t.add_point(6,2);
     t.add_point(7,5);
     show_time_chart(&t);
-    pie_chart p = pie_chart("Cibo per settimana");
-    p.add_entry(20, "Grassi");
-    p.add_entry(10, "Zuccheri");
-    p.add_entry(30, "Proteine");
-    p.add_entry(40, "Carboidrati");
+    showParent_list_values(&t);
+    pie_chart pc = pie_chart("Cibo per settimana");
+    pc.add_entry(20, "Grassi");
+    pc.add_entry(10, "Zuccheri");
+    pc.add_entry(30, "Proteine");
+    pc.add_entry(40, "Carboidrati");
+    showParent_list_values(&pc);
     show_pie_chart(&p);
-    stacked_bar_chart s = stacked_bar_chart(5, false, "Voti", false);
-    double* d1 = new double[5] {6,5,8,9,6};
-    double* d2 = new double[5] {7,4,9,7,5};
-    double* d3 = new double[5] {8,6,8,6,7};
-    double* d4 = new double[5] {7,8,10,10,7};
-    double* d5 = new double[5] {8,7,9,10,8};
-    s.add_entry(d1, "John");
-    s.add_entry(d2, "Veronica");
-    s.add_entry(d3, "Bob");
-    s.add_entry(d4, "Alessia");
-    s.add_entry(d5, "Anna");
-    std::vector<std::string> categories{"Verifica 1", "Verifica 2", "Verifica 3", "Verifica 4", "Verifica 5"};
+    stacked_bar_chart s = stacked_bar_chart(6, false, "Voti", false);
+    double* d1 = new double[6] {6,5,8,9,6,7};
+    double* d2 = new double[6] {7,4,9,7,5,7};
+    double* d3 = new double[6] {8,6,8,6,7,9};
+    double* d4 = new double[6] {7,8,10,10,7,8};
+    double* d5 = new double[6] {8,7,9,10,8,9};
+    s.add_entry(d1, "Verifica 1");
+    s.add_entry(d2, "Verifica 2");
+    s.add_entry(d3, "Verifica 3");
+    s.add_entry(d4, "Verifica 4");
+    s.add_entry(d5, "Verifica 5");
+    std::vector<std::string> categories{"Jessica", "Federico", "Alessia", "Bob", "Marko","Anna"};
     s.set_categories(categories);
-    show_stacked_bar_chart(&s);*/
+    show_stacked_bar_chart(&s);
+    showParent_list_values(&s);*/
     //set_text(s);
 }
 
@@ -190,11 +196,14 @@ void Charts_Main_Window::set_text(std::string s){
 
 void Charts_Main_Window::set_chart_presenter(presenter_chart_view* ccw){
     c = ccw;
-    connect(crea, SIGNAL(clicked()), c, SLOT(add_comparison_charts()));
-    connect(TC_Calculate, SIGNAL(clicked()), c, SLOT(add_entry_comparison()));
 }
 
-void Charts_Main_Window::show_simple_bar_chart(const chart* c){
+void Charts_Main_Window::set_comparison_editor(Charts_Comparisonchart_Editor* cce){
+    comp_editor = cce;
+}
+
+
+void Charts_Main_Window::show_simple_bar_chart(chart* c){
      const simple_bar_chart* simple_bc = dynamic_cast<const simple_bar_chart*>(c);
      if(simple_bc && !simple_bc->is_horizontal()){
          QChart* chart = new QChart();
@@ -221,7 +230,7 @@ void Charts_Main_Window::show_simple_bar_chart(const chart* c){
      }
 }
 
-void Charts_Main_Window::show_stacked_bar_chart(const chart* c){
+void Charts_Main_Window::show_stacked_bar_chart(chart* c){
     const stacked_bar_chart* stacked_bc = dynamic_cast<const stacked_bar_chart*>(c);
     if(stacked_bc && !stacked_bc->is_horizontal()){
         QChart* chart = new QChart();
@@ -234,11 +243,11 @@ void Charts_Main_Window::show_stacked_bar_chart(const chart* c){
         axisY->setMinorTickCount(4);
         chart->addAxis(axisY, Qt::AlignLeft);
         QStackedBarSeries* series = new QStackedBarSeries();
-        for(uint i = 0; i<stacked_bc->get_entries_size();++i){
-             QBarSet* set = new QBarSet(QString::fromStdString(stacked_bc->get_entry(i)->give_label()));
-             for(uint j = 0; j<stacked_bc->get_nvalues();++j){
-                 set->append(stacked_bc->get_entry(i)->give_value(j));
-                 categories.append(QString::fromStdString(stacked_bc->get_categories(j)));
+        for(uint i = 0; i<stacked_bc->get_nvalues();++i){
+             QBarSet* set = new QBarSet(QString::fromStdString(stacked_bc->get_categories(i)));
+             for(uint j = 0; j<stacked_bc->get_entries_size();++j){
+                 set->append(stacked_bc->get_entry(j)->give_value(i));
+                 categories.append(QString::fromStdString(stacked_bc->get_entry(j)->give_label()));
              }
              series->append(set);
         }
@@ -253,7 +262,7 @@ void Charts_Main_Window::show_stacked_bar_chart(const chart* c){
     }
 }
 
-void Charts_Main_Window::show_pie_chart(const chart* c){
+void Charts_Main_Window::show_pie_chart(chart* c){
     const pie_chart* pie_c = dynamic_cast<const pie_chart*>(c);
     if(pie_c){
         QChart* chart = new QChart();
@@ -271,7 +280,7 @@ void Charts_Main_Window::show_pie_chart(const chart* c){
     }
 }
 
-void Charts_Main_Window::show_time_chart(const chart* c){
+void Charts_Main_Window::show_time_chart(chart* c){
     const time_chart* time_c = dynamic_cast<const time_chart*>(c);
     if(time_c){
         QChart* chart = new QChart();
@@ -305,6 +314,54 @@ void Charts_Main_Window::show_time_chart(const chart* c){
     }
 }
 
+void Charts_Main_Window::showParent_list_values(chart* c){
+     const comparison_chart* cp = dynamic_cast<const comparison_chart*>(c);
+     if(cp){
+         QPixmap p(":/images/square.png");
+         QIcon iconDot(p);
+         for(uint i = 0; i<cp->get_entries_size();++i){
+             auto item = new QTreeWidgetItem();
+             item->setText(0, QString::fromStdString(cp->get_entry(i)->give_label()));
+             item->setIcon(0,iconDot);
+             showChild_list_values(item, cp, i);
+             valuesList->addTopLevelItem(item);
+         }
+     }else{
+         const cartesian_chart* cc = static_cast<cartesian_chart*>(c);
+         QPixmap p(":/images/dot.png");
+         QIcon iconDot(p);
+         std::vector<std::pair<float,float>> points = cc->get_points();
+         for(uint i = 0; i<cc->get_points_amount();++i){
+             auto item = new QTreeWidgetItem();
+             item->setText(0, "(" + QString::number(points[i].first) + "," + QString::number(points[i].second)+ ")");
+             item->setIcon(0,iconDot);
+             valuesList->addTopLevelItem(item);
+         }
+     }
+}
+
+void Charts_Main_Window::showChild_list_values(QTreeWidgetItem* parent, const chart* cp, uint index){
+    const stacked_bar_chart* stacked_bc = dynamic_cast<const stacked_bar_chart*>(cp);
+    if(stacked_bc){
+        for(uint i = 0; i<stacked_bc->get_nvalues();++i){
+            auto categ = new QTreeWidgetItem();
+            QString s = QString::number(stacked_bc->get_entry(index)->give_value(i));
+            categ->setText(0, QString::fromStdString(stacked_bc->get_categories(i)) + " -> " + s);
+            parent->addChild(categ);
+        }
+    }
+}
+
+void Charts_Main_Window::show_charts(chart* c){
+    show_simple_bar_chart(c);
+    show_stacked_bar_chart(c);
+    show_pie_chart(c);
+    show_time_chart(c);
+}
+
+void Charts_Main_Window::open_settings(){
+    comp_editor->show();
+}
 
 
 
