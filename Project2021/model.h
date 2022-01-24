@@ -10,6 +10,7 @@ public:
     model(const std::string& = "");
     void add_charts(uint, std::string, uint, bool, bool, std::string, std::string);
     void add_entry_comparison(uint, double*, std::string);
+    void add_point(uint,float, float);
     void delete_entries();
     void add_info(uint);
     std::string get_title() const;

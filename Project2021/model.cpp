@@ -59,6 +59,22 @@ void model::add_entry_comparison(uint code, double * val, std::string label){
     }
 }
 
+void model::add_point(uint code,float x, float y){
+    switch (code) {
+    case 5:{
+        time_chart* tc = static_cast<time_chart*>(c);
+        tc->add_point(x,y);
+        break;
+    }
+    {
+    case 6:
+        dot_chart* dc = static_cast<dot_chart*>(c);
+        dc->add_point(x,y);
+        break;
+    }
+    }
+}
+
 void model::delete_entries(){
     comparison_chart* cc = static_cast<comparison_chart*>(c);
     uint size = cc->get_entries_size();

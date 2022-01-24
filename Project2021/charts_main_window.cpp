@@ -9,6 +9,7 @@
 #include <simple_bar_chart.h>
 #include <stacked_bar_chart.h>
 #include <pie_chart.h>
+#include <polar_chart.h>
 #include <charts_main_window.h>
 #include <time_chart.h>
 
@@ -172,7 +173,7 @@ Charts_Main_Window::Charts_Main_Window(QWidget *parent)
     pc.add_entry(40, "Carboidrati");
     showParent_list_values(&pc);
     show_pie_chart(&p);
-    stacked_bar_chart s = stacked_bar_chart(6, false, "Voti", false);
+    stacked_bar_chart s = stacked_bar_chart(6, false, "Voti", true);
     double* d1 = new double[6] {6,5,8,9,6,7};
     double* d2 = new double[6] {7,4,9,7,5,7};
     double* d3 = new double[6] {8,6,8,6,7,9};
@@ -187,6 +188,14 @@ Charts_Main_Window::Charts_Main_Window(QWidget *parent)
     s.set_categories(categories);
     show_stacked_bar_chart(&s);
     showParent_list_values(&s);*/
+    polar_chart p = polar_chart("Voti");
+    p.add_entry(30, "Magia");
+    p.add_entry(45, "Resistenza");
+    p.add_entry(70, "Forza");
+    p.add_entry(80, "Agilità");
+    p.add_entry(50, "Special");
+    p.add_entry(30, "Cura");
+    show_polar_chart(&p);
     //set_text(s);
 }
 
@@ -200,6 +209,10 @@ void Charts_Main_Window::set_chart_presenter(presenter_chart_view* ccw){
 
 void Charts_Main_Window::set_comparison_editor(Charts_Comparisonchart_Editor* cce){
     comp_editor = cce;
+}
+
+void Charts_Main_Window::set_cartesian_editor(Charts_Cartesianchart_AddPoints* cap){
+    cart_editor = cap;
 }
 
 
@@ -227,6 +240,28 @@ void Charts_Main_Window::show_simple_bar_chart(chart* c){
          chart->legend()->setVisible(true);
          chart->legend()->setAlignment(Qt::AlignLeft);
          chartView->setChart(chart);
+     }else if(simple_bc && simple_bc->is_horizontal()){
+         QChart* chart = new QChart();
+         chart->setTitle(QString::fromStdString(simple_bc->get_title()));
+         QStringList label;
+         QBarCategoryAxis *axisY = new QBarCategoryAxis();
+         QValueAxis *axisX = new QValueAxis();
+         axisX->setRange(0, 10);
+         chart->addAxis(axisX, Qt::AlignBottom);
+         for(uint i = 0; i<simple_bc->get_entries_size();++i){
+              QHorizontalBarSeries* series = new QHorizontalBarSeries();
+              QBarSet* set = new QBarSet(QString::fromStdString(simple_bc->get_entry(i)->give_label()));
+              *set << simple_bc->get_entry(i)->give_value(0);
+              series->append(set);
+              chart->addSeries(series);
+              label.append(QString::fromStdString(simple_bc->get_entry(i)->give_label()));
+              series->attachAxis(axisX);
+         }
+         axisY->append(label);
+         chart->addAxis(axisY, Qt::AlignLeft);
+         chart->legend()->setVisible(true);
+         chart->legend()->setAlignment(Qt::AlignLeft);
+         chartView->setChart(chart);
      }
 }
 
@@ -243,7 +278,7 @@ void Charts_Main_Window::show_stacked_bar_chart(chart* c){
         axisY->setMinorTickCount(4);
         chart->addAxis(axisY, Qt::AlignLeft);
         QStackedBarSeries* series = new QStackedBarSeries();
-        for(uint i = 0; i<stacked_bc->get_nvalues();++i){
+        for(uint i = 0; i<stacked_bc->get_nvalues() && stacked_bc->get_entries_size() > 0;++i){
              QBarSet* set = new QBarSet(QString::fromStdString(stacked_bc->get_categories(i)));
              for(uint j = 0; j<stacked_bc->get_entries_size();++j){
                  set->append(stacked_bc->get_entry(j)->give_value(i));
@@ -259,6 +294,33 @@ void Charts_Main_Window::show_stacked_bar_chart(chart* c){
         chart->legend()->setAlignment(Qt::AlignBottom);
         chart->setAnimationOptions(QChart::SeriesAnimations);
         chartView->setChart(chart);
+    }else if(stacked_bc && stacked_bc->is_horizontal()){
+        QChart* chart = new QChart();
+        chart->setTitle(QString::fromStdString(stacked_bc->get_title()));
+        QStringList categories;
+        QBarCategoryAxis *axisY = new QBarCategoryAxis();
+        QValueAxis *axisX = new QValueAxis();
+        axisX->setRange(0, stacked_bc->get_nvalues()*10);
+        axisX->setTickCount(11);
+        axisX->setMinorTickCount(4);
+        chart->addAxis(axisX, Qt::AlignBottom);
+        QHorizontalStackedBarSeries* series = new QHorizontalStackedBarSeries();
+        for(uint i = 0; i<stacked_bc->get_nvalues() && stacked_bc->get_entries_size() > 0;++i){
+             QBarSet* set = new QBarSet(QString::fromStdString(stacked_bc->get_categories(i)));
+             for(uint j = 0; j<stacked_bc->get_entries_size();++j){
+                 set->append(stacked_bc->get_entry(j)->give_value(i));
+                 categories.append(QString::fromStdString(stacked_bc->get_entry(j)->give_label()));
+             }
+             series->append(set);
+        }
+        chart->addSeries(series);
+        series->attachAxis(axisX);
+        axisY->append(categories);
+        chart->addAxis(axisY, Qt::AlignLeft);
+        chart->legend()->setVisible(true);
+        chart->legend()->setAlignment(Qt::AlignBottom);
+        chart->setAnimationOptions(QChart::SeriesAnimations);
+        chartView->setChart(chart);
     }
 }
 
@@ -267,7 +329,6 @@ void Charts_Main_Window::show_pie_chart(chart* c){
     if(pie_c){
         QChart* chart = new QChart();
         chart->setTitle(QString::fromStdString(pie_c->get_title()));
-        QStringList categories;
         QPieSeries* series = new QPieSeries();
         for(uint i = 0; i<pie_c->get_entries_size();++i){
              series->append(QString::fromStdString(pie_c->get_entry(i)->give_label()), pie_c->give_slice_percentage(i)/100);
@@ -279,6 +340,32 @@ void Charts_Main_Window::show_pie_chart(chart* c){
         chartView->setChart(chart);
     }
 }
+
+void Charts_Main_Window::show_polar_chart(chart* c){
+    const polar_chart* pol_c = dynamic_cast<const polar_chart*>(c);
+    if(pol_c){
+        const qreal radialMin = 0;
+        const qreal radialMax = 100;
+        QStringList categories;
+        QPolarChart *chart = new QPolarChart();
+        chart->setTitle(QString::fromStdString(pol_c->get_title()));
+        QCategoryAxis *angularAxis = new QCategoryAxis();
+        angularAxis->setShadesVisible(true);
+        angularAxis->setShadesBrush(QBrush(QColor(249, 249, 255)));
+        for(uint i = 0; i<pol_c->get_entries_size();++i){
+             angularAxis->append(QString::fromStdString(pol_c->get_entry(i)->give_label()),(i+1)*100/pol_c->get_entries_size());
+        }
+        chart->addAxis(angularAxis, QPolarChart::PolarOrientationAngular);
+        QValueAxis *radialAxis = new QValueAxis();
+        radialAxis->setTickCount(11);
+        radialAxis->setLabelFormat("%d");
+        chart->addAxis(radialAxis, QPolarChart::PolarOrientationRadial);
+        radialAxis->setRange(radialMin, radialMax);
+        angularAxis->setRange(0, 100);
+        chartView->setChart(chart);
+    }
+}
+
 
 void Charts_Main_Window::show_time_chart(chart* c){
     const time_chart* time_c = dynamic_cast<const time_chart*>(c);
@@ -312,6 +399,13 @@ void Charts_Main_Window::show_time_chart(chart* c){
         chart->legend()->hide();
         chartView->setChart(chart);
     }
+}
+
+void Charts_Main_Window::show_charts(chart* c){
+    show_simple_bar_chart(c);
+    show_stacked_bar_chart(c);
+    show_pie_chart(c);
+    show_time_chart(c);
 }
 
 void Charts_Main_Window::showParent_list_values(chart* c){
@@ -353,15 +447,17 @@ void Charts_Main_Window::showChild_list_values(QTreeWidgetItem* parent, const ch
     }
 }
 
-void Charts_Main_Window::show_charts(chart* c){
-    show_simple_bar_chart(c);
-    show_stacked_bar_chart(c);
-    show_pie_chart(c);
-    show_time_chart(c);
-}
-
 void Charts_Main_Window::open_settings(){
-    comp_editor->show();
+    if(c->get_selected() == 1 || c->get_selected() == 2 || c->get_selected() == 3|| c->get_selected() == 4){
+        comp_editor->show();
+        if(c->get_selected() != 2){
+            comp_editor->spinBox->setValue(1);
+            comp_editor->spinBox->setEnabled(false);
+        }
+    }else{
+        cart_editor->show();
+    }
+
 }
 
 

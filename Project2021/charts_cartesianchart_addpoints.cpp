@@ -1,4 +1,6 @@
 #include "charts_cartesianchart_addpoints.h"
+#include <presenter_chart_view.h>
+#include <charts_main_window.h>
 
 Charts_Cartesianchart_AddPoints::Charts_Cartesianchart_AddPoints(QWidget *parent)
     : QWidget{parent}
@@ -33,3 +35,10 @@ Charts_Cartesianchart_AddPoints::Charts_Cartesianchart_AddPoints(QWidget *parent
     p.setColor(QPalette::Window, QColor(200,235,255));
     this->setPalette(p);
 }
+
+void Charts_Cartesianchart_AddPoints::set_chart_presenter(presenter_chart_view* ccw){
+    c = ccw;
+    connect(add, SIGNAL(clicked()), c, SLOT(add_point()));
+}
+
+void Charts_Cartesianchart_AddPoints::set_mainchart_view(Charts_Main_Window* cmw){charts_mw = cmw;}

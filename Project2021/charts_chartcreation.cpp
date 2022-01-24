@@ -101,7 +101,7 @@ void Charts_ChartCreation::set_chart(){
     else if(b4->isChecked())
         selected = 4;
     else if(b5->isChecked())
-        selected = 5;
-    else if(b1->isChecked())
         selected = 6;
+    else if(b6->isChecked())
+        selected = 5;
 }

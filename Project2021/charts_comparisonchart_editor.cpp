@@ -13,6 +13,7 @@ Charts_Comparisonchart_Editor::Charts_Comparisonchart_Editor(QWidget *parent)
     spinBox = new QSpinBox();
     spinBox->setMaximum(20);
 
+
     auto label2 = new QLabel("Inserimento valori");
     auto label3 = new QLabel("Titoli categorie");
     label3->setFixedWidth(120);

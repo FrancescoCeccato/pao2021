@@ -9,11 +9,12 @@ void presenter_chart_view::set_model(model* m){ mod = m;}
 void presenter_chart_view::set_mainchart_view(Charts_Main_Window* cmw){charts_mw = cmw;}
 void presenter_chart_view::set_chartcreation_view(Charts_ChartCreation * ccc){ charts_creation = ccc;}
 void presenter_chart_view::set_comparisoneditor_view(Charts_Comparisonchart_Editor *cce){ comp_editor = cce;}
+void presenter_chart_view::set_cartesianeditor_view(Charts_Cartesianchart_AddPoints* cap){ cart_editor = cap;}
 
 void presenter_chart_view::add_charts(){
     bool h = charts_creation->checkBox1->isChecked(), seg = charts_creation->checkBox2->isChecked();
     std::string title = charts_creation->chartTitle->text().toStdString(), x, y;
-    uint code = charts_creation->selected, amt = 1;
+    uint code = get_selected(), amt = 1;
     mod->add_charts(code, title, amt, h, seg, x, y);
     charts_mw->show();
     charts_creation->close();
@@ -40,6 +41,15 @@ void presenter_chart_view::add_entry_comparison(){
     charts_mw->showParent_list_values(mod->get_chart());
 }
 
+void presenter_chart_view::add_point(){
+    uint code = charts_creation->selected;
+    float x = cart_editor->spinX->value();
+    float y = cart_editor->spinY->value();
+    mod->add_point(code,x,y);
+    charts_mw->show_charts(mod->get_chart());
+    charts_mw->showParent_list_values(mod->get_chart());
+}
+
 double* presenter_chart_view::get_entries_value(uint index){
     int length = comp_editor->spinBox->value();
     double* value = new double();
@@ -59,6 +69,10 @@ std::string presenter_chart_view::get_label(uint index){
     } else
         label = "";
     return label;
+}
+
+uint presenter_chart_view::get_selected(){
+    return charts_creation->selected;
 }
 
 void presenter_chart_view::show_title(){

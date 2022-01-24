@@ -24,23 +24,28 @@ int main(int argc, char *argv[])
         }
     }
 
-    presenter_chart_view c;
-    model m;
+    presenter_chart_view* c = new presenter_chart_view();
+    model* m = new model();
     Charts_Main_Window* mw = new Charts_Main_Window();
     Charts_ChartCreation* w = new Charts_ChartCreation();
     Charts_Comparisonchart_Editor* e = new Charts_Comparisonchart_Editor();
-    c.set_chartcreation_view(w);
-    c.set_mainchart_view(mw);
-    c.set_comparisoneditor_view(e);
-    c.set_model(&m);
+    Charts_Cartesianchart_AddPoints* ap = new Charts_Cartesianchart_AddPoints();
+    c->set_chartcreation_view(w);
+    c->set_mainchart_view(mw);
+    c->set_comparisoneditor_view(e);
+    c->set_cartesianeditor_view(ap);
+    c->set_model(m);
     mw->set_comparison_editor(e);
-    w->set_chart_presenter(&c);
+    mw->set_cartesian_editor(ap);
+    w->set_chart_presenter(c);
     e->set_mainchart_view(mw);
-    e->set_chart_presenter(&c);
+    e->set_chart_presenter(c);
+    ap->set_mainchart_view(mw);
+    ap->set_chart_presenter(c);
 
     //Dialog_Entrance w;
 
-    w->show();
+    mw->show();
     //Charts_Cartesianchart_AddPoints* w = new Charts_Cartesianchart_AddPoints();
     //Charts_Comparisonchart_Editor* w = new Charts_Comparisonchart_Editor();
     //Charts_ChartCreation* w = new Charts_ChartCreation();
