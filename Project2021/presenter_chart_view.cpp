@@ -23,6 +23,7 @@ void presenter_chart_view::add_charts(){
 }
 
 void presenter_chart_view::add_entry_comparison(){
+    mod->delete_entries();
     uint code = charts_creation->selected;
     bool stop = false;
     for(uint i = 0; i<20 && !stop;++i){
@@ -32,7 +33,6 @@ void presenter_chart_view::add_entry_comparison(){
                 stop = false;
         }
         if(!stop){
-            mod->delete_entries(i);
             mod->add_entry_comparison(code, get_entries_value(i), get_label(i));
         }
     }

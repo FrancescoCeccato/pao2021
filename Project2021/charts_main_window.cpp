@@ -315,6 +315,7 @@ void Charts_Main_Window::show_time_chart(chart* c){
 }
 
 void Charts_Main_Window::showParent_list_values(chart* c){
+    valuesList->clear();
      const comparison_chart* cp = dynamic_cast<const comparison_chart*>(c);
      if(cp){
          QPixmap p(":/images/square.png");

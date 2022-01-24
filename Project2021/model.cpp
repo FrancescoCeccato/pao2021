@@ -59,9 +59,12 @@ void model::add_entry_comparison(uint code, double * val, std::string label){
     }
 }
 
-void model::delete_entries(uint i){
+void model::delete_entries(){
     comparison_chart* cc = static_cast<comparison_chart*>(c);
-    cc->delete_entry(i);
+    uint size = cc->get_entries_size();
+    for(uint i = 0; i<size;++i){
+        cc->delete_entry(0);
+    }
 }
 
 std::string model::get_title() const {return c->get_title();}

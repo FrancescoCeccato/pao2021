@@ -38,6 +38,7 @@ public:
     void show_time_chart(chart*);
     void showParent_list_values(chart*);
     void showChild_list_values(QTreeWidgetItem* ,const chart*, uint);
+    void delete_list_values(chart*);
 
 signals:
 
