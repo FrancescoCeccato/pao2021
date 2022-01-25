@@ -3,6 +3,7 @@
 #include <set>
 #include <string>
 #include <vector>
+#include "charts_exception.h"
 #include "chart.h"
 
 class cartesian_chart: public chart

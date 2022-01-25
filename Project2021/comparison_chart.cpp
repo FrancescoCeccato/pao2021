@@ -28,10 +28,28 @@ std::string comparison_chart::entry::give_label() const {
     return label;
 }
 
-double comparison_chart::entry::give_percentage(uint index) const {
-    if(index<n_values)
-        return 100*values[index] / give_sum();
-    else return 0;
+void comparison_chart::entry::set_label(const std::string &l) {
+    label = l;
+}
+
+std::vector<double> comparison_chart::entry::give_values() const {
+    std::vector<double> output;
+    for(uint i = 0; i<n_values; i++)
+        output.push_back(values[i]);
+    return output;
+}
+
+void comparison_chart::entry::set_values(double *v) {
+    delete[] values;
+    values = v;
+}
+
+std::vector<double> comparison_chart::entry::give_percentages() const {
+    double sum = give_sum();
+    std::vector<double> output;
+    for(uint i = 0; i<n_values; i++)
+        output.push_back(100*values[i]/sum);
+    return output;
 }
 
 comparison_chart::comparison_chart(uint amt, const std::string& t) : chart(t), values_per_entry(amt) {}
@@ -41,13 +59,39 @@ comparison_chart::~comparison_chart() {
         delete entries[i];
 }
 
-void comparison_chart::update_entry(uint index, double *values) {
-    auto string = entries[index]->give_label();
-    delete entries[index];
-    entries[index] =
+void comparison_chart::add_entry(double* values, const std::string& title) {
+    insert_entry(entries.size(),values,title,false);
+}
+
+void comparison_chart::insert_entry_generic(uint index, double *values, const std::string &title, bool overwrite) {
+    if(overwrite){
+        auto e = entries[index];
+        e->set_values(values);
+        e->set_label(title);
+    }
+    else {
+        auto e = new entry(1,values,title);
+        entries.insert(entries.begin()+index,e);
+    }
+}
+
+void comparison_chart::update_entry(uint index, double *values, const std::string& title) {
+    insert_entry(index,values,title,true);
 }
 
 void comparison_chart::delete_entry(uint index) {
     delete entries[index];
     entries.erase(entries.begin()+index);
+}
+
+std::string comparison_chart::give_entry_label(uint index) const {
+    return entries[index]->give_label();
+}
+
+std::vector<double> comparison_chart::give_entry_values(uint index) const{
+    return entries[index]->give_values();
+}
+
+std::vector<double> comparison_chart::give_entry_percentages(uint index) const {
+    return entries[index]->give_percentages();
 }

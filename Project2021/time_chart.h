@@ -14,7 +14,8 @@ private:
     std::set<point,comparator> points;
 
 public:
-    time_chart(const std::string& ="Grafico", const std::string& ="X", const std::string& ="Y");
+    time_chart(const std::string& ="", const std::string& ="X", const std::string& ="Y");
+    time_chart(const time_chart&) = delete;
 
     void add_point(float, float) override;
     void delete_point(float,float) override;

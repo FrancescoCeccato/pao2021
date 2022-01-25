@@ -4,15 +4,15 @@
 
 class pie_chart : public comparison_chart
 {
+private:
+    double give_total_sum() const;
+    void insert_entry(uint, double*, const std::string& = "", bool = false) override;
 public:
     pie_chart(const std::string& ="");
+    pie_chart(const pie_chart&) = delete;
 
-    double give_total_sum() const;
     double give_slice_percentage(uint) const;
     std::pair<double, std::string> give_max() const;
-
-    void add_entry(double*,const std::string& = "") override;
-    void add_entry(double,const std::string& = "");
 };
 
 #endif // PIE_CHART_H

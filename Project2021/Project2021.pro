@@ -14,6 +14,7 @@ SOURCES += \
     charts_cartesianchart_addpoints.cpp \
     charts_chartcreation.cpp \
     charts_comparisonchart_editor.cpp \
+    charts_exception.cpp \
     charts_main_window.cpp \
     charts_presenter.cpp \
     comparison_chart.cpp \
@@ -33,6 +34,7 @@ HEADERS += \
     charts_cartesianchart_addpoints.h \
     charts_chartcreation.h \
     charts_comparisonchart_editor.h \
+    charts_exception.h \
     charts_main_window.h \
     charts_presenter.h \
     comparison_chart.h \

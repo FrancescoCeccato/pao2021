@@ -2,6 +2,8 @@
 #include "charts_comparisonchart_editor.h"
 #include "charts_cartesianchart_addpoints.h"
 #include "charts_chartcreation.h"
+#include "stacked_bar_chart.h"
+#include "simple_bar_chart.h"
 
 #include <QApplication>
 #include <QLocale>
@@ -24,12 +26,11 @@ int main(int argc, char *argv[])
         }
     }
 
-    Charts_Cartesianchart_AddPoints* w = new Charts_Cartesianchart_AddPoints();
+    //Charts_Cartesianchart_AddPoints* w = new Charts_Cartesianchart_AddPoints();
     //Charts_Comparisonchart_Editor* w = new Charts_Comparisonchart_Editor();
-    //Charts_ChartCreation* w = new Charts_ChartCreation();
+    Charts_ChartCreation* w = new Charts_ChartCreation();
     //Charts_Main_Window* w = new Charts_Main_Window();
 
     w->show();
     return a.exec();
-
 }
