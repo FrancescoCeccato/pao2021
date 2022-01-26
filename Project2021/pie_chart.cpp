@@ -31,15 +31,8 @@ std::pair<double, std::string> pie_chart::give_max() const {
     return *x;
 }
 
-void pie_chart::add_entry(double* val,const std::string& label) {
-    entry* e = new entry(1,val,label);
-    entries.push_back(e);
-}
-
-void pie_chart::add_entry(double val,const std::string& label) {
-    double* d = new double[1] {val};
-    entry* e = new entry(1,d,label);
-    entries.push_back(e);
+void pie_chart::insert_entry(uint index, double *val, const std::string &label, bool overwrite) {
+    insert_entry_generic(index,val,label,overwrite);
 }
 
 /*void pie_chart::remove_entry(uint index){

@@ -14,9 +14,7 @@ void dot_chart::delete_point(float a, float b)
     if(it != points.end())
         points.erase(it);
     else
-    {
-        //throw exception
-    }
+        throw point_not_found();
 }
 
 std::vector<std::pair<float,float>> dot_chart::get_points() const {

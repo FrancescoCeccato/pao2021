@@ -9,38 +9,47 @@ double simple_bar_chart::mean() const {
 }
 
 double simple_bar_chart::median() const {
-    std::vector<double> v;
-    for(uint i = 0; i<entries.size(); i++)
-        v.push_back(*(entries[i]));
-    auto m = v.begin() + v.size()/2;
-    std::nth_element(v.begin(), m, v.end());
+    if(entries.size() != 0){
+        std::vector<double> v;
+        for(uint i = 0; i<entries.size(); i++)
+            v.push_back(*(entries[i]));
+        auto m = v.begin() + v.size()/2;
+        std::nth_element(v.begin(), m, v.end());
 
-    return v[v.size()/2];
+        return v[v.size()/2];
+    }
+    return 0;
 }
 
 double simple_bar_chart::mode() const {
-    std::map<double,uint> map;
-    for(uint i = 0; i<entries.size(); i++)
-        ++map[*(entries[i])];
-    auto x = std::max_element(map.begin(), map.end(),
-                                     [](const std::pair<const double, uint>& p1, const std::pair<const double, uint>& p2) {
-                                         return p1.second < p2.second; });
-    return x->first;
+    if(entries.size() != 0){
+        std::map<double,uint> map;
+        for(uint i = 0; i<entries.size(); i++)
+            ++map[*(entries[i])];
+        auto x = std::max_element(map.begin(), map.end(),
+                                         [](const std::pair<const double, uint>& p1, const std::pair<const double, uint>& p2) {
+                                             return p1.second < p2.second; });
+        return x->first;
+    }
+    return 0;
 }
 
 double simple_bar_chart::midrange() const {
-    std::vector<double> v;
-    for(uint i = 0; i<entries.size(); i++)
-        v.push_back(*(entries[i]));
-    auto pair = std::minmax_element(v.begin(),v.end());
-    return (*(pair.second) - *(pair.first));
+    if(entries.size() != 0) {
+        std::vector<double> v;
+        for(uint i = 0; i<entries.size(); i++)
+            v.push_back(*(entries[i]));
+        auto pair = std::minmax_element(v.begin(),v.end());
+        return (*(pair.second) - *(pair.first));
+    }
+    return 0;
 }
 
-void simple_bar_chart::add_entry(double* val,const std::string& label) {
-    entry* e = new entry(1,val,label);
-    entries.push_back(e);
+void simple_bar_chart::insert_entry(uint index, double *val, const std::string &label, bool overwrite) {
+    insert_entry_generic(index,val,label,overwrite);
 }
 
+<<<<<<< HEAD
 void simple_bar_chart::add_entry(double val,const std::string& label) {
     double* d = new double[1] {val};
     entry* e = new entry(1,d,label);
@@ -53,3 +62,5 @@ void simple_bar_chart::add_entry(double val,const std::string& label) {
     else
         entries.erase(entries.begin()+index);
 }*/
+=======
+>>>>>>> 22

@@ -18,13 +18,13 @@ double polar_chart::find_max() const
 
 double polar_chart::give_completion_percentage() const
 {
-    double max = find_max();
     double sum = 0;
     for(uint i = 0; i<entries.size(); i++)
-        sum += *(entries[i])/max;
+        sum += *(entries[i])/find_max();
     return sum/entries.size();
 }
 
+<<<<<<< HEAD
 double polar_chart::midrange() const {
     std::vector<double> v;
     for(uint i = 0; i<entries.size(); i++)
@@ -52,3 +52,10 @@ void polar_chart::add_entry(double val,const std::string& label) {
         entries.erase(entries.begin()+index);
 }*/
 
+=======
+void polar_chart::insert_entry(uint index, double *val, const std::string &label, bool overwrite) {
+    for(uint i = 0; i<values_per_entry; i++)
+        val[i] = std::round(val[i]);
+    insert_entry_generic(index,val,label,overwrite);
+}
+>>>>>>> 22

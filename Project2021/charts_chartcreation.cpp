@@ -25,6 +25,7 @@ Charts_ChartCreation::Charts_ChartCreation(QWidget *parent)
     btnCreate = new QPushButton("CREA IL GRAFICO");
     btnCreate->setCursor(Qt::CursorShape::PointingHandCursor);
     chartTitle = new QLineEdit();
+    chartTitle->setAlignment(Qt::AlignCenter);
     auto radioGroup = new QButtonGroup();
     auto groupBox = new QGroupBox("TIPOLOGIA GRAFICO");
 

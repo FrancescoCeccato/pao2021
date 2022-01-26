@@ -9,6 +9,7 @@ private:
     std::vector<point> points;
 public:
     dot_chart(const std::string& ="Grafico", const std::string& ="X", const std::string& ="Y");
+    dot_chart(const dot_chart&) = delete;
 
     void add_point(float, float) override;
     void delete_point(float,float) override;
