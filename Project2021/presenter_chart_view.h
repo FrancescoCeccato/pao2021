@@ -31,7 +31,8 @@ public slots:
     void add_charts();
     void add_entry_comparison();
     void add_point();
-    void show_title();
+    void delete_point();
+    void open_settings();
 };
 
 #endif // PRESENTER_CHART_VIEW_H

@@ -24,7 +24,6 @@ double polar_chart::give_completion_percentage() const
     return sum/entries.size();
 }
 
-<<<<<<< HEAD
 double polar_chart::midrange() const {
     std::vector<double> v;
     for(uint i = 0; i<entries.size(); i++)
@@ -33,29 +32,10 @@ double polar_chart::midrange() const {
     return (*(pair.second) - *(pair.first));
 }
 
-void polar_chart::add_entry(double* val,const std::string& label) {
-    *val = std::round(*val);
-    entry* e = new entry(1,val,label);
-    entries.push_back(e);
-}
 
-void polar_chart::add_entry(double val,const std::string& label) {
-    double* d = new double[1] {val};
-    add_entry(d,label);
-}
-
-
-/*void polar_chart::remove_entry(uint index){
-    if(index >= entries.size())
-        throw std::out_of_range("Index greater than the number of entries");
-    else
-        entries.erase(entries.begin()+index);
-}*/
-
-=======
 void polar_chart::insert_entry(uint index, double *val, const std::string &label, bool overwrite) {
     for(uint i = 0; i<values_per_entry; i++)
         val[i] = std::round(val[i]);
     insert_entry_generic(index,val,label,overwrite);
 }
->>>>>>> 22
+

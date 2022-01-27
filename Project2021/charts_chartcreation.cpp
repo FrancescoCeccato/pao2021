@@ -88,21 +88,46 @@ void Charts_ChartCreation::set_chart_presenter(presenter_chart_view* ccw){
 }
 
 void Charts_ChartCreation::set_chart(){
-    if(b1->isChecked())
+    if(b1->isChecked()){
         selected = 1;
+        checkBox1->setEnabled(true);
+        checkBox2->setEnabled(true);
+    }
     else if(b2->isChecked()){
         selected = 2;
-        scene->clear();
-        QPixmap px(":/images/StackedBar.png");
-        scene->addPixmap(px);
-        scene->setSceneRect(0,0,1440,724);
+        checkBox1->setEnabled(true);
+        checkBox2->setEnabled(true);
+        //scene->clear();
+        //QPixmap px(":/images/StackedBar.png");
+        //scene->addPixmap(px);
+        //scene->setSceneRect(0,0,1440,724);
     }
-    else if(b3->isChecked())
+    else if(b3->isChecked()){
+        checkBox1->setChecked(false);
+        checkBox1->setEnabled(false);
+        checkBox2->setChecked(false);
+        checkBox2->setEnabled(false);
         selected = 3;
-    else if(b4->isChecked())
+    }
+    else if(b4->isChecked()){
+        checkBox1->setChecked(false);
+        checkBox1->setEnabled(false);
+        checkBox2->setChecked(false);
+        checkBox2->setEnabled(false);
         selected = 4;
-    else if(b5->isChecked())
+    }
+    else if(b5->isChecked()){
+        checkBox1->setChecked(false);
+        checkBox1->setEnabled(false);
+        checkBox2->setChecked(false);
+        checkBox2->setEnabled(false);
         selected = 6;
-    else if(b6->isChecked())
+    }
+    else if(b6->isChecked()){
+        checkBox1->setChecked(false);
+        checkBox1->setEnabled(false);
+        checkBox2->setChecked(false);
+        checkBox2->setEnabled(false);
         selected = 5;
+    }
 }

@@ -18,27 +18,29 @@ void presenter_chart_view::add_charts(){
     mod->add_charts(code, title, amt, h, seg, x, y);
     charts_mw->show();
     charts_creation->close();
-    charts_mw->set_chart_presenter(this);
     charts_mw->show_charts(mod->get_chart());
-    show_title();
+    charts_mw->show_chart_info(mod->chart_info(code));
 }
 
 void presenter_chart_view::add_entry_comparison(){
-    mod->delete_entries();
+    //mod->delete_entries();
     uint code = charts_creation->selected;
     bool stop = false;
     for(uint i = 0; i<20 && !stop;++i){
         stop = true;
         for(int j = 0; j<comp_editor->spinBox->value() && stop; ++j){
-            if(comp_editor->gridValues->item(j,i))
+            if(comp_editor->gridValues->item(j,i) && comp_editor->gridValues->item(j,i)->text() != "")
                 stop = false;
         }
         if(!stop){
-            mod->add_entry_comparison(code, get_entries_value(i), get_label(i));
+            mod->add_entry_comparison(code, get_entries_value(i), get_label(i),i);
+        }else if(stop){
+            mod->delete_entry_comparison(i);
         }
     }
     charts_mw->show_charts(mod->get_chart());
     charts_mw->showParent_list_values(mod->get_chart());
+    charts_mw->show_chart_info(mod->chart_info(code));
 }
 
 void presenter_chart_view::add_point(){
@@ -46,6 +48,15 @@ void presenter_chart_view::add_point(){
     float x = cart_editor->spinX->value();
     float y = cart_editor->spinY->value();
     mod->add_point(code,x,y);
+    charts_mw->show_charts(mod->get_chart());
+    charts_mw->showParent_list_values(mod->get_chart());
+}
+
+void presenter_chart_view::delete_point(){
+    uint code = charts_creation->selected;
+    QTreeWidgetItem *nd = charts_mw->valuesList->currentItem();
+    uint index = charts_mw->valuesList->indexOfTopLevelItem(nd);
+    mod->delete_point(code,index);
     charts_mw->show_charts(mod->get_chart());
     charts_mw->showParent_list_values(mod->get_chart());
 }
@@ -75,7 +86,20 @@ uint presenter_chart_view::get_selected(){
     return charts_creation->selected;
 }
 
-void presenter_chart_view::show_title(){
-    std::string t = mod->get_title();
-    charts_mw->set_text(t);
+void presenter_chart_view::open_settings(){
+    comparison_chart* cc = static_cast<comparison_chart*>(mod->get_chart());
+    if(get_selected() == 1 || get_selected() == 2 || get_selected() == 3|| get_selected() == 4){
+        comp_editor->show();
+        if(get_selected() != 2){
+            comp_editor->spinBox->setValue(1);
+            comp_editor->spinBox->setEnabled(false);
+            comp_editor->gridValues->clear();
+            comp_editor->gridCategories->clear();
+            comp_editor->gridValues->setRowCount(1);
+            comp_editor->set_grids(cc);
+        }
+    }else{
+        cart_editor->show();
+    }
 }
+

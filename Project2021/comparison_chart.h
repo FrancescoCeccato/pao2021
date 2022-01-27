@@ -40,20 +40,12 @@ protected:
 public:
     comparison_chart(uint, const std::string&);
     ~comparison_chart();
-<<<<<<< HEAD
-    entry* get_entry(uint)const;
+
     uint get_nvalues() const;
     uint get_entries_size() const;
-    virtual void add_entry(double*,const std::string& = "") = 0;
-    //virtual void update_entry(uint,double*) = 0;
-    //virtual void delete_entry(uint) = 0;
-    //virtual void remove_entry(uint) = 0;
-    //virtual void update_entry(uint,double*) = 0;
-=======
 
     void add_entry(double*,const std::string& = "");
     void update_entry(uint,double*, const std::string&);
->>>>>>> 22
     void delete_entry(uint);
     std::string give_entry_label(uint) const;
     std::vector<double> give_entry_values(uint) const;

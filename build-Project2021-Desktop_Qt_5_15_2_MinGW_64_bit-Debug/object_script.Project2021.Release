@@ -4,6 +4,7 @@ release/chart.o
 release/charts_cartesianchart_addpoints.o
 release/charts_chartcreation.o
 release/charts_comparisonchart_editor.o
+release/charts_exception.o
 release/charts_main_window.o
 release/charts_presenter.o
 release/comparison_chart.o

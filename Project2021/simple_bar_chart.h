@@ -14,13 +14,6 @@ public:
     double median() const;
     double mode() const;
     double midrange() const;
-<<<<<<< HEAD
-
-    void add_entry(double*,const std::string& = "") override;
-    void add_entry(double,const std::string& = "");
-    //void remove_entry(uint) override;
-=======
->>>>>>> 22
 };
 
 #endif // SIMPLE_BAR_CHART_H

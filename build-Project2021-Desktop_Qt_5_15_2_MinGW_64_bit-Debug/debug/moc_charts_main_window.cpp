@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Charts_Main_Window_t {
-    QByteArrayData data[3];
-    char stringdata0[34];
+    QByteArrayData data[4];
+    char stringdata0[36];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -33,11 +33,12 @@ struct qt_meta_stringdata_Charts_Main_Window_t {
 static const qt_meta_stringdata_Charts_Main_Window_t qt_meta_stringdata_Charts_Main_Window = {
     {
 QT_MOC_LITERAL(0, 0, 18), // "Charts_Main_Window"
-QT_MOC_LITERAL(1, 19, 13), // "open_settings"
-QT_MOC_LITERAL(2, 33, 0) // ""
+QT_MOC_LITERAL(1, 19, 11), // "prepareMenu"
+QT_MOC_LITERAL(2, 31, 0), // ""
+QT_MOC_LITERAL(3, 32, 3) // "pos"
 
     },
-    "Charts_Main_Window\0open_settings\0"
+    "Charts_Main_Window\0prepareMenu\0\0pos"
 };
 #undef QT_MOC_LITERAL
 
@@ -55,10 +56,10 @@ static const uint qt_meta_data_Charts_Main_Window[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   19,    2, 0x0a /* Public */,
+       1,    1,   19,    2, 0x0a /* Public */,
 
  // slots: parameters
-    QMetaType::Void,
+    QMetaType::Void, QMetaType::QPoint,    3,
 
        0        // eod
 };
@@ -69,11 +70,10 @@ void Charts_Main_Window::qt_static_metacall(QObject *_o, QMetaObject::Call _c, i
         auto *_t = static_cast<Charts_Main_Window *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->open_settings(); break;
+        case 0: _t->prepareMenu((*reinterpret_cast< const QPoint(*)>(_a[1]))); break;
         default: ;
         }
     }
-    Q_UNUSED(_a);
 }
 
 QT_INIT_METAOBJECT const QMetaObject Charts_Main_Window::staticMetaObject = { {

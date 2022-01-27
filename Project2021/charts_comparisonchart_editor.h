@@ -8,6 +8,7 @@
 #include <QTableWidget>
 #include <QWidget>
 #include <QHeaderView>
+#include <comparison_chart.h>
 
 
 class presenter_chart_view;
@@ -26,6 +27,7 @@ public:
     explicit Charts_Comparisonchart_Editor(QWidget *parent = nullptr);
     void set_chart_presenter(presenter_chart_view* ccw);
     void set_mainchart_view(Charts_Main_Window* cmw);
+    void set_grids(comparison_chart*);
 
 signals:
 

@@ -15,13 +15,7 @@ public:
 
     double midrange() const;
     double give_completion_percentage() const;
-<<<<<<< HEAD
 
-    void add_entry(double*,const std::string& = "") override;
-    void add_entry(double,const std::string& = "");
-    //void remove_entry(uint) override;
-=======
->>>>>>> 22
 };
 
 #endif // POLAR_CHART_H

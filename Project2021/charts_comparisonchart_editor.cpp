@@ -2,6 +2,7 @@
 #include <presenter_chart_view.h>
 #include <charts_main_window.h>
 #include "iostream"
+#include "vector"
 
 Charts_Comparisonchart_Editor::Charts_Comparisonchart_Editor(QWidget *parent)
     : QWidget{parent}
@@ -51,3 +52,17 @@ void Charts_Comparisonchart_Editor::set_chart_presenter(presenter_chart_view* cc
 
 void Charts_Comparisonchart_Editor::set_mainchart_view(Charts_Main_Window* cmw){charts_mw = cmw;}
 
+void Charts_Comparisonchart_Editor::set_grids(comparison_chart* c){
+    for(uint i = 0;i<c->get_entries_size();++i){
+        std::vector<double> values = c->give_entry_values(i);
+        std::string label = c->give_entry_label(i);
+        auto item = new  QTableWidgetItem();
+        item->setText(QString::fromStdString(label));
+        gridCategories->setItem(i,0,item);
+        for(uint j = 0; j<c->get_nvalues();++j){
+            auto item = new  QTableWidgetItem();
+            item->setText(QString::number(values[j]));
+            gridValues->setItem(j,i,item);
+        }
+    }
+}

@@ -4,12 +4,6 @@
 #include "charts_comparisonchart_editor.h"
 #include "charts_cartesianchart_addpoints.h"
 #include "charts_chartcreation.h"
-<<<<<<< HEAD
-=======
-#include "stacked_bar_chart.h"
-#include "simple_bar_chart.h"
-
->>>>>>> 22
 #include <QApplication>
 #include <QLocale>
 #include <QTranslator>
@@ -30,7 +24,6 @@ int main(int argc, char *argv[])
         }
     }
 
-<<<<<<< HEAD
     presenter_chart_view* c = new presenter_chart_view();
     model* m = new model();
     Charts_Main_Window* mw = new Charts_Main_Window();
@@ -44,6 +37,7 @@ int main(int argc, char *argv[])
     c->set_model(m);
     mw->set_comparison_editor(e);
     mw->set_cartesian_editor(ap);
+    mw->set_chart_presenter(c);
     w->set_chart_presenter(c);
     e->set_mainchart_view(mw);
     e->set_chart_presenter(c);
@@ -52,14 +46,6 @@ int main(int argc, char *argv[])
 
     //Dialog_Entrance w;
 
-    mw->show();
-=======
->>>>>>> 22
-    //Charts_Cartesianchart_AddPoints* w = new Charts_Cartesianchart_AddPoints();
-    //Charts_Comparisonchart_Editor* w = new Charts_Comparisonchart_Editor();
-    Charts_ChartCreation* w = new Charts_ChartCreation();
-    //Charts_Main_Window* w = new Charts_Main_Window();
-
-    //w->show();
+    w->show();
     return a.exec();
 }

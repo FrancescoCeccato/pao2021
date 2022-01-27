@@ -35,12 +35,5 @@ void pie_chart::insert_entry(uint index, double *val, const std::string &label, 
     insert_entry_generic(index,val,label,overwrite);
 }
 
-/*void pie_chart::remove_entry(uint index){
-    if(index >= entries.size())
-        throw std::out_of_range("Index greater than the number of entries");
-    else
-        entries.erase(entries.begin()+index);
-}*/
-
 
 

@@ -4,6 +4,7 @@ debug/chart.o
 debug/charts_cartesianchart_addpoints.o
 debug/charts_chartcreation.o
 debug/charts_comparisonchart_editor.o
+debug/charts_exception.o
 debug/charts_main_window.o
 debug/charts_presenter.o
 debug/comparison_chart.o
