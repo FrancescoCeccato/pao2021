@@ -7,7 +7,7 @@ time_chart::time_chart(const std::string& title, const std::string& x, const std
 void time_chart::add_point(float x, float y){
     auto a = points.insert(point(x,y));
     if(!a.second)
-        throw point_already_present();
+        throw point_already_present(x,y);
 }
 
 void time_chart::delete_point(float x, float y)

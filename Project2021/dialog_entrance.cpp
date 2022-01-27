@@ -7,7 +7,7 @@ Dialog_Entrance::Dialog_Entrance(QWidget *parent)
 {
     QVBoxLayout* main = new QVBoxLayout();
     QPalette pal = QPalette();
-    pal.setColor(QPalette::Window, QColor(135,235,255));
+    pal.setColor(QPalette::Window, QColor(200,235,255));
 
     QHBoxLayout* container = new QHBoxLayout();
     QVBoxLayout* lLeft = new QVBoxLayout();
@@ -23,6 +23,7 @@ Dialog_Entrance::Dialog_Entrance(QWidget *parent)
     btnLeft->setIcon(ButtonIcon1);
     btnLeft->setCursor(Qt::CursorShape::PointingHandCursor);
     lblLeft1 = new QLabel("Crea");
+    lblLeft1->setStyleSheet("QLabel { font-weight: bold; }");
     lblLeft1->setAlignment(Qt::AlignCenter);
     lblLeft2 = new QLabel("Crea un nuovo grafico da zero.");
     lblLeft2->setAlignment(Qt::AlignCenter);
@@ -38,6 +39,7 @@ Dialog_Entrance::Dialog_Entrance(QWidget *parent)
     btnRight->setIcon(ButtonIcon2);
     btnRight->setCursor(Qt::CursorShape::PointingHandCursor);
     lblRight1 = new QLabel("Apri");
+    lblRight1->setStyleSheet("QLabel { font-weight: bold; }");
     lblRight1->setAlignment(Qt::AlignCenter);
     lblRight2 = new QLabel("Apri un grafico già esistente da file.");
     lblRight2->setAlignment(Qt::AlignCenter);
@@ -50,5 +52,5 @@ Dialog_Entrance::Dialog_Entrance(QWidget *parent)
     main->addLayout(container);
     this->setLayout(main);
     this->setPalette(pal);
-
+    this->setWindowFlags(Qt::CustomizeWindowHint | Qt::WindowCloseButtonHint);
 }

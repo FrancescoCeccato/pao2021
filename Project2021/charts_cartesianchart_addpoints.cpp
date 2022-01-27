@@ -32,4 +32,6 @@ Charts_Cartesianchart_AddPoints::Charts_Cartesianchart_AddPoints(QWidget *parent
     QPalette p = QPalette();
     p.setColor(QPalette::Window, QColor(200,235,255));
     this->setPalette(p);
+
+    this->setWindowFlags(Qt::Dialog|Qt::MSWindowsFixedSizeDialogHint);
 }

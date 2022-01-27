@@ -37,7 +37,6 @@ Charts_Main_Window::Charts_Main_Window(QWidget *parent)
     item1->setIcon(0,iconDot);
     auto item2 = new QTreeWidgetItem();
     item2->setText(0,"demented");
-    auto item = new QTreeWidgetItem(list);
     item1->addChild(item2);
     valuesList->addTopLevelItem(item1);
 

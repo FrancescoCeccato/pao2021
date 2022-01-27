@@ -4,6 +4,7 @@
 #include <QPushButton>
 #include <QLayout>
 #include <QLabel>
+#include <QLineEdit>
 #include <QSpinBox>
 #include <QTableWidget>
 #include <QWidget>
@@ -12,9 +13,12 @@
 class Charts_Comparisonchart_Editor : public QWidget
 {
     Q_OBJECT
+private:
+    void populateRowWithLineEdit(uint index);
+    double getCellNumericValue(uint row, uint col);
 public:
     QSpinBox *spinBox;
-    QTableWidget *gridValues, *gridCategories;
+    QTableWidget *gridValues, *gridLabelCategories, *gridLabelEntries;
     QLabel *signalLabel;
     QPushButton *okButton;
     explicit Charts_Comparisonchart_Editor(QWidget *parent = nullptr);

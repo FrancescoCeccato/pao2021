@@ -15,7 +15,6 @@ public:
     stacked_bar_chart(uint, bool, const std::string& ="",bool=false);
     stacked_bar_chart(const stacked_bar_chart&) = delete;
 
-
     void set_categories(const std::vector<std::string>&);
     std::vector<std::string> get_categories() const;
     bool is_segmented() const;
