@@ -82,3 +82,9 @@ float dot_chart::covariance() const {
     }
     else return 0;
 }
+
+std::vector<std::string> dot_chart::chart_info()const{
+    std::vector<std::string> info;
+    info.push_back("Titolo: " + get_title());
+    return info;
+}

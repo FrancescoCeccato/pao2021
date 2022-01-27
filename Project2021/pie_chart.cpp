@@ -35,5 +35,11 @@ void pie_chart::insert_entry(uint index, double *val, const std::string &label, 
     insert_entry_generic(index,val,label,overwrite);
 }
 
+std::vector<std::string> pie_chart::chart_info()const{
+    std::vector<std::string> info;
+    info.push_back("Titolo: " + get_title());
+    return info;
+}
+
 
 

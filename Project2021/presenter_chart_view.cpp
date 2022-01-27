@@ -19,12 +19,10 @@ void presenter_chart_view::add_charts(){
     charts_mw->show();
     charts_creation->close();
     charts_mw->show_charts(mod->get_chart());
-    charts_mw->show_chart_info(mod->chart_info(code));
+    charts_mw->show_chart_info(mod->chart_info());
 }
 
 void presenter_chart_view::add_entry_comparison(){
-    //mod->delete_entries();
-    uint code = charts_creation->selected;
     bool stop = false;
     for(uint i = 0; i<20 && !stop;++i){
         stop = true;
@@ -33,30 +31,28 @@ void presenter_chart_view::add_entry_comparison(){
                 stop = false;
         }
         if(!stop){
-            mod->add_entry_comparison(code, get_entries_value(i), get_label(i),i);
+            mod->add_entry_comparison(get_entries_value(i), get_label(i),i);
         }else if(stop){
             mod->delete_entry_comparison(i);
         }
     }
     charts_mw->show_charts(mod->get_chart());
     charts_mw->showParent_list_values(mod->get_chart());
-    charts_mw->show_chart_info(mod->chart_info(code));
+    charts_mw->show_chart_info(mod->chart_info());
 }
 
 void presenter_chart_view::add_point(){
-    uint code = charts_creation->selected;
     float x = cart_editor->spinX->value();
     float y = cart_editor->spinY->value();
-    mod->add_point(code,x,y);
+    mod->add_point(x,y);
     charts_mw->show_charts(mod->get_chart());
     charts_mw->showParent_list_values(mod->get_chart());
 }
 
 void presenter_chart_view::delete_point(){
-    uint code = charts_creation->selected;
     QTreeWidgetItem *nd = charts_mw->valuesList->currentItem();
     uint index = charts_mw->valuesList->indexOfTopLevelItem(nd);
-    mod->delete_point(code,index);
+    mod->delete_point(index);
     charts_mw->show_charts(mod->get_chart());
     charts_mw->showParent_list_values(mod->get_chart());
 }

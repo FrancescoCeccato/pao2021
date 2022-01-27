@@ -49,3 +49,13 @@ void simple_bar_chart::insert_entry(uint index, double *val, const std::string &
     insert_entry_generic(index,val,label,overwrite);
 }
 
+std::vector<std::string> simple_bar_chart::chart_info()const{
+    std::vector<std::string> info;
+    info.push_back("Titolo: " + get_title());
+    info.push_back("La media delle entrate di questo grafico è: " + std::to_string(mean()));
+    info.push_back("La mediana delle entrate di questo grafico è: " + std::to_string(median()));
+    info.push_back("La moda delle entrate di questo grafico è: " + std::to_string(mode()));
+    info.push_back("Il midrange delle entrate di questo grafico è: " + std::to_string(midrange()));
+    return info;
+}
+

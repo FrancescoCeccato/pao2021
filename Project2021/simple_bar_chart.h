@@ -9,6 +9,7 @@ private:
 public:
     simple_bar_chart(const std::string& = "", bool = false);
     simple_bar_chart(const simple_bar_chart&) = delete;
+    std::vector<std::string> chart_info() const override;
 
     double mean() const;
     double median() const;

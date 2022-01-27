@@ -33,12 +33,12 @@ struct qt_meta_stringdata_Charts_Main_Window_t {
 static const qt_meta_stringdata_Charts_Main_Window_t qt_meta_stringdata_Charts_Main_Window = {
     {
 QT_MOC_LITERAL(0, 0, 18), // "Charts_Main_Window"
-QT_MOC_LITERAL(1, 19, 11), // "prepareMenu"
+QT_MOC_LITERAL(1, 19, 11), // "menu_delete"
 QT_MOC_LITERAL(2, 31, 0), // ""
 QT_MOC_LITERAL(3, 32, 3) // "pos"
 
     },
-    "Charts_Main_Window\0prepareMenu\0\0pos"
+    "Charts_Main_Window\0menu_delete\0\0pos"
 };
 #undef QT_MOC_LITERAL
 
@@ -70,7 +70,7 @@ void Charts_Main_Window::qt_static_metacall(QObject *_o, QMetaObject::Call _c, i
         auto *_t = static_cast<Charts_Main_Window *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->prepareMenu((*reinterpret_cast< const QPoint(*)>(_a[1]))); break;
+        case 0: _t->menu_delete((*reinterpret_cast< const QPoint(*)>(_a[1]))); break;
         default: ;
         }
     }

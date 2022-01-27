@@ -12,6 +12,8 @@ private:
 public:
     polar_chart(const std::string& ="");
     polar_chart(const polar_chart&) = delete;
+    std::vector<std::string> chart_info() const override;
+
 
     double midrange() const;
     double give_completion_percentage() const;

@@ -61,3 +61,9 @@ float time_chart::give_min() const {
 float time_chart::give_max() const {
     return points.rbegin()->y;
 }
+
+std::vector<std::string> time_chart::chart_info()const{
+    std::vector<std::string> info;
+    info.push_back("Titolo: " + get_title());
+    return info;
+}
