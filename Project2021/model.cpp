@@ -7,7 +7,7 @@
 #include <time_chart.h>
 #include <iostream>
 
-model::model(const std::string& title) : c(new chart(title)){}
+model::model(){}
 
 void model::add_charts(uint code, std::string title, uint amt, bool h, bool seg, std::string x, std::string y){
     switch (code) {
@@ -59,8 +59,6 @@ void model::delete_entry_comparison(uint index){
         cc->delete_entry(index);
 }
 
-//std::string model::get_title() const {return c->get_title();}
-
 chart* model::get_chart() const{
     return c;
 }
@@ -69,11 +67,7 @@ std::vector<std::string> model::chart_info(){
     return c->chart_info();
 }
 
-/*double model::get_mean() const {
-    if(typeid (c) == typeid (simple_bar_chart))
-        return static_cast<const simple_bar_chart&>(c).mean();
-    else{
-        //throw exception
-        return 0;
-    }
-}*/
+float model::give_balance(float x1, float x2){
+    time_chart* tc = static_cast<time_chart*>(c);
+    return tc->give_balance(x1,x2);
+}

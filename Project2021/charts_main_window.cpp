@@ -42,6 +42,7 @@ Charts_Main_Window::Charts_Main_Window(QWidget *parent)
     deleteP = new QMenu();
     deleteP->addAction(new QAction("Cancella punto", deleteP));
     connect(valuesList ,&QTreeWidget::customContextMenuRequested, this, &Charts_Main_Window::menu_delete);
+    connect(valuesList ,SIGNAL(itemSelectionChanged()), this, SLOT(expand_pie_chart()));
 
 
     QDockWidget* dock2 = new QDockWidget("MODIFICA COLLEZIONE...",this);
@@ -207,6 +208,7 @@ void Charts_Main_Window::set_chart_presenter(presenter_chart_view* ccw){
     c = ccw;
     connect(settings, SIGNAL(clicked()), c, SLOT(open_settings()));
     connect(deleteP->actions()[0], SIGNAL(triggered()), c, SLOT(delete_point()));
+    connect(TC_Calculate, SIGNAL(clicked()), c, SLOT(give_balance()));
 }
 
 void Charts_Main_Window::set_comparison_editor(Charts_Comparisonchart_Editor* cce){
@@ -398,7 +400,8 @@ void Charts_Main_Window::show_pie_chart(chart* c){
         chart->setTitle(QString::fromStdString(pie_c->get_title()));
         QPieSeries* series = new QPieSeries();
         for(uint i = 0; i<pie_c->get_entries_size();++i){
-             series->append(QString::fromStdString(pie_c->give_entry_label(i)), pie_c->give_slice_percentage(i)/100);
+             QString s = QString::fromStdString(pie_c->give_entry_label(i)) + " " + QString::number(pie_c->give_slice_percentage(i)) + "%";
+             series->append(s, pie_c->give_slice_percentage(i)/100);
              QPieSlice* q = series->slices().at(i);
              q->setLabelVisible();
         }
@@ -445,22 +448,6 @@ void Charts_Main_Window::show_time_chart(chart* c){
             series->append(p);
         }
         chart->addSeries(series);
-        /*QDateTimeAxis *axisX = new QDateTimeAxis;
-        axisX->setTickCount(10);
-        axisX->setFormat("MMM yyyy");
-        axisX->setTitleText(QString::fromStdString(time_c->get_label_x()));
-        chart->addAxis(axisX, Qt::AlignBottom);
-        series->attachAxis(axisX);
-        QValueAxis *axisX = new QValueAxis;
-        axisX->setLabelFormat("%i");
-        axisX->setTitleText(QString::fromStdString(time_c->get_label_x()));
-        chart->addAxis(axisX, Qt::AlignBottom);
-        series->attachAxis(axisX);
-        QValueAxis *axisY = new QValueAxis;
-        axisY->setLabelFormat("%i");
-        axisY->setTitleText(QString::fromStdString(time_c->get_label_y()));
-        chart->addAxis(axisY, Qt::AlignLeft);
-        series->attachAxis(axisY);*/
         chart->createDefaultAxes();
         chart->legend()->hide();
         chartView->setChart(chart);
@@ -556,13 +543,27 @@ void Charts_Main_Window::show_chart_info(std::vector<std::string> info){
     }
 }
 
-void Charts_Main_Window::menu_delete( const QPoint & pos )
-{
-    deleteP->exec(valuesList->mapToGlobal(pos));
+void Charts_Main_Window::menu_delete(const QPoint & pos){
+    uint sel = c->get_selected();
+    if(sel == 5 || sel == 6)
+        deleteP->exec(valuesList->mapToGlobal(pos));
 }
 
-
-
+void Charts_Main_Window::expand_pie_chart(){
+    uint sel = c->get_selected();
+    if(sel == 3){
+        QTreeWidgetItem *nd = valuesList->currentItem();
+        if(nd){
+             uint index = valuesList->indexOfTopLevelItem(nd);
+             QChart* chart = chartView->chart();
+             QPieSeries* series = static_cast<QPieSeries*>(chart->series().first());
+             for(int i = 0; i< series->slices().size();++i){
+                 series->slices().at(i)->setExploded(false);
+             }
+             series->slices().at(index)->setExploded(true);
+        }
+    }
+}
 
 
 

@@ -16,6 +16,7 @@ public:
     std::vector<std::pair<float,float>> get_points() const override;
     uint get_points_amount() const override;
     std::vector<std::string> chart_info() const override;
+    std::string description() const override;
 
 
     float mean_x() const;

@@ -12,7 +12,8 @@ private:
 public:
     chart(const std::string&);
     virtual ~chart() = default;
-    virtual std::vector<std::string> chart_info() const;
+    virtual std::vector<std::string> chart_info() const = 0;
+    virtual std::string description() const = 0;
 
     std::string get_title() const;
 

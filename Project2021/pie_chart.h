@@ -11,6 +11,7 @@ public:
     pie_chart(const std::string& ="");
     pie_chart(const pie_chart&) = delete;
     std::vector<std::string> chart_info() const override;
+    std::string description() const override;
 
 
     double give_slice_percentage(uint) const;

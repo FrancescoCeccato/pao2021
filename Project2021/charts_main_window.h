@@ -46,11 +46,11 @@ public:
     void showChild_list_values(QTreeWidgetItem* ,const chart*, uint);
     void delete_list_values(chart*);
     void show_chart_info(std::vector<std::string>);
-
 signals:
 
 public slots:
     void menu_delete( const QPoint & pos );
+    void expand_pie_chart();
 
 };
 

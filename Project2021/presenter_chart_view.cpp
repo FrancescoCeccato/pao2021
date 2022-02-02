@@ -99,3 +99,8 @@ void presenter_chart_view::open_settings(){
     }
 }
 
+void presenter_chart_view::give_balance(){
+    float x1 = charts_mw->TC_SpinBox1->value(), x2 = charts_mw->TC_SpinBox2->value();
+    charts_mw->TC_Result->setText(QString::number(mod->give_balance(x1,x2)));
+}
+
