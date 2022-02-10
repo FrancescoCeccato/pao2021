@@ -15,6 +15,7 @@ public:
     void add_point(float, float);
     void delete_point(uint);
     std::vector<std::string> chart_info();
+    static std::string chart_description(uint);
     chart* get_chart()const;
     float give_balance(float, float);
 };

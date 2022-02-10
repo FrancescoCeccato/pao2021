@@ -20,6 +20,11 @@ void presenter_chart_view::add_charts(){
     charts_creation->close();
     charts_mw->show_charts(mod->get_chart());
     charts_mw->show_chart_info(mod->chart_info());
+    if(code != 5){
+        charts_mw->TC_SpinBox1->setEnabled(false);
+        charts_mw->TC_SpinBox2->setEnabled(false);
+        charts_mw->TC_Calculate->setEnabled(false);
+    }
 }
 
 void presenter_chart_view::add_entry_comparison(){
@@ -102,5 +107,10 @@ void presenter_chart_view::open_settings(){
 void presenter_chart_view::give_balance(){
     float x1 = charts_mw->TC_SpinBox1->value(), x2 = charts_mw->TC_SpinBox2->value();
     charts_mw->TC_Result->setText(QString::number(mod->give_balance(x1,x2)));
+}
+
+void presenter_chart_view::set_description(){
+    uint code = get_selected();
+    charts_creation->labelDescription->setText(QString::fromStdString(model::chart_description(code)));
 }
 

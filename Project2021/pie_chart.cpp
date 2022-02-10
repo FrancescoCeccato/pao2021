@@ -36,9 +36,12 @@ void pie_chart::insert_entry(uint index, double *val, const std::string &label, 
 }
 
 std::vector<std::string> pie_chart::chart_info()const{
-    std::vector<std::string> info;
-    info.push_back("Titolo: " + get_title());
+    std::vector<std::string> info = chart::chart_info();
     return info;
+}
+
+std::string pie_chart::description(){
+    return "Il pie chart è un grafico a torta che permette di osservare in quale percentuale le diverse categorie influenzano il totale.";
 }
 
 

@@ -40,8 +40,11 @@ void polar_chart::insert_entry(uint index, double *val, const std::string &label
 }
 
 std::vector<std::string> polar_chart::chart_info()const{
-    std::vector<std::string> info;
-    info.push_back("Titolo: " + get_title());
+    std::vector<std::string> info = chart::chart_info();
     return info;
+}
+
+std::string polar_chart::description(){
+    return " ";
 }
 

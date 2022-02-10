@@ -34,6 +34,7 @@ public slots:
     void delete_point();
     void open_settings();
     void give_balance();
+    void set_description();
 };
 
 #endif // PRESENTER_CHART_VIEW_H

@@ -14,7 +14,7 @@ private:
 public:
     std::string get_categories(uint) const;
     std::vector<std::string> chart_info() const override;
-    std::string description() const override;
+    static std::string description();
 
     stacked_bar_chart(uint, bool, const std::string& ="",bool=false);
     stacked_bar_chart(const stacked_bar_chart&) = delete;

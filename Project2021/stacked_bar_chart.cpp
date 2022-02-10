@@ -27,7 +27,10 @@ void stacked_bar_chart::insert_entry(uint index, double *val, const std::string 
 }
 
 std::vector<std::string> stacked_bar_chart::chart_info()const{
-    std::vector<std::string> info;
-    info.push_back("Titolo: " + get_title());
+    std::vector<std::string> info = chart::chart_info();
     return info;
+}
+
+std::string stacked_bar_chart::description(){
+    return "Lo stacked bar chart è un grafico a barre che permette di vedere i cambiamenti dei valori delle diverse categorie a seguito di diversi eventi. Può essere considerato un insieme di simple bar chart.";
 }

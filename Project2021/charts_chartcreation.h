@@ -26,6 +26,7 @@ public:
      QLineEdit *chartTitle;
      QCheckBox *checkBox1, *checkBox2;
      QRadioButton *b1, *b2, *b3, *b4, *b5, *b6;
+     QButtonGroup* radioGroup;
 public:
      uint selected;
      explicit Charts_ChartCreation(QWidget *parent = nullptr);

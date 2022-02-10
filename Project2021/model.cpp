@@ -67,6 +67,24 @@ std::vector<std::string> model::chart_info(){
     return c->chart_info();
 }
 
+std::string model::chart_description(uint sel){
+    switch (sel) {
+    case 1:
+        return simple_bar_chart::description();
+    case 2:
+        return stacked_bar_chart::description();
+    case 3:
+        return pie_chart::description();
+    case 4:
+        return polar_chart::description();
+    case 5:
+        return time_chart::description();
+    case 6:
+        return dot_chart::description();
+    }
+    return "";
+}
+
 float model::give_balance(float x1, float x2){
     time_chart* tc = static_cast<time_chart*>(c);
     return tc->give_balance(x1,x2);

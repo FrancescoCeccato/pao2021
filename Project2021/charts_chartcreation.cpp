@@ -26,7 +26,7 @@ Charts_ChartCreation::Charts_ChartCreation(QWidget *parent)
     btnCreate->setCursor(Qt::CursorShape::PointingHandCursor);
     chartTitle = new QLineEdit();
     chartTitle->setAlignment(Qt::AlignCenter);
-    auto radioGroup = new QButtonGroup();
+    radioGroup = new QButtonGroup();
     auto groupBox = new QGroupBox("TIPOLOGIA GRAFICO");
 
     checkBox1 = new QCheckBox("Orientazione orizzontale");
@@ -85,6 +85,7 @@ Charts_ChartCreation::Charts_ChartCreation(QWidget *parent)
 void Charts_ChartCreation::set_chart_presenter(presenter_chart_view* ccw){
     c = ccw;
     connect(btnCreate, SIGNAL(clicked()), c, SLOT(add_charts()));
+    connect(radioGroup , SIGNAL(buttonClicked(QAbstractButton*)), c, SLOT(set_description()));
 }
 
 void Charts_ChartCreation::set_chart(){
@@ -92,6 +93,8 @@ void Charts_ChartCreation::set_chart(){
         selected = 1;
         checkBox1->setEnabled(true);
         checkBox2->setEnabled(true);
+        labelDescription->text();
+
     }
     else if(b2->isChecked()){
         selected = 2;

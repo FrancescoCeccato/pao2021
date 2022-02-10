@@ -17,7 +17,7 @@ public:
     time_chart(const std::string& ="", const std::string& ="X", const std::string& ="Y");
     time_chart(const time_chart&) = delete;
     std::vector<std::string> chart_info() const override;
-    std::string description() const override;
+    static std::string description();
 
 
     void add_point(float, float) override;

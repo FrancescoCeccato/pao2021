@@ -2,6 +2,7 @@
 #include <QStatusBar>
 #include <QMenu>
 #include <QMenuBar>
+#include <QtMath>
 #include <vector>
 #include <iostream>
 #include <presenter_chart_view.h>
@@ -21,7 +22,7 @@
 Charts_Main_Window::Charts_Main_Window(QWidget *parent)
     : QMainWindow{parent}
 {
-    this->statusBar()->showMessage("porcodio");
+    this->statusBar()->showMessage("");
     this->menuBar()->addAction("Guida...");
 
     QPalette pal1 = QPalette();
@@ -68,7 +69,7 @@ Charts_Main_Window::Charts_Main_Window(QWidget *parent)
     TC_SpinBox1 = new QSpinBox();
     TC_SpinBox2 = new QSpinBox();
     TC_Calculate = new QPushButton("CALCOLA");
-    TC_Result = new QLabel("oofiest");
+    TC_Result = new QLabel("");
     TC_Result->setStyleSheet("QLabel { color : black; }");
     TC_Result->setAlignment(Qt::AlignCenter);
     TC_Result->setFrameShape(QFrame::Panel);
@@ -167,8 +168,8 @@ Charts_Main_Window::Charts_Main_Window(QWidget *parent)
     pc.add_entry(30, "Proteine");
     pc.add_entry(40, "Carboidrati");
     showParent_list_values(&pc);
-    show_pie_chart(&p);
-    stacked_bar_chart* s = new stacked_bar_chart(6, true, "Voti", false);
+    show_pie_chart(&p);*/
+    /*stacked_bar_chart* s = new stacked_bar_chart(6, false, "Voti", false);
     double* d1 = new double[6] {6,5,8,9,6,7};
     double* d2 = new double[6] {7,4,9,7,5,7};
     double* d3 = new double[6] {8,6,8,6,7,9};
@@ -179,19 +180,25 @@ Charts_Main_Window::Charts_Main_Window(QWidget *parent)
     s->add_entry(d3, "Verifica 3");
     s->add_entry(d4, "Verifica 4");
     s->add_entry(d5, "Verifica 5");
-    std::vector<std::string> categories{"Jessica", "Federico", "Alessia", "Bob", "Marko","Anna"};
+    std::vector<std::string> categories{"Anna", "Federico", "Erika", "Marco", "Roberto", "Sara"};
     s->set_categories(categories);
     show_charts(s);
     showParent_list_values(s);
-    polar_chart p = polar_chart("Voti");
-    p.add_entry(30, "Magia");
-    p.add_entry(45, "Resistenza");
-    p.add_entry(70, "Forza");
-    p.add_entry(80, "Agilità");
-    p.add_entry(50, "Special");
-    p.add_entry(30, "Cura");
-    show_polar_chart(&p);*/
-    /*dot_chart* t = new dot_chart("Test", "X", "Y");
+    polar_chart* p = new polar_chart("Voti");
+    double* d1 = new double[1] {40};
+    double* d2 = new double[1] {50};
+    double* d3 = new double[1] {85};
+    double* d4 = new double[1] {80};
+    double* d5 = new double[1] {70};
+    double* d6 = new double[1] {60};
+    p->add_entry(d1, "Magia");
+    p->add_entry(d2, "Resistenza");
+    p->add_entry(d3, "Forza");
+    p->add_entry(d4, "Agilità");
+    p->add_entry(d5, "Super");
+    p->add_entry(d6, "Health");
+    show_polar_chart(p);
+    dot_chart* t = new dot_chart("Test", "X", "Y");
     t->add_point(3,8);
     t->add_point(5,4);
     t->add_point(4,6);
@@ -368,7 +375,7 @@ void Charts_Main_Window::show_segmented_bar_chart(chart* c){
         QStringList categories;
         QBarCategoryAxis *axisY = new QBarCategoryAxis();
         QValueAxis *axisX = new QValueAxis();
-        axisX->setRange(0, stacked_bc->get_nvalues()*10);
+        axisX->setRange(0, 100);
         axisX->setTickCount(11);
         axisX->setMinorTickCount(4);
         chart->addAxis(axisX, Qt::AlignBottom);
@@ -377,7 +384,7 @@ void Charts_Main_Window::show_segmented_bar_chart(chart* c){
              QBarSet* set = new QBarSet(QString::fromStdString(stacked_bc->get_categories(i)));
              for(uint j = 0; j<stacked_bc->get_entries_size();++j){
                  std::vector<double> entries_v = stacked_bc->give_entry_percentages(j);
-                 *set << entries_v[i]/stacked_bc->get_entries_size()*100;
+                 *set << entries_v[i];
                  categories.append(QString::fromStdString(stacked_bc->give_entry_label(j)));
              }
              series->append(set);
@@ -414,24 +421,99 @@ void Charts_Main_Window::show_pie_chart(chart* c){
 void Charts_Main_Window::show_polar_chart(chart* c){
     const polar_chart* pol_c = dynamic_cast<const polar_chart*>(c);
     if(pol_c){
-        const qreal radialMin = 0;
-        const qreal radialMax = 100;
-        QStringList categories;
-        QPolarChart *chart = new QPolarChart();
-        chart->setTitle(QString::fromStdString(pol_c->get_title()));
-        QCategoryAxis *angularAxis = new QCategoryAxis();
-        angularAxis->setShadesVisible(true);
-        angularAxis->setShadesBrush(QBrush(QColor(249, 249, 255)));
-        for(uint i = 0; i<pol_c->get_entries_size();++i){
-             angularAxis->append(QString::fromStdString(pol_c->give_entry_label(i)),(i+1)*100/pol_c->get_entries_size());
+        QPolarChart* chart = new QPolarChart();
+        //series
+        QLineSeries* center = new QLineSeries();
+        QLineSeries* base_line = new QLineSeries();
+        QLineSeries* draw_line = new QLineSeries();
+        QAreaSeries* base_area = new QAreaSeries();
+        QAreaSeries* draw_area = new QAreaSeries();
+        //axis
+        QCategoryAxis* angularAxis = new QCategoryAxis();
+        QValueAxis* radialAxis = new QValueAxis();
+        qreal radialMin = 0;
+        qreal radialMax = 100;
+        QColor baseAreaColor = QColor(Qt::transparent);
+        QColor drawAreaColor = QColor(66, 66, 255, 100);
+        QColor baseLineColor = Qt::darkMagenta;
+        QColor drawLineColor = Qt::darkBlue;
+
+        QColor angularGridLineColor = Qt::black;
+        QColor angularSideLineColor = Qt::transparent;
+        QColor radialLineColor = Qt::transparent;
+        QColor radiusLineColor = Qt::black;
+        const qreal angularMin = 0;
+        const qreal angularMax = 360;
+        //center
+        center->append(angularMin, radialMin);
+        center->setBrush(Qt::NoBrush);
+        center->setPen(Qt::NoPen);
+        center->setPointLabelsVisible();
+        center->setPointLabelsColor(Qt::red);
+        center->setPointLabelsFormat(QLatin1String { "@yPoint" });
+        //area
+        base_area->setLowerSeries(center);
+        base_area->setUpperSeries(base_line);
+        draw_area->setLowerSeries(center);
+        draw_area->setUpperSeries(draw_line);
+        uint count = pol_c->get_entries_size();
+        const auto offset = ( angularMax - angularMin ) / count;
+        std::vector<double> entries_v;
+        for(uint i = 0; i<count;++i){
+            entries_v = pol_c->give_entry_values(i);
+            base_line->append(angularMin + offset * i, radialMax);
+            draw_line->append(
+                angularMin + offset * i,
+                radialMin + entries_v[0]
+            );
+            angularAxis->append(QString::fromStdString(pol_c->give_entry_label(i)), angularMin + offset * i);
         }
-        chart->addAxis(angularAxis, QPolarChart::PolarOrientationAngular);
-        QValueAxis *radialAxis = new QValueAxis();
-        radialAxis->setTickCount(11);
-        radialAxis->setLabelFormat("%d");
-        chart->addAxis(radialAxis, QPolarChart::PolarOrientationRadial);
+        if (count)
+        {
+            entries_v = pol_c->give_entry_values(0);
+            draw_line->append(
+                angularMin + offset * count,
+                radialMin + entries_v[0]
+            );
+        }
+        chart->addSeries(base_line);
+        chart->addSeries(draw_line);
+        chart->addSeries(base_area);
+        chart->addSeries(draw_area);
+        chart->addSeries(center);
+        base_area->setColor(baseAreaColor);
+        draw_area->setColor(drawAreaColor);
+        draw_line->setBrush(Qt::NoBrush);
+        draw_line->setPen(Qt::NoPen);
+        draw_area->setBorderColor(drawLineColor);
+        base_line->setBrush(Qt::NoBrush);
+        base_line->setPen(Qt::NoPen);
+        base_area->setBorderColor(baseLineColor);
+        angularAxis->setGridLineColor(angularGridLineColor);
+        angularAxis->setLinePenColor(angularSideLineColor);
+        angularAxis->setRange(angularMin, angularMax);
+        angularAxis->setStartValue(angularMin);
+        angularAxis->setLabelsPosition(
+            QtCharts::QCategoryAxis::AxisLabelsPositionOnValue);
+        chart->addAxis(angularAxis, QtCharts::QPolarChart::PolarOrientationAngular);
+        radialAxis->setGridLineColor(radialLineColor);
+        radialAxis->setLinePenColor(radiusLineColor);
         radialAxis->setRange(radialMin, radialMax);
-        angularAxis->setRange(0, 100);
+        chart->addAxis(radialAxis, QtCharts::QPolarChart::PolarOrientationRadial);
+        center->attachAxis(radialAxis);
+        center->attachAxis(angularAxis);
+        base_line->attachAxis(radialAxis);
+        base_line->attachAxis(angularAxis);
+        base_area->attachAxis(radialAxis);
+        base_area->attachAxis(angularAxis);
+        draw_line->attachAxis(radialAxis);
+        draw_line->attachAxis(angularAxis);
+        draw_area->attachAxis(radialAxis);
+        draw_area->attachAxis(angularAxis);
+        chart->legend()->hide();
+        center->hide();
+        chart->layout()->setContentsMargins(0, 0, 0, 0);
+        chart->setBackgroundRoundness(0);
         chartView->setChart(chart);
     }
 }
@@ -486,6 +568,7 @@ void Charts_Main_Window::show_charts(chart* c){
     show_simple_bar_chart(c);
     show_stacked_bar_chart(c);
     show_segmented_bar_chart(c);
+    show_polar_chart(c);
     show_pie_chart(c);
     show_time_chart(c);
     show_dot_chart(c);
@@ -506,14 +589,16 @@ void Charts_Main_Window::showParent_list_values(chart* c){
          }
      }else{
          const cartesian_chart* cc = static_cast<cartesian_chart*>(c);
-         QPixmap p(":/images/dot.png");
-         QIcon iconDot(p);
-         std::vector<std::pair<float,float>> points = cc->get_points();
-         for(uint i = 0; i<cc->get_points_amount();++i){
-             auto item = new QTreeWidgetItem();
-             item->setText(0, "(" + QString::number(points[i].first) + "," + QString::number(points[i].second)+ ")");
-             item->setIcon(0,iconDot);
-             valuesList->addTopLevelItem(item);
+         if(cc){
+             QPixmap p(":/images/dot.png");
+             QIcon iconDot(p);
+             std::vector<std::pair<float,float>> points = cc->get_points();
+             for(uint i = 0; i<cc->get_points_amount();++i){
+                 auto item = new QTreeWidgetItem();
+                 item->setText(0, "(" + QString::number(points[i].first) + "," + QString::number(points[i].second)+ ")");
+                 item->setIcon(0,iconDot);
+                 valuesList->addTopLevelItem(item);
+             }
          }
      }
 }
