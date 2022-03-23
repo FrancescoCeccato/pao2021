@@ -1,4 +1,8 @@
 #include "charts_comparisonchart_editor.h"
+#include <presenter_chart_view.h>
+#include <charts_main_window.h>
+#include "iostream"
+#include "vector"
 
 Charts_Comparisonchart_Editor::Charts_Comparisonchart_Editor(QWidget *parent)
     : QWidget{parent}
@@ -11,9 +15,8 @@ Charts_Comparisonchart_Editor::Charts_Comparisonchart_Editor(QWidget *parent)
     spinBox = new QSpinBox();
     spinBox->setMaximum(20);
 
-    auto label2 = new QLabel("INSERIMENTO VALORI");
-    auto label3 = new QLabel("NOMI CATEGORIE");
-    auto label4 = new QLabel("TITOLI DEI RECORD");
+    auto label2 = new QLabel("Inserimento valori");
+    auto label3 = new QLabel("Titoli categorie");
     label3->setFixedWidth(120);
     gridValues = new QTableWidget(20,20);
     gridLabelCategories = new QTableWidget(20,1);
@@ -59,4 +62,25 @@ void Charts_Comparisonchart_Editor::populateRowWithLineEdit(uint row) {
 
 double Charts_Comparisonchart_Editor::getCellNumericValue(uint row, uint col) {
     return static_cast<QLineEdit*>(gridValues->cellWidget(row, col))->text().toDouble();
+
+void Charts_Comparisonchart_Editor::set_chart_presenter(presenter_chart_view* ccw){
+    c = ccw;
+    connect(okButton, SIGNAL(clicked()), c, SLOT(add_entry_comparison()));
+}
+
+void Charts_Comparisonchart_Editor::set_mainchart_view(Charts_Main_Window* cmw){charts_mw = cmw;}
+
+void Charts_Comparisonchart_Editor::set_grids(comparison_chart* c){
+    for(uint i = 0;i<c->get_entries_size();++i){
+        std::vector<double> values = c->give_entry_values(i);
+        std::string label = c->give_entry_label(i);
+        auto item = new  QTableWidgetItem();
+        item->setText(QString::fromStdString(label));
+        gridCategories->setItem(i,0,item);
+        for(uint j = 0; j<c->get_nvalues();++j){
+            auto item = new  QTableWidgetItem();
+            item->setText(QString::number(values[j]));
+            gridValues->setItem(j,i,item);
+        }
+    }
 }

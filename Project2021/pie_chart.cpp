@@ -1,5 +1,6 @@
 #include <vector>
 #include <algorithm>
+#include <stdexcept>
 #include "pie_chart.h"
 
 pie_chart::pie_chart(const std::string& title): comparison_chart(1,title){}
@@ -33,5 +34,15 @@ std::pair<double, std::string> pie_chart::give_max() const {
 void pie_chart::insert_entry(uint index, double *val, const std::string &label, bool overwrite) {
     insert_entry_generic(index,val,label,overwrite);
 }
+
+std::vector<std::string> pie_chart::chart_info()const{
+    std::vector<std::string> info = chart::chart_info();
+    return info;
+}
+
+std::string pie_chart::description(){
+    return "Il pie chart è un grafico a torta che permette di osservare in quale percentuale le diverse categorie influenzano il totale.";
+}
+
 
 

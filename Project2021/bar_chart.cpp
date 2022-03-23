@@ -22,3 +22,4 @@ void bar_chart::set_horizontal(bool h)
 {
     horizontal = h;
 }
+

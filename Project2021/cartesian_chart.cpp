@@ -16,3 +16,4 @@ std::string cartesian_chart::get_label_x() const {
 std::string cartesian_chart::get_label_y() const {
     return label_y;
 }
+

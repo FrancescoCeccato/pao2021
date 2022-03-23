@@ -15,6 +15,9 @@ public:
     void delete_point(float,float) override;
     std::vector<std::pair<float,float>> get_points() const override;
     uint get_points_amount() const override;
+    std::vector<std::string> chart_info() const override;
+    static std::string description();
+
 
     float mean_x() const;
     float mean_y() const;

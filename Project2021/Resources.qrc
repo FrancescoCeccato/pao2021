@@ -7,6 +7,9 @@
         <file>paint.png</file>
         <file>dot.png</file>
         <file>square.png</file>
+        <file>PieChart.png</file>
+        <file>SimpleBar.png</file>
+        <file>StackedBar.png</file>
     </qresource>
     <qresource prefix="/"/>
 </RCC>

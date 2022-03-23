@@ -19,8 +19,12 @@ void time_chart::delete_point(float x, float y)
 
 std::vector<std::pair<float,float>> time_chart::get_points() const {
     std::vector<std::pair<float,float>> v;
-    for(auto it = points.begin(); it != points.end(); it++)
+    for(auto it = points.begin(); it != points.end(); it++){
         v.push_back(std::pair<float,float>(it->x,it->y));
+    }
+    std::sort(v.begin(),v.end(),
+              [](const std::pair<const float, const float>& p1, const std::pair<const float, const float>& p2) {
+                                return p1.first < p2.first; });
     return v;
 }
 
@@ -56,4 +60,13 @@ float time_chart::give_min() const {
 }
 float time_chart::give_max() const {
     return points.rbegin()->y;
+}
+
+std::vector<std::string> time_chart::chart_info()const{
+    std::vector<std::string> info = chart::chart_info();
+    return info;
+}
+
+std::string time_chart::description(){
+    return " ";
 }

@@ -1,4 +1,5 @@
 #include "comparison_chart.h"
+#include "iostream"
 
 comparison_chart::entry::entry(uint num, double* val,const std::string& title) : label(title), values(val), n_values(num) {}
 
@@ -52,12 +53,21 @@ std::vector<double> comparison_chart::entry::give_percentages() const {
     return output;
 }
 
+uint comparison_chart::get_entries_size() const{
+    return entries.size();
+}
+
+uint comparison_chart::get_nvalues() const{
+    return values_per_entry;
+}
+
 comparison_chart::comparison_chart(uint amt, const std::string& t) : chart(t), values_per_entry(amt) {}
 
 comparison_chart::~comparison_chart() {
     for(uint i = 0; i<entries.size(); i++)
         delete entries[i];
 }
+
 
 void comparison_chart::add_entry(double* values, const std::string& title) {
     insert_entry(entries.size(),values,title,false);
@@ -70,7 +80,7 @@ void comparison_chart::insert_entry_generic(uint index, double *values, const st
         e->set_label(title);
     }
     else {
-        auto e = new entry(1,values,title);
+        auto e = new entry(values_per_entry,values,title);
         entries.insert(entries.begin()+index,e);
     }
 }
@@ -80,9 +90,12 @@ void comparison_chart::update_entry(uint index, double *values, const std::strin
 }
 
 void comparison_chart::delete_entry(uint index) {
-    delete entries[index];
-    entries.erase(entries.begin()+index);
+    if(index<entries.size()){
+        delete entries[index];
+        entries.erase(entries.begin()+index);
+    }
 }
+
 
 std::string comparison_chart::give_entry_label(uint index) const {
     return entries[index]->give_label();

@@ -8,7 +8,7 @@ class time_chart: public cartesian_chart
 private:
     struct comparator {
       bool operator()(const point& a, const point& b) const {
-        return a.y < b.y;
+        return a.x < b.x;
       }
     };
     std::set<point,comparator> points;
@@ -16,6 +16,9 @@ private:
 public:
     time_chart(const std::string& ="", const std::string& ="X", const std::string& ="Y");
     time_chart(const time_chart&) = delete;
+    std::vector<std::string> chart_info() const override;
+    static std::string description();
+
 
     void add_point(float, float) override;
     void delete_point(float,float) override;

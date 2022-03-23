@@ -12,20 +12,31 @@
 #include <QGroupBox>
 #include <QLineEdit>
 
+class presenter_chart_view;
+
 class Charts_ChartCreation : public QWidget
 {
     Q_OBJECT
 public:
-    QGraphicsView *imageView;
-    QLabel *labelType, *labelDescription;
-    QPushButton *btnCreate;
-    QLineEdit *chartTitle;
-    QCheckBox *checkBox1, *checkBox2;
-    QRadioButton *b1, *b2, *b3, *b4, *b5, *b6;
-    explicit Charts_ChartCreation(QWidget *parent = nullptr);
+     presenter_chart_view* c;
+     QGraphicsView *imageView;
+     QGraphicsScene *scene;
+     QLabel *labelType, *labelDescription;
+     QPushButton *btnCreate;
+     QLineEdit *chartTitle;
+     QCheckBox *checkBox1, *checkBox2;
+     QRadioButton *b1, *b2, *b3, *b4, *b5, *b6;
+     QButtonGroup* radioGroup;
+public:
+     uint selected;
+     explicit Charts_ChartCreation(QWidget *parent = nullptr);
+     void set_chart_presenter(presenter_chart_view* ccw);
 
 
 signals:
+
+public slots:
+     void set_chart();
 
 };
 

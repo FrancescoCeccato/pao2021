@@ -49,3 +49,16 @@ void simple_bar_chart::insert_entry(uint index, double *val, const std::string &
     insert_entry_generic(index,val,label,overwrite);
 }
 
+std::vector<std::string> simple_bar_chart::chart_info()const{
+    std::vector<std::string> info = chart::chart_info();
+    info.push_back("La media delle entrate di questo grafico è: " + std::to_string(mean()));
+    info.push_back("La mediana delle entrate di questo grafico è: " + std::to_string(median()));
+    info.push_back("La moda delle entrate di questo grafico è: " + std::to_string(mode()));
+    info.push_back("Il midrange delle entrate di questo grafico è: " + std::to_string(midrange()));
+    return info;
+}
+
+std::string simple_bar_chart::description(){
+    return "Il simple bar chart è un grafico a barre che permette di comparare diverse categorie tra loro. Ciò permette di fare anche analisi statistiche tra le diverse categorie.";
+}
+
