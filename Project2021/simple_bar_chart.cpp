@@ -12,7 +12,7 @@ double simple_bar_chart::median() const {
     if(entries.size() != 0){
         std::vector<double> v;
         for(uint i = 0; i<entries.size(); i++)
-            v.push_back(*(entries[i]));
+            v.push_back(entries[i]);
         auto m = v.begin() + v.size()/2;
         std::nth_element(v.begin(), m, v.end());
 
@@ -25,7 +25,7 @@ double simple_bar_chart::mode() const {
     if(entries.size() != 0){
         std::map<double,uint> map;
         for(uint i = 0; i<entries.size(); i++)
-            ++map[*(entries[i])];
+            ++map[entries[i]];
         auto x = std::max_element(map.begin(), map.end(),
                                          [](const std::pair<const double, uint>& p1, const std::pair<const double, uint>& p2) {
                                              return p1.second < p2.second; });
@@ -38,7 +38,7 @@ double simple_bar_chart::midrange() const {
     if(entries.size() != 0) {
         std::vector<double> v;
         for(uint i = 0; i<entries.size(); i++)
-            v.push_back(*(entries[i]));
+            v.push_back(entries[i]);
         auto pair = std::minmax_element(v.begin(),v.end());
         return (*(pair.second) - *(pair.first));
     }

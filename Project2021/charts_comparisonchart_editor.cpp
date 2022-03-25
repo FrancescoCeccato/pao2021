@@ -15,8 +15,9 @@ Charts_Comparisonchart_Editor::Charts_Comparisonchart_Editor(QWidget *parent)
     spinBox->setMaximum(20);
 
 
-    auto label2 = new QLabel("Inserimento valori");
-    auto label3 = new QLabel("Titoli categorie");
+    auto label2 = new QLabel("INSERIMENTO VALORI");
+    auto label3 = new QLabel("NOMI CATEGORIE");
+    auto label4 = new QLabel("TITOLI DEI RECORD");
     label3->setFixedWidth(120);
     gridValues = new QTableWidget(20,20);
     gridCategories = new QTableWidget(20,1);
