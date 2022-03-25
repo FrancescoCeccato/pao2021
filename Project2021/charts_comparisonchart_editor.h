@@ -16,12 +16,15 @@ class Charts_Main_Window;
 
 class Charts_Comparisonchart_Editor : public QWidget
 {
-    Q_OBJECT 
+    Q_OBJECT
+private:
+    void populateRowWithLineEdit(uint index);
+    double getCellNumericValue(uint row, uint col);
 public:
     presenter_chart_view* c;
     Charts_Main_Window* charts_mw;
     QSpinBox *spinBox;
-    QTableWidget *gridValues, *gridCategories;
+    QTableWidget *gridValues, *gridLabelCategories, *gridLabelEntries;
     QLabel *signalLabel;
     QPushButton *okButton;
     explicit Charts_Comparisonchart_Editor(QWidget *parent = nullptr);

@@ -75,8 +75,8 @@ double* presenter_chart_view::get_entries_value(uint index){
 
 std::string presenter_chart_view::get_label(uint index){
     std::string label = "";
-    if(comp_editor->gridCategories->item(index,0)){
-        label = comp_editor->gridCategories->item(index,0)->text().toStdString();
+    if(comp_editor->gridLabelEntries->item(index,0)){
+        label = comp_editor->gridLabelEntries->item(index,0)->text().toStdString();
     } else
         label = "";
     return label;
@@ -94,7 +94,7 @@ void presenter_chart_view::open_settings(){
             comp_editor->spinBox->setValue(1);
             comp_editor->spinBox->setEnabled(false);
             comp_editor->gridValues->clear();
-            comp_editor->gridCategories->clear();
+            comp_editor->gridLabelEntries->clear();
             comp_editor->gridValues->setRowCount(1);
             comp_editor->set_grids(cc);
         }
