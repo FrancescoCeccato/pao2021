@@ -1,6 +1,5 @@
 #include "presenter_chart_view.h"
 #include "comparison_chart.h"
-#include "iostream"
 
 presenter_chart_view::presenter_chart_view(QObject *parent): QObject{parent} {}
 
@@ -112,5 +111,9 @@ void presenter_chart_view::give_balance(){
 void presenter_chart_view::set_description(){
     uint code = get_selected();
     charts_creation->labelDescription->setText(QString::fromStdString(model::chart_description(code)));
+}
+
+void presenter_chart_view::save(){
+    x.write_xml(mod->get_chart());
 }
 

@@ -68,5 +68,5 @@ std::vector<std::string> time_chart::chart_info()const{
 }
 
 std::string time_chart::description(){
-    return " ";
+    return "Il time chart è un grafico a linee che permette di osservare il cambiamento di un certo dato nel tempo.";
 }

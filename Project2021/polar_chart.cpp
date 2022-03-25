@@ -45,6 +45,6 @@ std::vector<std::string> polar_chart::chart_info()const{
 }
 
 std::string polar_chart::description(){
-    return " ";
+    return "Il polar chart è un grafico che permette di osservare i diversi parametri di un certo dato, paragonandoli fra loro e analizzando quali parametri influiscono di più e quali di meno.";
 }
 

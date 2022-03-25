@@ -89,5 +89,5 @@ std::vector<std::string> dot_chart::chart_info()const{
 }
 
 std::string dot_chart::description(){
-    return " ";
+    return "Il dot chart indica le informazioni di un dato come punti su un piano cartesiano, permettendo di analizzare questo dato in base alla disposizione dei punti.";
 }

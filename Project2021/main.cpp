@@ -4,11 +4,11 @@
 #include "charts_comparisonchart_editor.h"
 #include "charts_cartesianchart_addpoints.h"
 #include "charts_chartcreation.h"
+#include "xml_management.h"
 #include <QApplication>
 #include <QLocale>
 #include <QTranslator>
 #include <iostream>
-#include <string>
 
 int main(int argc, char *argv[])
 {
@@ -43,7 +43,7 @@ int main(int argc, char *argv[])
     e->set_chart_presenter(c);
     ap->set_mainchart_view(mw);
     ap->set_chart_presenter(c);
-
+    xml_management x = xml_management();
     //Dialog_Entrance w;
 
     w->show();

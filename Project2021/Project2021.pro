@@ -1,4 +1,4 @@
-QT       += core gui charts
+QT       += core gui charts xml
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++11
@@ -27,7 +27,8 @@ SOURCES += \
     presenter_chart_view.cpp \
     simple_bar_chart.cpp \
     stacked_bar_chart.cpp \
-    time_chart.cpp
+    time_chart.cpp \
+    xml_management.cpp
 
 HEADERS += \
     bar_chart.h \
@@ -48,7 +49,8 @@ HEADERS += \
     presenter_chart_view.h \
     simple_bar_chart.h \
     stacked_bar_chart.h \
-    time_chart.h
+    time_chart.h \
+    xml_management.h
 
 FORMS += \
     test.ui

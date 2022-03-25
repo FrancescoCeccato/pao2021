@@ -7,6 +7,7 @@
 #include <charts_comparisonchart_editor.h>
 #include <charts_cartesianchart_addpoints.h>
 #include <model.h>
+#include "xml_management.h"
 
 class presenter_chart_view : public QObject
 {
@@ -17,6 +18,7 @@ private:
     Charts_Comparisonchart_Editor* comp_editor;
     Charts_Cartesianchart_AddPoints* cart_editor;
     model* mod;
+    xml_management x;
 public:
     explicit presenter_chart_view(QObject *parent = nullptr);
     void set_model(model*);
@@ -35,6 +37,7 @@ public slots:
     void open_settings();
     void give_balance();
     void set_description();
+    void save();
 };
 
 #endif // PRESENTER_CHART_VIEW_H

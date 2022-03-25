@@ -79,6 +79,8 @@ Charts_ChartCreation::Charts_ChartCreation(QWidget *parent)
     p.setColor(QPalette::Window, QColor(200,235,255));
     this->setPalette(p);
     connect(radioGroup , SIGNAL(buttonClicked(QAbstractButton*)), this, SLOT(set_chart()));
+    connect(checkBox1 , SIGNAL(clicked()), this, SLOT(set_checkBox()));
+    connect(checkBox2 , SIGNAL(clicked()), this, SLOT(set_checkBox()));
 
 }
 
@@ -92,45 +94,102 @@ void Charts_ChartCreation::set_chart(){
     if(b1->isChecked()){
         selected = 1;
         checkBox1->setEnabled(true);
-        checkBox2->setEnabled(true);
-        labelDescription->text();
-
+        checkBox2->setChecked(false);
+        checkBox2->setEnabled(false);
+        scene->clear();
+        if(checkBox1->isChecked()){
+            QPixmap px(":/images/simpleh_c.PNG");
+            scene->addPixmap(px);
+        }else{
+            QPixmap px(":/images/simplev_c.PNG");
+            scene->addPixmap(px);
+        }
     }
     else if(b2->isChecked()){
         selected = 2;
         checkBox1->setEnabled(true);
         checkBox2->setEnabled(true);
-        //scene->clear();
-        //QPixmap px(":/images/StackedBar.png");
-        //scene->addPixmap(px);
-        //scene->setSceneRect(0,0,1440,724);
+        scene->clear();
+        if(!checkBox1->isChecked() && !checkBox2->isChecked()){
+            QPixmap px(":/images/stackedv_c.PNG");
+            scene->addPixmap(px);
+        }else if(checkBox1->isChecked() && !checkBox2->isChecked()){
+            QPixmap px(":/images/stackedh_c.PNG");
+            scene->addPixmap(px);
+        }else if(!checkBox1->isChecked() && checkBox2->isChecked()){
+            QPixmap px(":/images/segmentedv_c.PNG");
+            scene->addPixmap(px);
+        }else{
+            QPixmap px(":/images/segmentedh_c.PNG");
+            scene->addPixmap(px);
+        }
     }
     else if(b3->isChecked()){
+        selected = 3;
         checkBox1->setChecked(false);
         checkBox1->setEnabled(false);
         checkBox2->setChecked(false);
         checkBox2->setEnabled(false);
-        selected = 3;
+        scene->clear();
+        QPixmap px(":/images/pie_c.PNG");
+        scene->addPixmap(px);
     }
     else if(b4->isChecked()){
+        selected = 4;
         checkBox1->setChecked(false);
         checkBox1->setEnabled(false);
         checkBox2->setChecked(false);
         checkBox2->setEnabled(false);
-        selected = 4;
+        scene->clear();
+        QPixmap px(":/images/polar_c.PNG");
+        scene->addPixmap(px);
     }
     else if(b5->isChecked()){
+        selected = 6;
         checkBox1->setChecked(false);
         checkBox1->setEnabled(false);
         checkBox2->setChecked(false);
         checkBox2->setEnabled(false);
-        selected = 6;
+        scene->clear();
+        QPixmap px(":/images/dot_c.PNG");
+        scene->addPixmap(px);
     }
     else if(b6->isChecked()){
+        selected = 5;
         checkBox1->setChecked(false);
         checkBox1->setEnabled(false);
         checkBox2->setChecked(false);
         checkBox2->setEnabled(false);
-        selected = 5;
+        scene->clear();
+        QPixmap px(":/images/time_c.PNG");
+        scene->addPixmap(px);
+    }
+}
+
+void Charts_ChartCreation::set_checkBox(){
+    if(checkBox1->isChecked() && b1->isChecked()){
+        scene->clear();
+        QPixmap px(":/images/simpleh_c.PNG");
+        scene->addPixmap(px);
+    }else if(!checkBox1->isChecked() && b1->isChecked()){
+        scene->clear();
+        QPixmap px(":/images/simplev_c.PNG");
+        scene->addPixmap(px);
+    }else if(checkBox1->isChecked() && !checkBox2->isChecked() && b2->isChecked()){
+        scene->clear();
+        QPixmap px(":/images/stackedh_c.PNG");
+        scene->addPixmap(px);
+    }else if(!checkBox1->isChecked() && !checkBox2->isChecked() && b2->isChecked()){
+        scene->clear();
+        QPixmap px(":/images/stackedv_c.PNG");
+        scene->addPixmap(px);
+    }else if(checkBox1->isChecked() && checkBox2->isChecked() && b2->isChecked()){
+        scene->clear();
+        QPixmap px(":/images/segmentedh_c.PNG");
+        scene->addPixmap(px);
+    }else if(!checkBox1->isChecked() && checkBox2->isChecked() && b2->isChecked()){
+        scene->clear();
+        QPixmap px(":/images/segmentedv_c.PNG");
+        scene->addPixmap(px);
     }
 }

@@ -37,6 +37,7 @@ signals:
 
 public slots:
      void set_chart();
+     void set_checkBox();
 
 };
 

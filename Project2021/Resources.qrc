@@ -7,9 +7,16 @@
         <file>paint.png</file>
         <file>dot.png</file>
         <file>square.png</file>
-        <file>PieChart.png</file>
-        <file>SimpleBar.png</file>
-        <file>StackedBar.png</file>
+        <file>dot_c.PNG</file>
+        <file>pie_c.PNG</file>
+        <file>polar_c.PNG</file>
+        <file>segmentedh_c.PNG</file>
+        <file>segmentedv_c.PNG</file>
+        <file>simpleh_c.PNG</file>
+        <file>simplev_c.PNG</file>
+        <file>stackedh_c.PNG</file>
+        <file>stackedv_c.PNG</file>
+        <file>time_c.PNG</file>
     </qresource>
     <qresource prefix="/"/>
 </RCC>

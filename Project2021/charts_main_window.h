@@ -27,7 +27,7 @@ public:
     QPushButton *zoomIn, *zoomOut, *repaint, *settings, *TC_Calculate;
     QLabel *TC_Result;
     QSpinBox *TC_SpinBox1, *TC_SpinBox2;
-    QToolBar *toolBarBottom;
+    QToolBar *toolBarBottom, *toolBarTop;
     //test
 public:
     explicit Charts_Main_Window(QWidget *parent = nullptr);

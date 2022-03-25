@@ -105,7 +105,7 @@ Charts_Main_Window::Charts_Main_Window(QWidget *parent)
     setCorner(Qt::BottomLeftCorner,Qt::LeftDockWidgetArea);
     setCorner(Qt::TopLeftCorner,Qt::LeftDockWidgetArea);
 
-    QToolBar* toolBarTop = new QToolBar();
+    toolBarTop = new QToolBar();
     QPixmap pixmap2(":/images/new.png");
     QIcon ButtonIcon2(pixmap2);
     toolBarTop->addAction(ButtonIcon2, "Crea nuovo...");
@@ -216,6 +216,8 @@ void Charts_Main_Window::set_chart_presenter(presenter_chart_view* ccw){
     connect(settings, SIGNAL(clicked()), c, SLOT(open_settings()));
     connect(deleteP->actions()[0], SIGNAL(triggered()), c, SLOT(delete_point()));
     connect(TC_Calculate, SIGNAL(clicked()), c, SLOT(give_balance()));
+    connect(toolBarTop->actions()[1], SIGNAL(triggered()), c,
+                        SLOT(save()));
 }
 
 void Charts_Main_Window::set_comparison_editor(Charts_Comparisonchart_Editor* cce){
