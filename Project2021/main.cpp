@@ -1,10 +1,16 @@
+/*
 #include "charts_main_window.h"
 #include "presenter_chart_view.h"
 #include "model.h"
 #include "charts_comparisonchart_editor.h"
 #include "charts_cartesianchart_addpoints.h"
 #include "charts_chartcreation.h"
-#include "xml_management.h"
+*/
+#include "chart.h"
+#include "charts_xmlexport.h"
+#include "charts_xmlimport.h"
+#include "stacked_bar_chart.h"
+
 #include <QApplication>
 #include <QLocale>
 #include <QTranslator>
@@ -24,10 +30,13 @@ int main(int argc, char *argv[])
         }
     }
 
+
+    /*
     presenter_chart_view* c = new presenter_chart_view();
     model* m = new model();
     Charts_Main_Window* mw = new Charts_Main_Window();
     Charts_ChartCreation* w = new Charts_ChartCreation();
+
     Charts_Comparisonchart_Editor* e = new Charts_Comparisonchart_Editor();
     Charts_Cartesianchart_AddPoints* ap = new Charts_Cartesianchart_AddPoints();
     c->set_chartcreation_view(w);
@@ -43,9 +52,21 @@ int main(int argc, char *argv[])
     e->set_chart_presenter(c);
     ap->set_mainchart_view(mw);
     ap->set_chart_presenter(c);
-    xml_management x = xml_management();
-    //Dialog_Entrance w;
 
-    w->show();
+    */
+    stacked_bar_chart* c = new stacked_bar_chart(4,true,"PROVAAAAA",false);
+    double* A = new double[] {4.57,24,8.6,9.26};
+    double *B = new double[] {4.507,824,6.6,9};
+    c->add_entry(A,"first");
+    c->add_entry(B,"second");
+    std::vector<std::string> categorie {"prima","seconda","terza","quarta"};
+    c->set_categories(categorie);
+
+    //Charts_XmlExport x(c,"/home/kikkoceccato/Scrivania/","NewNoise.xml");
+    //x.exportContent();
+
+    Charts_XmlImport i("/home/kikkoceccato/Scrivania/","NewNoise.xml");
+    auto pair = i.importContent();
+
     return a.exec();
 }

@@ -31,7 +31,7 @@ public:
         void set_values(double*);
     };
 protected:
-    std::vector<entry> entries;
+    std::vector<entry*> entries;
     uint values_per_entry;
 
     virtual void insert_entry(uint, double*, const std::string& = "", bool = false) = 0;

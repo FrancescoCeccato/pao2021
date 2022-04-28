@@ -294,7 +294,7 @@ void Charts_Main_Window::show_stacked_bar_chart(chart* c){
         chart->addAxis(axisY, Qt::AlignLeft);
         QStackedBarSeries* series = new QStackedBarSeries();
         for(uint i = 0; i<stacked_bc->get_nvalues() && stacked_bc->get_entries_size() > 0;++i){
-             QBarSet* set = new QBarSet(QString::fromStdString(stacked_bc->get_categories(i)));
+             QBarSet* set = new QBarSet(QString::fromStdString(stacked_bc->get_category(i)));
              for(uint j = 0; j<stacked_bc->get_entries_size();++j){
                  std::vector<double> entries_v = stacked_bc->give_entry_values(j);
                  *set << entries_v[i];
@@ -322,7 +322,7 @@ void Charts_Main_Window::show_stacked_bar_chart(chart* c){
         chart->addAxis(axisX, Qt::AlignBottom);
         QHorizontalStackedBarSeries* series = new QHorizontalStackedBarSeries();
         for(uint i = 0; i<stacked_bc->get_nvalues() && stacked_bc->get_entries_size() > 0;++i){
-             QBarSet* set = new QBarSet(QString::fromStdString(stacked_bc->get_categories(i)));
+             QBarSet* set = new QBarSet(QString::fromStdString(stacked_bc->get_category(i)));
              for(uint j = 0; j<stacked_bc->get_entries_size();++j){
                  std::vector<double> entries_v = stacked_bc->give_entry_values(j);
                  *set << entries_v[i];
@@ -355,7 +355,7 @@ void Charts_Main_Window::show_segmented_bar_chart(chart* c){
         chart->addAxis(axisY, Qt::AlignLeft);
         QStackedBarSeries* series = new QStackedBarSeries();
         for(uint i = 0; i<stacked_bc->get_nvalues() && stacked_bc->get_entries_size() > 0;++i){
-             QBarSet* set = new QBarSet(QString::fromStdString(stacked_bc->get_categories(i)));
+             QBarSet* set = new QBarSet(QString::fromStdString(stacked_bc->get_category(i)));
              for(uint j = 0; j<stacked_bc->get_entries_size();++j){
                  std::vector<double> entries_v = stacked_bc->give_entry_percentages(j);
                  *set << entries_v[i];
@@ -383,7 +383,7 @@ void Charts_Main_Window::show_segmented_bar_chart(chart* c){
         chart->addAxis(axisX, Qt::AlignBottom);
         QHorizontalStackedBarSeries* series = new QHorizontalStackedBarSeries();
         for(uint i = 0; i<stacked_bc->get_nvalues() && stacked_bc->get_entries_size() > 0;++i){
-             QBarSet* set = new QBarSet(QString::fromStdString(stacked_bc->get_categories(i)));
+             QBarSet* set = new QBarSet(QString::fromStdString(stacked_bc->get_category(i)));
              for(uint j = 0; j<stacked_bc->get_entries_size();++j){
                  std::vector<double> entries_v = stacked_bc->give_entry_percentages(j);
                  *set << entries_v[i];
@@ -615,7 +615,7 @@ void Charts_Main_Window::showChild_list_values(QTreeWidgetItem* parent, const ch
             auto categ = new QTreeWidgetItem();
             QString s = "";
             stacked_bc->is_segmented() ? s = QString::number(std::round(entries_v[i])) + "%" : s = QString::number(entries_v[i]);
-            categ->setText(0, QString::fromStdString(stacked_bc->get_categories(i)) + ": " + s);
+            categ->setText(0, QString::fromStdString(stacked_bc->get_category(i)) + ": " + s);
             parent->addChild(categ);
         }
     }

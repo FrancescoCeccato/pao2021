@@ -114,6 +114,6 @@ void presenter_chart_view::set_description(){
 }
 
 void presenter_chart_view::save(){
-    x.write_xml(mod->get_chart());
+    //x.write_xml(mod->get_chart());
 }
 

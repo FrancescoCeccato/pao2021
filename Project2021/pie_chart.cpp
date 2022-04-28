@@ -8,14 +8,14 @@ pie_chart::pie_chart(const std::string& title): comparison_chart(1,title){}
 double pie_chart::give_total_sum() const {
     double sum = 0;
     for(uint i = 0; i<entries.size(); i++)
-        sum += entries[i];
+        sum += *entries[i];
     return sum;
 }
 
 double pie_chart::give_slice_percentage(uint index) const {
     auto size = entries.size();
     if(index<size){
-        return 100*entries[index]/give_total_sum();
+        return 100*(*entries[index])/give_total_sum();
     } else
         return 0;
 }
@@ -23,7 +23,7 @@ double pie_chart::give_slice_percentage(uint index) const {
 std::pair<double, std::string> pie_chart::give_max() const {
     std::vector<std::pair<double,std::string>> v;
     for(uint i = 0; i<entries.size(); ++i){
-        v.push_back(std::pair<double,std::string>(entries[i], entries[i].give_label()));
+        v.push_back(std::pair<double,std::string>(*entries[i], entries[i]->give_label()));
     }
     auto x = std::max_element(v.begin(), v.end(),
                               [](const std::pair<const double, std::string>& p1, const std::pair<const double, std::string>& p2) {
