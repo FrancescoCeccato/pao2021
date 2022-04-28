@@ -10,8 +10,8 @@ double polar_chart::find_max() const
     double max = 0;
     for(uint i = 0; i<entries.size(); i++)
     {
-        if(entries[i] > max)
-            max = entries[i];
+        if(*entries[i] > max)
+            max = *entries[i];
     }
     return max;
 }
@@ -20,14 +20,14 @@ double polar_chart::give_completion_percentage() const
 {
     double sum = 0;
     for(uint i = 0; i<entries.size(); i++)
-        sum += entries[i]/find_max();
+        sum += *entries[i]/find_max();
     return sum/entries.size();
 }
 
 double polar_chart::midrange() const {
     std::vector<double> v;
     for(uint i = 0; i<entries.size(); i++)
-        v.push_back(entries[i].give_value(0));
+        v.push_back(entries[i]->give_value(0));
     auto pair = std::minmax_element(v.begin(),v.end());
     return (*(pair.second) - *(pair.first));
 }

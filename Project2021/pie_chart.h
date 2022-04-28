@@ -9,12 +9,12 @@ private:
     void insert_entry(uint, double*, const std::string& = "", bool = false) override;
 public:
     pie_chart(const std::string& ="");
-    pie_chart(const pie_chart&) = delete;
-    std::vector<std::string> chart_info() const override;
-    static std::string description();
 
     double give_slice_percentage(uint) const;
     std::pair<double, std::string> give_max() const;
+
+    std::vector<std::string> chart_info() const override;
+    static std::string description();
 };
 
 #endif // PIE_CHART_H

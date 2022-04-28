@@ -12,15 +12,16 @@ private:
     void insert_entry(uint, double*, const std::string& = "", bool = false) override;
 
 public:
-    std::string get_categories(uint) const;
-    std::vector<std::string> chart_info() const override;
-    static std::string description();
 
     stacked_bar_chart(uint, bool, const std::string& ="",bool=false);
-    stacked_bar_chart(const stacked_bar_chart&) = delete;
     void set_categories(const std::vector<std::string>&);
     std::vector<std::string> get_categories() const;
+    std::string get_category(uint) const;
+
     bool is_segmented() const;
+
+    std::vector<std::string> chart_info() const override;
+    static std::string description();
 };
 
 #endif // STACKED_BAR_CHART_H

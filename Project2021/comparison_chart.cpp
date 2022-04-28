@@ -70,11 +70,11 @@ void comparison_chart::add_entry(double* values, const std::string& title) {
 void comparison_chart::insert_entry_generic(uint index, double *values, const std::string &title, bool overwrite) {
     if(overwrite){
         auto e = entries[index];
-        e.set_values(values);
-        e.set_label(title);
+        e->set_values(values);
+        e->set_label(title);
     }
     else {
-        entry e(values_per_entry,values,title);
+        entry* e = new entry(values_per_entry,values,title);
         entries.insert(entries.begin()+index,e);
     }
 }
@@ -91,13 +91,13 @@ void comparison_chart::delete_entry(uint index) {
 
 
 std::string comparison_chart::give_entry_label(uint index) const {
-    return entries[index].give_label();
+    return entries[index]->give_label();
 }
 
 std::vector<double> comparison_chart::give_entry_values(uint index) const{
-    return entries[index].give_values();
+    return entries[index]->give_values();
 }
 
 std::vector<double> comparison_chart::give_entry_percentages(uint index) const {
-    return entries[index].give_percentages();
+    return entries[index]->give_percentages();
 }

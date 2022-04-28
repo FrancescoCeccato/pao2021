@@ -7,7 +7,7 @@ void stacked_bar_chart::set_categories(const std::vector<std::string>& categorie
     this->categories = categories;
 }
 
-std::string stacked_bar_chart::get_categories(uint index) const {
+std::string stacked_bar_chart::get_category(uint index) const {
     if(index < categories.size()){
          return categories[index];
     }else
