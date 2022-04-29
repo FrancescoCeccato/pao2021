@@ -16,6 +16,8 @@ SOURCES += \
     charts_comparisonchart_editor.cpp \
     charts_exception.cpp \
     charts_main_window.cpp \
+    charts_xmlexport.cpp \
+    charts_xmlimport.cpp \
     comparison_chart.cpp \
     dialog_entrance.cpp \
     dot_chart.cpp \
@@ -26,8 +28,7 @@ SOURCES += \
     presenter_chart_view.cpp \
     simple_bar_chart.cpp \
     stacked_bar_chart.cpp \
-    time_chart.cpp \
-    xml_management.cpp
+    time_chart.cpp
 
 HEADERS += \
     bar_chart.h \
@@ -38,6 +39,7 @@ HEADERS += \
     charts_comparisonchart_editor.h \
     charts_exception.h \
     charts_main_window.h \
+    charts_presenter.h \
     comparison_chart.h \
     dialog_entrance.h \
     dot_chart.h \
@@ -47,8 +49,7 @@ HEADERS += \
     presenter_chart_view.h \
     simple_bar_chart.h \
     stacked_bar_chart.h \
-    time_chart.h \
-    xml_management.h
+    time_chart.h
 
 FORMS += \
     test.ui

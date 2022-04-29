@@ -16,9 +16,10 @@ public:
     static std::string description();
 
     stacked_bar_chart(uint, bool, const std::string& ="",bool=false);
-    stacked_bar_chart(const stacked_bar_chart&) = delete;
     void set_categories(const std::vector<std::string>&);
     std::vector<std::string> get_categories() const;
+    std::string get_category(uint) const;
+
     bool is_segmented() const;
     double max() const;
 };

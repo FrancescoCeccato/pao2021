@@ -1,10 +1,16 @@
+/*
 #include "charts_main_window.h"
 #include "presenter_chart_view.h"
 #include "model.h"
 #include "charts_comparisonchart_editor.h"
 #include "charts_cartesianchart_addpoints.h"
 #include "charts_chartcreation.h"
-#include "xml_management.h"
+*/
+#include "chart.h"
+#include "charts_xmlexport.h"
+#include "charts_xmlimport.h"
+#include "stacked_bar_chart.h"
+
 #include <QApplication>
 #include <QLocale>
 #include <QTranslator>
@@ -24,10 +30,13 @@ int main(int argc, char *argv[])
         }
     }
 
+
+    /*
     presenter_chart_view* c = new presenter_chart_view();
     model* m = new model();
     Charts_Main_Window* mw = new Charts_Main_Window();
     Charts_ChartCreation* w = new Charts_ChartCreation();
+
     Charts_Comparisonchart_Editor* e = new Charts_Comparisonchart_Editor();
     Charts_Cartesianchart_AddPoints* ap = new Charts_Cartesianchart_AddPoints();
     c->set_chartcreation_view(w);
@@ -43,9 +52,7 @@ int main(int argc, char *argv[])
     e->set_chart_presenter(c);
     ap->set_mainchart_view(mw);
     ap->set_chart_presenter(c);
-    xml_management x = xml_management();
-    //Dialog_Entrance w;
 
-    w->showMaximized();
+    w->show();
     return a.exec();
 }
