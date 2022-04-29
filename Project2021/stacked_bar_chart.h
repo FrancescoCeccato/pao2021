@@ -12,7 +12,6 @@ private:
     void insert_entry(uint, double*, const std::string& = "", bool = false) override;
 
 public:
-    std::string get_categories(uint) const;
     std::vector<std::string> chart_info() const override;
     static std::string description();
 
@@ -21,6 +20,7 @@ public:
     void set_categories(const std::vector<std::string>&);
     std::vector<std::string> get_categories() const;
     bool is_segmented() const;
+    double max() const;
 };
 
 #endif // STACKED_BAR_CHART_H

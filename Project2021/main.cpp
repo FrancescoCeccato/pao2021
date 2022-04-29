@@ -46,6 +46,6 @@ int main(int argc, char *argv[])
     xml_management x = xml_management();
     //Dialog_Entrance w;
 
-    w->show();
+    w->showMaximized();
     return a.exec();
 }

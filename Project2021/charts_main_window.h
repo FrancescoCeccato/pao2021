@@ -19,7 +19,6 @@ private:
     presenter_chart_view* c;
     Charts_Comparisonchart_Editor* comp_editor;
     Charts_Cartesianchart_AddPoints* cart_editor;
-    QMenu *deleteP;
 public:
     QChartView *chartView;
     QTreeWidget *valuesList;
@@ -28,12 +27,13 @@ public:
     QLabel *TC_Result;
     QSpinBox *TC_SpinBox1, *TC_SpinBox2;
     QToolBar *toolBarBottom, *toolBarTop;
-    //test
+    QMenu *deleteP;
 public:
     explicit Charts_Main_Window(QWidget *parent = nullptr);
     void set_chart_presenter(presenter_chart_view*);
     void set_comparison_editor(Charts_Comparisonchart_Editor*);
     void set_cartesian_editor(Charts_Cartesianchart_AddPoints*);
+
     void show_charts(chart*);
     void show_simple_bar_chart(chart*);
     void show_stacked_bar_chart(chart*);
@@ -46,7 +46,6 @@ public:
     void showChild_list_values(QTreeWidgetItem* ,const chart*, uint);
     void delete_list_values(chart*);
     void show_chart_info(std::vector<std::string>);
-signals:
 
 public slots:
     void menu_delete( const QPoint & pos );

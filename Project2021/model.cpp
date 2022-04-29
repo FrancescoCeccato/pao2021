@@ -67,6 +67,16 @@ std::vector<std::string> model::chart_info(){
     return c->chart_info();
 }
 
+void model::set_categories(std::vector<std::string> cat){
+    stacked_bar_chart* stbc = static_cast<stacked_bar_chart*>(c);
+    stbc->set_categories(cat);
+}
+
+void model::set_amt(uint amt){
+    comparison_chart* cc = static_cast<comparison_chart*>(c);
+    cc->set_amt(amt);
+}
+
 std::string model::chart_description(uint sel){
     switch (sel) {
     case 1:

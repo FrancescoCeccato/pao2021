@@ -7,7 +7,7 @@
 #include <charts_comparisonchart_editor.h>
 #include <charts_cartesianchart_addpoints.h>
 #include <model.h>
-#include "xml_management.h"
+#include <xml_management.h>
 
 class presenter_chart_view : public QObject
 {
@@ -26,15 +26,21 @@ public:
     void set_chartcreation_view(Charts_ChartCreation*);
     void set_comparisoneditor_view(Charts_Comparisonchart_Editor*);
     void set_cartesianeditor_view(Charts_Cartesianchart_AddPoints*);
+    uint get_selected();
+    void populateRowWithLineEdit(uint index);
+private:
+    double getCellNumericValue(uint row, uint col);
     double* get_entries_value(uint);
     std::string get_label(uint);
-    uint get_selected();
+    std::vector<std::string> get_categories();
+
 public slots:
     void add_charts();
     void add_entry_comparison();
     void add_point();
     void delete_point();
     void open_settings();
+    void populateRow();
     void give_balance();
     void set_description();
     void save();

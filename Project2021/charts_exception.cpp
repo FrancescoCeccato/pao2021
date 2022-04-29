@@ -11,3 +11,7 @@ const char* point_already_present::what() const noexcept {
 const char* point_not_found::what() const noexcept {
     return "Un punto richiesto non è stato trovato.";
 }
+
+const char* chart_not_valid::what() const noexcept {
+    return "Scegliere un tipo di grafico valido.";
+}

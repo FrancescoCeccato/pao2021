@@ -16,6 +16,7 @@ public:
     double median() const;
     double mode() const;
     double midrange() const;
+    double max() const;
 };
 
 #endif // SIMPLE_BAR_CHART_H

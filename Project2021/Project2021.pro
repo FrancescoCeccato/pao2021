@@ -16,7 +16,6 @@ SOURCES += \
     charts_comparisonchart_editor.cpp \
     charts_exception.cpp \
     charts_main_window.cpp \
-    charts_presenter.cpp \
     comparison_chart.cpp \
     dialog_entrance.cpp \
     dot_chart.cpp \
@@ -39,7 +38,6 @@ HEADERS += \
     charts_comparisonchart_editor.h \
     charts_exception.h \
     charts_main_window.h \
-    charts_presenter.h \
     comparison_chart.h \
     dialog_entrance.h \
     dot_chart.h \

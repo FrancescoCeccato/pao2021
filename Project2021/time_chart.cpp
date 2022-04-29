@@ -56,10 +56,17 @@ float time_chart::give_balance(float a,float b) const {
 }
 
 float time_chart::give_min() const {
-    return points.begin()->y;
+    if(points.size()!= 0)
+        return points.begin()->y;
+    else
+        return 0;
 }
+
 float time_chart::give_max() const {
-    return points.rbegin()->y;
+     if(points.size()!= 0)
+         return points.rbegin()->y;
+     else
+         return 0;
 }
 
 std::vector<std::string> time_chart::chart_info()const{
