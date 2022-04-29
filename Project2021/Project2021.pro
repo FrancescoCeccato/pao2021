@@ -39,7 +39,8 @@ HEADERS += \
     charts_comparisonchart_editor.h \
     charts_exception.h \
     charts_main_window.h \
-    charts_presenter.h \
+    charts_xmlexport.h \
+    charts_xmlimport.h \
     comparison_chart.h \
     dialog_entrance.h \
     dot_chart.h \

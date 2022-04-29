@@ -1,11 +1,10 @@
-/*
 #include "charts_main_window.h"
 #include "presenter_chart_view.h"
 #include "model.h"
 #include "charts_comparisonchart_editor.h"
 #include "charts_cartesianchart_addpoints.h"
 #include "charts_chartcreation.h"
-*/
+
 #include "chart.h"
 #include "charts_xmlexport.h"
 #include "charts_xmlimport.h"
@@ -29,9 +28,6 @@ int main(int argc, char *argv[])
             break;
         }
     }
-
-
-    /*
     presenter_chart_view* c = new presenter_chart_view();
     model* m = new model();
     Charts_Main_Window* mw = new Charts_Main_Window();
@@ -53,6 +49,6 @@ int main(int argc, char *argv[])
     ap->set_mainchart_view(mw);
     ap->set_chart_presenter(c);
 
-    w->show();
+    w->showMaximized();
     return a.exec();
 }

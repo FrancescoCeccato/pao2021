@@ -214,41 +214,41 @@ void Charts_Main_Window::show_stacked_bar_chart(chart* c){
         QChart* chart = new QChart();
         chart->setTitle(QString::fromStdString(stacked_bc->get_title()));
         QStringList categories;
-            series->attachAxis(axis2);
-            chart->addSeries(series);
-            }
-                 series->append(set);
-                     categories.append(QString::fromStdString(stacked_bc->give_entry_label(j)));
-                 }
-                     *set << entries_v[i];
-                 for(uint j = 0; j<stacked_bc->get_entries_size();++j){
-                     std::vector<double> entries_v = stacked_bc->give_entry_values(j);
-                 QBarSet* set = new QBarSet(QString::fromStdString(cat[i]));
-            for(uint i = 0; i<stacked_bc->get_nvalues() && stacked_bc->get_entries_size() > 0;++i){
-            QStackedBarSeries* series = new QStackedBarSeries();
-            chart->addAxis(axis2, Qt::AlignLeft);
-        if(!stacked_bc->is_horizontal()){
-        axis2->setMinorTickCount(4);
-        axis2->setTickCount(11);
-        axis2->setRange(0, stacked_bc->max()+10);
+        std::vector<std::string> cat = stacked_bc->get_categories();
         QBarCategoryAxis *axis1 = new QBarCategoryAxis();
         QValueAxis *axis2 = new QValueAxis();
-        std::vector<std::string> cat = stacked_bc->get_categories();
-        }
-            series->attachAxis(axis2);
+        axis2->setRange(0, stacked_bc->max()+10);
+        axis2->setTickCount(11);
+        axis2->setMinorTickCount(4);
+        if(!stacked_bc->is_horizontal()){
+            QStackedBarSeries* series = new QStackedBarSeries();
+            chart->addAxis(axis2, Qt::AlignLeft);
+            for(uint i = 0; i<stacked_bc->get_nvalues() && stacked_bc->get_entries_size() > 0;++i){
+                QBarSet* set = new QBarSet(QString::fromStdString(cat[i]));
+                for(uint j = 0; j<stacked_bc->get_entries_size();++j){
+                     std::vector<double> entries_v = stacked_bc->give_entry_values(j);
+                     *set << entries_v[i];
+                     categories.append(QString::fromStdString(stacked_bc->give_entry_label(j)));
+                }
+                series->append(set);
             }
             chart->addSeries(series);
-                 series->append(set);
-                 }
-                     categories.append(QString::fromStdString(stacked_bc->give_entry_label(j)));
-                     *set << entries_v[i];
-                 for(uint j = 0; j<stacked_bc->get_entries_size();++j){
-                     std::vector<double> entries_v = stacked_bc->give_entry_values(j);
-            for(uint i = 0; i<stacked_bc->get_nvalues() && stacked_bc->get_entries_size() > 0;++i){
-                 QBarSet* set = new QBarSet(QString::fromStdString(cat[i]));
+            series->attachAxis(axis2);
+        }
         else if(stacked_bc->is_horizontal()){
-            QHorizontalStackedBarSeries* series = new QHorizontalStackedBarSeries();
-            chart->addAxis(axis2, Qt::AlignBottom);
+        QHorizontalStackedBarSeries* series = new QHorizontalStackedBarSeries();
+        chart->addAxis(axis2, Qt::AlignBottom);
+        for(uint i = 0; i<stacked_bc->get_nvalues() && stacked_bc->get_entries_size() > 0;++i){
+            QBarSet* set = new QBarSet(QString::fromStdString(cat[i]));
+            for(uint j = 0; j<stacked_bc->get_entries_size();++j){
+                std::vector<double> entries_v = stacked_bc->give_entry_values(j);
+                *set << entries_v[i];
+                categories.append(QString::fromStdString(stacked_bc->give_entry_label(j)));
+            }
+            series->append(set);
+        }
+        chart->addSeries(series);
+        series->attachAxis(axis2);
         }
         axis1->append(categories);
         if(!stacked_bc->is_horizontal())
@@ -272,17 +272,17 @@ void Charts_Main_Window::show_segmented_bar_chart(chart* c){
         QBarCategoryAxis *axis1 = new QBarCategoryAxis();
         QValueAxis *axis2 = new QValueAxis();
         axis2->setRange(0, 100);
-        axis2->setMinorTickCount(4);
         axis2->setTickCount(11);
+        axis2->setMinorTickCount(4);
         if(!stacked_bc->is_horizontal()){
             QStackedBarSeries* series = new QStackedBarSeries();
             chart->addAxis(axis2, Qt::AlignLeft);
             for(uint i = 0; i<stacked_bc->get_nvalues() && stacked_bc->get_entries_size() > 0;++i){
                  QBarSet* set = new QBarSet(QString::fromStdString(cat[i]));
-                     std::vector<double> entries_v = stacked_bc->give_entry_percentages(j);
                  for(uint j = 0; j<stacked_bc->get_entries_size();++j){
-                     categories.append(QString::fromStdString(stacked_bc->give_entry_label(j)));
+                     std::vector<double> entries_v = stacked_bc->give_entry_percentages(j);
                      *set << entries_v[i];
+                     categories.append(QString::fromStdString(stacked_bc->give_entry_label(j)));
                  }
                  series->append(set);
             }
@@ -296,13 +296,13 @@ void Charts_Main_Window::show_segmented_bar_chart(chart* c){
                  QBarSet* set = new QBarSet(QString::fromStdString(cat[i]));
                  for(uint j = 0; j<stacked_bc->get_entries_size();++j){
                      std::vector<double> entries_v = stacked_bc->give_entry_percentages(j);
-                     categories.append(QString::fromStdString(stacked_bc->give_entry_label(j)));
                      *set << entries_v[i];
-                 series->append(set);
+                     categories.append(QString::fromStdString(stacked_bc->give_entry_label(j)));
                  }
+                 series->append(set);
             }
-            series->attachAxis(axis2);
             chart->addSeries(series);
+            series->attachAxis(axis2);
         }
         axis1->append(categories);
         if(!stacked_bc->is_horizontal())
