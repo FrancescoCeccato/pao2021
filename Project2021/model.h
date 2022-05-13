@@ -19,6 +19,7 @@ public:
     std::vector<std::string> chart_info();
     static std::string chart_description(uint);
     chart* get_chart()const;
+    void set_chart(chart*);
     float give_balance(float, float);
 };
 

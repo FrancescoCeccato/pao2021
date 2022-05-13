@@ -3,6 +3,7 @@
 #include <charts_main_window.h>
 #include "iostream"
 #include "vector"
+#include "stacked_bar_chart.h"
 
 Charts_Comparisonchart_Editor::Charts_Comparisonchart_Editor(QWidget *parent)
     : QWidget{parent}
@@ -65,19 +66,34 @@ void Charts_Comparisonchart_Editor::set_mainchart_view(Charts_Main_Window* cmw){
 
 void Charts_Comparisonchart_Editor::set_grids(comparison_chart* cc){
     gridLabelEntries->clear();
+    gridLabelCategories->clear();
+    gridValues->clear();
     for(uint k = 0; k<cc->get_nvalues();++k)
          c->populateRowWithLineEdit(k);
-    c->populateRowWithLineEdit(0);
+    //c->populateRowWithLineEdit(0);
     for(uint i = 0;i<cc->get_entries_size();++i){
         std::vector<double> values = cc->give_entry_values(i);
         std::string label = cc->give_entry_label(i);
-        auto item = new  QTableWidgetItem();
+        auto item = new QTableWidgetItem();
         item->setText(QString::fromStdString(label));
         gridLabelEntries->setItem(0,i,item);
         for(uint j = 0; j<cc->get_nvalues();++j){
             static_cast<QLineEdit*>(gridValues->cellWidget(j, i))->setText(QString::number(values[j]));
         }
     }
+    if(presenter_chart_view::type == 2 && cc->get_entries_size() != 0){
+        stacked_bar_chart* stbc = dynamic_cast<stacked_bar_chart*>(cc);
+        for(uint j = 0; j<cc->get_nvalues();++j){
+            std::string category = stbc->get_categories().at(j);
+            auto item = new QTableWidgetItem();
+            item->setText(QString::fromStdString(category));
+            gridLabelCategories->setItem(j,0,item);
+        }
+    }
 }
 
+/*void Charts_Comparisonchart_Editor::close(QCloseEvent *event){
+    delete this;
+    event->accept();
+}*/
 

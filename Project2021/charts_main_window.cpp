@@ -133,10 +133,10 @@ Charts_Main_Window::Charts_Main_Window(QWidget *parent)
 
     toolBarTop->addSeparator();
 
-    QPixmap pixmap6(":/images/paint.png");
+    /*QPixmap pixmap6(":/images/paint.png");
     QIcon ButtonIcon6(pixmap6);
     toolBarTop->addAction(ButtonIcon6, "Imposta schema colori...");
-    addToolBar(Qt::TopToolBarArea,toolBarTop);
+    addToolBar(Qt::TopToolBarArea,toolBarTop);*/
 
     this->setPalette(pal1);
     this->menuBar()->setPalette(pal2);
@@ -153,17 +153,13 @@ void Charts_Main_Window::set_chart_presenter(presenter_chart_view* ccw){
     connect(deleteP->actions().at(0), SIGNAL(triggered()), c, SLOT(delete_point()));
     connect(TC_Calculate, SIGNAL(clicked()), c, SLOT(give_balance()));
     connect(toolBarTop->actions().at(0), SIGNAL(triggered()), c,
+                        SLOT(open_new()));
+    connect(toolBarTop->actions().at(1), SIGNAL(triggered()), c,
                         SLOT(save()));
+    connect(toolBarTop->actions().at(2), SIGNAL(triggered()), c,
+                        SLOT(load()));
     connect(toolBarTop->actions().at(4), SIGNAL(triggered()), c,
                         SLOT(open_settings()));
-}
-
-void Charts_Main_Window::set_comparison_editor(Charts_Comparisonchart_Editor* cce){
-    comp_editor = cce;
-}
-
-void Charts_Main_Window::set_cartesian_editor(Charts_Cartesianchart_AddPoints* cap){
-    cart_editor = cap;
 }
 
 void Charts_Main_Window::show_simple_bar_chart(chart* c){
@@ -545,14 +541,13 @@ void Charts_Main_Window::show_chart_info(std::vector<std::string> info){
 }
 
 void Charts_Main_Window::menu_delete(const QPoint & pos){
-    uint sel = c->get_selected();
+    uint sel = presenter_chart_view::type;
     if(sel == 5 || sel == 6)
         deleteP->exec(valuesList->mapToGlobal(pos));
 }
 
 void Charts_Main_Window::expand_pie_chart(){
-    uint sel = c->get_selected();
-    if(sel == 3){
+    if(presenter_chart_view::type == 3){
         QTreeWidgetItem *nd = valuesList->currentItem();
         if(nd){
              uint index = valuesList->indexOfTopLevelItem(nd);
@@ -567,6 +562,21 @@ void Charts_Main_Window::expand_pie_chart(){
     }
 }
 
+void Charts_Main_Window::closeEvent(QCloseEvent *event){
+    QMessageBox msgBox;
+    msgBox.setWindowTitle("Chiudi");
+    msgBox.setText("Vuoi salvare il grafico corrente?");
+    msgBox.setStandardButtons(QMessageBox::Yes);
+    msgBox.addButton(QMessageBox::No);
+    msgBox.setDefaultButton(QMessageBox::No);
+    if(msgBox.exec() == QMessageBox::Yes){
+        c->close(true);
+        event->accept();
+    }else{
+        c->close(false);
+        event->accept();
+    }
+}
 
 
 

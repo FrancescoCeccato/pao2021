@@ -118,7 +118,6 @@ Charts_ChartCreation::Charts_ChartCreation(QWidget *parent)
     connect(radioGroup , SIGNAL(buttonClicked(QAbstractButton*)), this, SLOT(set_chart()));
     connect(checkBox1 , SIGNAL(clicked()), this, SLOT(set_checkBox()));
     connect(checkBox2 , SIGNAL(clicked()), this, SLOT(set_checkBox()));
-
 }
 
 void Charts_ChartCreation::set_chart_presenter(presenter_chart_view* ccw){

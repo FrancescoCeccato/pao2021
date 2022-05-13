@@ -19,7 +19,7 @@ private:
     Charts_Main_Window* charts_mw;
 public:
     QSpinBox *spinX, *spinY;
-    QPushButton *add, *close;
+    QPushButton *add;
     QLabel* signalLabel;
     explicit Charts_Cartesianchart_AddPoints(QWidget *parent = nullptr);
     void set_chart_presenter(presenter_chart_view* ccw);

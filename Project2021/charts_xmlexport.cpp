@@ -7,6 +7,7 @@
 #include "dot_chart.h"
 #include <QSaveFile>
 #include <QDir>
+#include "iostream"
 
 Charts_XmlExport::Charts_XmlExport(chart* c, const QString& d, const QString& f) : ch(c), destinationFolder(d), filename(f) {
     mmap = {
@@ -20,18 +21,17 @@ Charts_XmlExport::Charts_XmlExport(chart* c, const QString& d, const QString& f)
 }
 
 void Charts_XmlExport::exportContent() {
-
     initiateDocument();
     (this->*mmap[tmap[typeid(*ch)]]) ();
     finalizeDocument();
 
-    QString path(destinationFolder);
-    QDir dir;
+    //QString path(destinationFolder);
+    //QDir dir;
 
-    if (!dir.exists(path))
-        dir.mkpath(path);
+    /*if (!dir.exists(destinationFolder))
+        dir.mkpath(destinationFolder);*/
 
-    QSaveFile file(path + filename);
+    QSaveFile file(destinationFolder);
     file.open(QIODevice::WriteOnly);
     file.write(qPrintable(doc.toString()));
     file.commit();

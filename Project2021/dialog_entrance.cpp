@@ -1,4 +1,5 @@
 #include "dialog_entrance.h"
+#include <presenter_chart_view.h>
 
 #define BTN_SIDE 200
 
@@ -15,33 +16,33 @@ Dialog_Entrance::Dialog_Entrance(QWidget *parent)
     QVBoxLayout* lRight = new QVBoxLayout();
     lRight->setAlignment(Qt::AlignLeft);
 
-    btnLeft = new QPushButton();
-    btnLeft->setFixedSize(BTN_SIDE,BTN_SIDE);
+    btnNew = new QPushButton();
+    btnNew->setFixedSize(BTN_SIDE,BTN_SIDE);
     QPixmap pixmap1(":/images/new.png");
     QIcon ButtonIcon1(pixmap1);
-    btnLeft->setIconSize(QSize(0.75*BTN_SIDE,0.75*BTN_SIDE));
-    btnLeft->setIcon(ButtonIcon1);
-    btnLeft->setCursor(Qt::CursorShape::PointingHandCursor);
+    btnNew->setIconSize(QSize(0.75*BTN_SIDE,0.75*BTN_SIDE));
+    btnNew->setIcon(ButtonIcon1);
+    btnNew->setCursor(Qt::CursorShape::PointingHandCursor);
     lblLeft1 = new QLabel("Crea");
     lblLeft1->setAlignment(Qt::AlignCenter);
     lblLeft2 = new QLabel("Crea un nuovo grafico da zero.");
     lblLeft2->setAlignment(Qt::AlignCenter);
-    lLeft->addWidget(btnLeft);
+    lLeft->addWidget(btnNew);
     lLeft->addWidget(lblLeft1);
     lLeft->addWidget(lblLeft2);
 
-    btnRight = new QPushButton();
-    btnRight->setFixedSize(BTN_SIDE,BTN_SIDE);
+    btnOpen = new QPushButton();
+    btnOpen->setFixedSize(BTN_SIDE,BTN_SIDE);
     QPixmap pixmap2(":/images/open.png");
     QIcon ButtonIcon2(pixmap2);
-    btnRight->setIconSize(QSize(0.75*BTN_SIDE,0.75*BTN_SIDE));
-    btnRight->setIcon(ButtonIcon2);
-    btnRight->setCursor(Qt::CursorShape::PointingHandCursor);
+    btnOpen->setIconSize(QSize(0.75*BTN_SIDE,0.75*BTN_SIDE));
+    btnOpen->setIcon(ButtonIcon2);
+    btnOpen->setCursor(Qt::CursorShape::PointingHandCursor);
     lblRight1 = new QLabel("Apri");
     lblRight1->setAlignment(Qt::AlignCenter);
     lblRight2 = new QLabel("Apri un grafico già esistente da file.");
     lblRight2->setAlignment(Qt::AlignCenter);
-    lRight->addWidget(btnRight);
+    lRight->addWidget(btnOpen);
     lRight->addWidget(lblRight1);
     lRight->addWidget(lblRight2);
 
@@ -52,3 +53,12 @@ Dialog_Entrance::Dialog_Entrance(QWidget *parent)
     this->setPalette(pal);
 
 }
+
+
+void Dialog_Entrance::set_chart_presenter(presenter_chart_view *ccw){
+    c = ccw;
+    connect(btnNew, SIGNAL(clicked()), c, SLOT(open_new()));
+    connect(btnOpen, SIGNAL(clicked()), c, SLOT(load()));
+}
+
+

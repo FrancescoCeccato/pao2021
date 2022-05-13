@@ -7,14 +7,20 @@
 #include <QPushButton>
 #include <QLabel>
 
+
+class presenter_chart_view;
+
 class Dialog_Entrance : public QWidget
 {
     Q_OBJECT
+private:
+    presenter_chart_view* c;
 
 public: 
-    QPushButton *btnLeft, *btnRight;
+    QPushButton *btnNew, *btnOpen;
     QLabel *lblLeft1, *lblRight1,*lblLeft2, *lblRight2;
     explicit Dialog_Entrance(QWidget *parent = nullptr);
+    void set_chart_presenter(presenter_chart_view* ccw);
 
 signals:
 

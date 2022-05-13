@@ -27,7 +27,7 @@ Charts_Cartesianchart_AddPoints::Charts_Cartesianchart_AddPoints(QWidget *parent
 
     gridLayout->addWidget(labelX,0,0);
     gridLayout->addWidget(labelY,0,1);
-    gridLayout->addWidget(add,0,2);
+    gridLayout->addWidget(add,1,2);
     gridLayout->addWidget(spinX,1,0);
     gridLayout->addWidget(spinY,1,1);
     mainLayout->addLayout(gridLayout);

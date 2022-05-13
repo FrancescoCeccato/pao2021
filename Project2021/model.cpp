@@ -41,6 +41,22 @@ void model::add_entry_comparison(double * val, std::string label, uint index){
     }
 }
 
+void model::delete_entry_comparison(uint index){
+    comparison_chart* cc = static_cast<comparison_chart*>(c);
+    if(cc->get_entries_size()>index)
+        cc->delete_entry(index);
+}
+
+void model::set_amt(uint amt){
+    comparison_chart* cc = static_cast<comparison_chart*>(c);
+    cc->set_amt(amt);
+}
+
+void model::set_categories(std::vector<std::string> cat){
+    stacked_bar_chart* stbc = static_cast<stacked_bar_chart*>(c);
+    stbc->set_categories(cat);
+}
+
 void model::add_point(float x, float y){
     cartesian_chart* cc = static_cast<cartesian_chart*>(c);
     cc->add_point(x,y);
@@ -53,28 +69,16 @@ void model::delete_point(uint index){
     cc->delete_point(x,y);
 }
 
-void model::delete_entry_comparison(uint index){
-    comparison_chart* cc = static_cast<comparison_chart*>(c);
-    if(cc->get_entries_size()>index)
-        cc->delete_entry(index);
-}
-
 chart* model::get_chart() const{
     return c;
 }
 
+void model::set_chart(chart * ch){
+    c = ch;
+}
+
 std::vector<std::string> model::chart_info(){
     return c->chart_info();
-}
-
-void model::set_categories(std::vector<std::string> cat){
-    stacked_bar_chart* stbc = static_cast<stacked_bar_chart*>(c);
-    stbc->set_categories(cat);
-}
-
-void model::set_amt(uint amt){
-    comparison_chart* cc = static_cast<comparison_chart*>(c);
-    cc->set_amt(amt);
 }
 
 std::string model::chart_description(uint sel){

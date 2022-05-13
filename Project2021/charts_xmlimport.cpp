@@ -10,7 +10,7 @@
 #include "time_chart.h"
 #include "dot_chart.h"
 
-#include <iostream>
+
 
 Charts_XmlImport::Charts_XmlImport(const QString& s,const QString& f): sourceFolder(s),filename(f) {
         mmap = {
@@ -25,10 +25,10 @@ Charts_XmlImport::Charts_XmlImport(const QString& s,const QString& f): sourceFol
 
 std::pair<uint, chart*> Charts_XmlImport::importContent()
 {
-   if(!QFileInfo::exists(sourceFolder+filename))
+   if(!QFileInfo::exists(sourceFolder/*+filename*/))
        throw std::ios_base::failure("Il file non è presente nell'unità.");
 
-   QFile file(sourceFolder+filename);
+   QFile file(sourceFolder/*+filename*/);
    if (!file.open(QIODevice::ReadOnly))
        throw std::ios_base::failure("Non è stato possibile aprire il file.");
    if (!doc.setContent(&file)) {
