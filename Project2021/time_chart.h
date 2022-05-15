@@ -24,6 +24,7 @@ public:
     float give_balance(float,float) const;
     float give_min() const;
     float give_max() const;
+    float average() const;
 
     std::vector<std::string> chart_info() const override;
     static std::string description();

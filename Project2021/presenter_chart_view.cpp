@@ -83,6 +83,7 @@ void presenter_chart_view::add_point(){
         mod->add_point(x,y);
         charts_mw->show_charts(mod->get_chart());
         charts_mw->showParent_list_values(mod->get_chart());
+        charts_mw->show_chart_info(mod->chart_info());
         cart_editor->signalLabel->setText("");
     }catch(std::exception& ex){
         cart_editor->signalLabel->setText(ex.what());
@@ -215,10 +216,6 @@ void presenter_chart_view::load(){
         QString nome_file = QFileInfo(directory).fileName();
         Charts_XmlImport c_import(directory,nome_file);
         std::pair<uint,chart*> ch = c_import.importContent();
-        model* m = new model();
-        set_model(m);
-        mod->set_chart(ch.second);
-        type = ch.first+1;
         if(de->isActiveWindow()){
             Charts_Main_Window* mw = new Charts_Main_Window();
             set_mainchart_view(mw);
@@ -234,6 +231,10 @@ void presenter_chart_view::load(){
             comp_editor->set_chart_presenter(this);
             de->close();
         }
+        model* m = new model();
+        set_model(m);
+        mod->set_chart(ch.second);
+        type = ch.first+1;
         charts_mw->show_charts(mod->get_chart());
         charts_mw->show_chart_info(mod->chart_info());
         charts_mw->showParent_list_values(mod->get_chart());
@@ -286,6 +287,7 @@ void presenter_chart_view::close(bool salva){
     cart_editor->close();
     delete cart_editor;
     delete charts_mw;
+    delete mod;
 }
 
 uint presenter_chart_view::type = 0;

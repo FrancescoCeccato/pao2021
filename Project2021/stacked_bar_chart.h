@@ -20,7 +20,8 @@ public:
     std::vector<std::string> get_categories() const;
 
     bool is_segmented() const;
-    double max() const;
+    std::pair<double,std::string> max() const;
+    std::vector<double> mean_per_category() const;
 };
 
 #endif // STACKED_BAR_CHART_H

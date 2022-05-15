@@ -16,6 +16,7 @@ protected:
 
         point(float=0, float=0);
         bool operator==(const point&) const;
+        bool operator<(const point&) const;
     };
     std::string label_x, label_y;
 

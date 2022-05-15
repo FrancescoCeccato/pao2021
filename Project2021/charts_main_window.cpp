@@ -213,7 +213,7 @@ void Charts_Main_Window::show_stacked_bar_chart(chart* c){
         std::vector<std::string> cat = stacked_bc->get_categories();
         QBarCategoryAxis *axis1 = new QBarCategoryAxis();
         QValueAxis *axis2 = new QValueAxis();
-        axis2->setRange(0, stacked_bc->max()+10);
+        axis2->setRange(0, stacked_bc->max().first+10);
         axis2->setTickCount(11);
         axis2->setMinorTickCount(4);
         if(!stacked_bc->is_horizontal()){
