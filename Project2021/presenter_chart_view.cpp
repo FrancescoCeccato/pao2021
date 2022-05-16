@@ -96,6 +96,7 @@ void presenter_chart_view::delete_point(){
     mod->delete_point(index);
     charts_mw->show_charts(mod->get_chart());
     charts_mw->showParent_list_values(mod->get_chart());
+    charts_mw->show_chart_info(mod->chart_info());
 }
 
 double* presenter_chart_view::get_entries_value(uint index){
@@ -153,7 +154,18 @@ void presenter_chart_view::open_settings(){
 void presenter_chart_view::populateRowWithLineEdit(uint row) {
     for(int col = 0; col<20; col++) {
         auto line = new QLineEdit();
-        line->setValidator(new QDoubleValidator());
+        QDoubleValidator* val;
+        if(type!=4){
+            val = new QDoubleValidator(0.0,1000.00,2);
+            val->setNotation(QDoubleValidator::StandardNotation);
+            val->setLocale(QLocale("us_US"));
+        }
+        else{
+            val = new QDoubleValidator(0.0,10.0,2);
+            val->setNotation(QDoubleValidator::StandardNotation);
+            val->setLocale(QLocale("us_US"));
+        }
+        line->setValidator(val);
         comp_editor->gridValues->setCellWidget(row,col,line);
      }
 }
@@ -204,8 +216,8 @@ void presenter_chart_view::save(){
 }
 
 void presenter_chart_view::load(){
-    try{
-        QWidget* w;
+    QWidget* w;
+    try{        
         if(de->isActiveWindow())
             w = de;
         else
@@ -245,9 +257,9 @@ void presenter_chart_view::load(){
         }
         charts_mw->statusBar()->showMessage(directory);
     }catch(std::ios_base::failure& ex){
-        QMessageBox::about(charts_mw,"Errore",ex.what());
+        QMessageBox::about(w,"Errore",ex.what());
     }catch(std::logic_error& ex){
-        QMessageBox::about(charts_mw,"Errore",ex.what());
+        QMessageBox::about(w,"Errore",ex.what());
     }
 }
 
@@ -266,7 +278,6 @@ void presenter_chart_view::open_new(){
         delete comp_editor;
         cart_editor->close();
         delete cart_editor;
-        charts_mw->close();
         delete charts_mw;
     }else{
         de->close();

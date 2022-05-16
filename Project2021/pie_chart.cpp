@@ -22,18 +22,14 @@ double pie_chart::give_slice_percentage(uint index) const {
 }
 
 std::pair<double, std::string> pie_chart::give_max() const {
-    std::pair<double,std::string> x;
-    if(entries.size() != 0){
-        std::vector<std::pair<double,std::string>> v;
-        for(uint i = 0; i<entries.size(); ++i){
-            v.push_back(std::pair<double,std::string>(give_slice_percentage(i), entries[i]->give_label()));
+    std::pair<double,std::string> max;
+    for(uint i = 0; i<entries.size(); ++i){
+        if(give_slice_percentage(i) > max.first){
+            max.first = give_slice_percentage(i);
+            max.second = entries[i]->give_label();
         }
-        auto x = std::max_element(v.begin(), v.end(),
-                                  [](const std::pair<const double, std::string>& p1, const std::pair<const double, std::string>& p2) {
-                                      return p1.first < p2.first; });
-        return *x;
     }
-    return x;
+    return max;
 }
 
 void pie_chart::insert_entry(uint index, double *val, const std::string &label, bool overwrite) {

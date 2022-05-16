@@ -6,13 +6,14 @@
 class polar_chart: public comparison_chart
 {
 private:
-    double find_max() const;
+    std::pair<double,std::string> find_max() const;
     void insert_entry(uint, double*, const std::string& = "", bool = false) override;
 
 public:
     polar_chart(const std::string& ="");
 
     double midrange() const;
+    double mean() const;
     double give_completion_percentage() const;
 
     std::vector<std::string> chart_info() const override;

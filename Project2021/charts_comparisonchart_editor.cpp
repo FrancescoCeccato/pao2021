@@ -53,7 +53,6 @@ Charts_Comparisonchart_Editor::Charts_Comparisonchart_Editor(QWidget *parent)
     QPalette p = QPalette();
     p.setColor(QPalette::Window, QColor(200,235,255));
     this->setPalette(p);
-
 }
 
 void Charts_Comparisonchart_Editor::set_chart_presenter(presenter_chart_view* ccw){
@@ -70,7 +69,6 @@ void Charts_Comparisonchart_Editor::set_grids(comparison_chart* cc){
     gridValues->clear();
     for(uint k = 0; k<cc->get_nvalues();++k)
          c->populateRowWithLineEdit(k);
-    //c->populateRowWithLineEdit(0);
     for(uint i = 0;i<cc->get_entries_size();++i){
         std::vector<double> values = cc->give_entry_values(i);
         std::string label = cc->give_entry_label(i);
@@ -91,9 +89,4 @@ void Charts_Comparisonchart_Editor::set_grids(comparison_chart* cc){
         }
     }
 }
-
-/*void Charts_Comparisonchart_Editor::close(QCloseEvent *event){
-    delete this;
-    event->accept();
-}*/
 

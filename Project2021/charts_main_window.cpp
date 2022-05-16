@@ -436,12 +436,17 @@ void Charts_Main_Window::show_time_chart(chart* c){
         QChart* chart = new QChart();
         chart->setTitle(QString::fromStdString(time_c->get_title()));
         QLineSeries *series = new QLineSeries();
+        QLineSeries* mean = new QLineSeries();
+        mean->setColor(QColor("red"));
         std::vector<std::pair<float,float>> points = time_c->get_points();
         for(uint i = 0; i<time_c->get_points_amount();++i){
             QPointF p(points[i].first, points[i].second);
+            QPointF p_mean(points[i].first,time_c->average());
             series->append(p);
+            mean->append(p_mean);
         }
         chart->addSeries(series);
+        chart->addSeries(mean);
         chart->createDefaultAxes();
         QList<QAbstractAxis*> axis = chart->axes();
         axis[0]->setTitleText(QString::fromStdString(time_c->get_label_x()));
@@ -564,18 +569,26 @@ void Charts_Main_Window::expand_pie_chart(){
 
 void Charts_Main_Window::closeEvent(QCloseEvent *event){
     QMessageBox msgBox;
-    msgBox.setWindowTitle("Chiudi");
-    msgBox.setText("Vuoi salvare il grafico corrente?");
-    msgBox.setStandardButtons(QMessageBox::Yes);
-    msgBox.addButton(QMessageBox::No);
-    msgBox.setDefaultButton(QMessageBox::No);
-    if(msgBox.exec() == QMessageBox::Yes){
-        c->close(true);
-        event->accept();
-    }else{
-        c->close(false);
-        event->accept();
+    msgBox.setText("Stai chiudendo il programma.");
+    msgBox.setInformativeText("Vuoi salvare le modifiche del grafico corrente?");
+    msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Close | QMessageBox::Cancel);
+    int ret = msgBox.exec();
+    switch (ret) {
+      case QMessageBox::Save:
+          c->close(true);
+          event->accept();
+          break;
+      case QMessageBox::Close:
+          c->close(false);
+          event->accept();
+          break;
+      case QMessageBox::Cancel:
+          event->ignore();
+          break;
+      default:
+          break;
     }
+
 }
 
 
