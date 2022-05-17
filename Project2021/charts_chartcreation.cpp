@@ -59,16 +59,10 @@ Charts_ChartCreation::Charts_ChartCreation(QWidget *parent)
     radioGroup->addButton(b4= new QRadioButton("Diagramma di Kiviat (o grafico radar)"));
     radioGroup->addButton(b5= new QRadioButton("Diagramma a punti"));
     radioGroup->addButton(b6= new QRadioButton("Grafico di evoluzione lineare"));
-    //auto label1 = new QLabel("GRAFICI A CATEGORIE");
-    //label1->setStyleSheet("font-weight: bold;");
-    //vlButtons->addWidget(label1);
     vlButtons1->addWidget(b1);
     vlButtons1->addWidget(b2);
     vlButtons1->addWidget(b3);
     vlButtons1->addWidget(b4);
-    //auto label2 = new QLabel("GRAFICI CARTESIANI");
-    //label2->setStyleSheet("font-weight: bold;");
-    //vlButtons->addWidget(label2);
     vlButtons2->addWidget(b5);
     vlButtons2->addWidget(b6);
     b1->setCursor(Qt::CursorShape::PointingHandCursor);

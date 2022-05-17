@@ -161,7 +161,7 @@ void presenter_chart_view::populateRowWithLineEdit(uint row) {
             val->setLocale(QLocale("us_US"));
         }
         else{
-            val = new QDoubleValidator(0.0,10.0,2);
+            val = new QDoubleValidator(0.0,10.0,1);
             val->setNotation(QDoubleValidator::StandardNotation);
             val->setLocale(QLocale("us_US"));
         }
@@ -266,6 +266,7 @@ void presenter_chart_view::load(){
 void presenter_chart_view::open_new(){
     if(!de->isActiveWindow()){
         QMessageBox msgBox;
+        msgBox.setIcon(QMessageBox::Question);
         msgBox.setWindowTitle("Crea nuovo grafico");
         msgBox.setText("Vuoi salvare il grafico corrente?");
         msgBox.setStandardButtons(QMessageBox::Yes);
@@ -274,9 +275,7 @@ void presenter_chart_view::open_new(){
         if(msgBox.exec() == QMessageBox::Yes){
           save();
         }
-        comp_editor->close();
         delete comp_editor;
-        cart_editor->close();
         delete cart_editor;
         delete charts_mw;
     }else{

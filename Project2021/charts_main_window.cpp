@@ -133,11 +133,6 @@ Charts_Main_Window::Charts_Main_Window(QWidget *parent)
 
     toolBarTop->addSeparator();
 
-    /*QPixmap pixmap6(":/images/paint.png");
-    QIcon ButtonIcon6(pixmap6);
-    toolBarTop->addAction(ButtonIcon6, "Imposta schema colori...");
-    addToolBar(Qt::TopToolBarArea,toolBarTop);*/
-
     this->setPalette(pal1);
     this->menuBar()->setPalette(pal2);
     this->statusBar()->setPalette(pal2);
@@ -344,7 +339,7 @@ void Charts_Main_Window::show_polar_chart(chart* c){
         QCategoryAxis* angularAxis = new QCategoryAxis();
         QValueAxis* radialAxis = new QValueAxis();
         qreal radialMin = 0;
-        qreal radialMax = 100;
+        qreal radialMax = pol_c->find_max().first;
         QColor baseAreaColor = QColor(Qt::transparent);
         QColor drawAreaColor = QColor(66, 66, 255, 100);
         QColor baseLineColor = Qt::darkMagenta;
@@ -474,6 +469,17 @@ void Charts_Main_Window::show_dot_chart(chart* c){
         QList<QAbstractAxis*> axis = chart->axes();
         axis[0]->setTitleText(QString::fromStdString(dot_c->get_label_x()));
         axis[1]->setTitleText(QString::fromStdString(dot_c->get_label_y()));
+        if(points.size()!=0){
+            std::pair<float,float> minmax_x(std::minmax_element(points.begin(),points.end()).first->first, std::minmax_element(points.begin(),points.end()).second->first);
+            std::pair<float,float> minmax_y(std::minmax_element(points.begin(),points.end(),
+                                                      [](const std::pair<float, float>& p1, const std::pair<float, float>& p2) {
+                                                       return p1.second < p2.second; }).first->second,
+                                            std::minmax_element(points.begin(),points.end(),
+                                                      [](const std::pair<float, float>& p1, const std::pair<float, float>& p2) {
+                                                      return p1.second < p2.second; }).second->second);
+            axis[0]->setRange(minmax_x.first-5,minmax_x.second+5);
+            axis[1]->setRange(minmax_y.first-5,minmax_y.second+5);
+        }
         chart->setDropShadowEnabled(false);
         chart->legend()->hide();
         chartView->setChart(chart);
@@ -569,6 +575,7 @@ void Charts_Main_Window::expand_pie_chart(){
 
 void Charts_Main_Window::closeEvent(QCloseEvent *event){
     QMessageBox msgBox;
+    msgBox.setIcon(QMessageBox::Warning);
     msgBox.setText("Stai chiudendo il programma.");
     msgBox.setInformativeText("Vuoi salvare le modifiche del grafico corrente?");
     msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Close | QMessageBox::Cancel);

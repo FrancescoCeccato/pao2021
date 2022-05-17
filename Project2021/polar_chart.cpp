@@ -5,8 +5,8 @@
 
 polar_chart::polar_chart(const std::string& title) : comparison_chart(1, title) {}
 
-std::pair<double, std::string> polar_chart::find_max() const {
-    std::pair<double,std::string> max;
+std::pair<int, std::string> polar_chart::find_max() const {
+    std::pair<int,std::string> max;
     for(uint i = 0; i<entries.size(); ++i){
         if(*entries[i] > max.first){
             max.first = *entries[i];
@@ -32,10 +32,10 @@ double polar_chart::give_completion_percentage() const
     double sum = 0;
     for(uint i = 0; i<entries.size(); i++)
         sum += *entries[i]/find_max().first;
-    return sum/entries.size();
+    return sum/entries.size()*100;
 }
 
-double polar_chart::midrange() const {
+int polar_chart::midrange() const {
     if(entries.size() != 0) {
         std::vector<double> v;
         for(uint i = 0; i<entries.size(); i++)
@@ -54,7 +54,8 @@ void polar_chart::insert_entry(uint index, double *val, const std::string &label
 
 std::vector<std::string> polar_chart::chart_info()const{
     std::vector<std::string> info = chart::chart_info();
-    info.push_back("La media delle entrate è " + std::to_string(mean()) + "/100");
+    info.push_back("La media delle entrate è " + std::to_string(mean()) + "/" + std::to_string(find_max().first));
+    info.push_back("La completion percentage del grafico è del: " + std::to_string(give_completion_percentage())+"%");
     info.push_back("L'entrata con il valore piu alto è " + find_max().second + ": " + std::to_string(find_max().first));
     info.push_back("Il range tra l'entrata più alta e quella più bassa del grafico è: " + std::to_string(midrange()));
     return info;

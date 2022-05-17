@@ -17,8 +17,6 @@ Charts_Cartesianchart_AddPoints::Charts_Cartesianchart_AddPoints(QWidget *parent
     add = new QPushButton("AGGIUNGI");
     add->setCursor(Qt::CursorShape::PointingHandCursor);
 
-    //close = new QPushButton("CHIUDI");
-    //close->setCursor(Qt::CursorShape::PointingHandCursor);
     signalLabel = new QLabel("");
     signalLabel->setStyleSheet("QLabel { background-color : transparent; color : red; }");
 
