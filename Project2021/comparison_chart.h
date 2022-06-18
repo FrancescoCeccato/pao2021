@@ -1,8 +1,7 @@
 #ifndef COMPARISON_CHART_H
 #define COMPARISON_CHART_H
-#include <vector>
 #include <string>
-#include "chart.h"
+#include <chart.h>
 
 class comparison_chart: public chart
 {

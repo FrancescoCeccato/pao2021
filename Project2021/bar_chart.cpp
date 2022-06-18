@@ -1,4 +1,4 @@
-#include "bar_chart.h"
+#include <bar_chart.h>
 
 bar_chart::bar_chart(uint amt, const std::string& t, bool h) : comparison_chart(amt,t), horizontal(h){ }
 

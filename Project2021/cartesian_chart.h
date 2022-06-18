@@ -1,10 +1,9 @@
 #ifndef CARTESIAN_CHART_H
 #define CARTESIAN_CHART_H
+#include <chart.h>
 #include <set>
-#include <string>
-#include <vector>
-#include "charts_exception.h"
-#include "chart.h"
+#include <charts_exception.h>
+
 
 class cartesian_chart: public chart
 {

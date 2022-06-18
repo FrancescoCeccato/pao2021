@@ -1,4 +1,4 @@
-#include "comparison_chart.h"
+#include <comparison_chart.h>
 
 comparison_chart::entry::entry(uint num, double* val,const std::string& title) : label(title), values(val), n_values(num) {}
 

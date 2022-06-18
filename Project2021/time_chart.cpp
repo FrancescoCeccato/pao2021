@@ -1,5 +1,5 @@
 #include <algorithm>
-#include "time_chart.h"
+#include <time_chart.h>
 
 time_chart::time_chart(const std::string& title, const std::string& x, const std::string& y): cartesian_chart(title,x,y) {}
 

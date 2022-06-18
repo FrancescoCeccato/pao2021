@@ -38,13 +38,11 @@ public:
     void show_dot_chart(chart*);
     void showParent_list_values(chart*);
     void showChild_list_values(QTreeWidgetItem* ,const chart*, uint);
-    void delete_list_values(chart*);
     void show_chart_info(std::vector<std::string>);
     void closeEvent(QCloseEvent *);
 public slots:
     void menu_delete( const QPoint & pos );
     void expand_pie_chart();
-
 };
 
 #endif // CHARTS_MAIN_WINDOW_H

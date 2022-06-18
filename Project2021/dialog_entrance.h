@@ -21,9 +21,6 @@ public:
     QLabel *lblLeft1, *lblRight1,*lblLeft2, *lblRight2;
     explicit Dialog_Entrance(QWidget *parent = nullptr);
     void set_chart_presenter(presenter_chart_view* ccw);
-
-signals:
-
 };
 
 #endif // DIALOG_ENTRANCE_H

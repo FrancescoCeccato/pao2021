@@ -1,7 +1,6 @@
 #include <cmath>
-#include "polar_chart.h"
 #include <algorithm>
-#include <stdexcept>
+#include <polar_chart.h>
 
 polar_chart::polar_chart(const std::string& title) : comparison_chart(1, title) {}
 

@@ -1,5 +1,5 @@
 #include <algorithm>
-#include "cartesian_chart.h"
+#include <cartesian_chart.h>
 
 cartesian_chart::point::point(float px,float py) : x(px), y(py) {}
 

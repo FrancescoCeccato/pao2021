@@ -1,13 +1,11 @@
-#include "charts_xmlexport.h"
-#include "pie_chart.h"
-#include "polar_chart.h"
-#include "stacked_bar_chart.h"
-#include "simple_bar_chart.h"
-#include "time_chart.h"
-#include "dot_chart.h"
+#include <charts_xmlexport.h>
+#include <simple_bar_chart.h>
+#include <stacked_bar_chart.h>
+#include <pie_chart.h>
+#include <polar_chart.h>
+#include <time_chart.h>
+#include <dot_chart.h>
 #include <QSaveFile>
-#include <QDir>
-#include "iostream"
 
 Charts_XmlExport::Charts_XmlExport(chart* c, const QString& d, const QString& f) : ch(c), destinationFolder(d), filename(f) {
     mmap = {
@@ -24,12 +22,6 @@ void Charts_XmlExport::exportContent() {
     initiateDocument();
     (this->*mmap[tmap[typeid(*ch)]]) ();
     finalizeDocument();
-
-    //QString path(destinationFolder);
-    //QDir dir;
-
-    /*if (!dir.exists(destinationFolder))
-        dir.mkpath(destinationFolder);*/
 
     QSaveFile file(destinationFolder);
     file.open(QIODevice::WriteOnly);

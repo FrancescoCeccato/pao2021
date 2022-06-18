@@ -40,11 +40,9 @@ void presenter_chart_view::add_charts(){
             }
             Charts_Cartesianchart_AddPoints* cca = new Charts_Cartesianchart_AddPoints();
             set_cartesianeditor_view(cca);
-            cart_editor->set_mainchart_view(charts_mw);
             cart_editor->set_chart_presenter(this);
             Charts_Comparisonchart_Editor* cce = new Charts_Comparisonchart_Editor();
             set_comparisoneditor_view(cce);
-            comp_editor->set_mainchart_view(charts_mw);
             comp_editor->set_chart_presenter(this);
         }else
             throw chart_not_valid();
@@ -235,11 +233,9 @@ void presenter_chart_view::load(){
             charts_mw->set_chart_presenter(this);
             Charts_Cartesianchart_AddPoints* cca = new Charts_Cartesianchart_AddPoints();
             set_cartesianeditor_view(cca);
-            cart_editor->set_mainchart_view(charts_mw);
             cart_editor->set_chart_presenter(this);
             Charts_Comparisonchart_Editor* cce = new Charts_Comparisonchart_Editor();
             set_comparisoneditor_view(cce);
-            comp_editor->set_mainchart_view(charts_mw);
             comp_editor->set_chart_presenter(this);
             de->close();
         }
@@ -264,27 +260,41 @@ void presenter_chart_view::load(){
 }
 
 void presenter_chart_view::open_new(){
+    bool open = true;
     if(!de->isActiveWindow()){
         QMessageBox msgBox;
         msgBox.setIcon(QMessageBox::Question);
-        msgBox.setWindowTitle("Crea nuovo grafico");
-        msgBox.setText("Vuoi salvare il grafico corrente?");
-        msgBox.setStandardButtons(QMessageBox::Yes);
-        msgBox.addButton(QMessageBox::No);
-        msgBox.setDefaultButton(QMessageBox::No);
-        if(msgBox.exec() == QMessageBox::Yes){
-          save();
+        msgBox.setText("Crea nuovo grafico");
+        msgBox.setInformativeText("Vuoi salvare il grafico corrente?");
+        msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Close | QMessageBox::Cancel);
+        int ret = msgBox.exec();
+        switch (ret) {
+          case QMessageBox::Save:
+              save();
+              delete comp_editor;
+              delete cart_editor;
+              delete charts_mw;
+              break;
+          case QMessageBox::Close:
+              delete comp_editor;
+              delete cart_editor;
+              delete charts_mw;
+              break;
+          case QMessageBox::Cancel:
+              open = false;
+              break;
+          default:
+              break;
         }
-        delete comp_editor;
-        delete cart_editor;
-        delete charts_mw;
     }else{
         de->close();
     }
-    Charts_ChartCreation* c = new Charts_ChartCreation();
-    set_chartcreation_view(c);
-    charts_creation->showMaximized();
-    charts_creation->set_chart_presenter(this);
+    if(open){
+        Charts_ChartCreation* c = new Charts_ChartCreation();
+        set_chartcreation_view(c);
+        charts_creation->showMaximized();
+        charts_creation->set_chart_presenter(this);
+    }
 }
 
 void presenter_chart_view::close(bool salva){

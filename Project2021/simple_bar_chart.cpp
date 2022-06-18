@@ -1,6 +1,6 @@
 #include <algorithm>
 #include <map>
-#include "simple_bar_chart.h"
+#include <simple_bar_chart.h>
 
 simple_bar_chart::simple_bar_chart(const std::string& title, bool h): bar_chart(1,title,h) {}
 

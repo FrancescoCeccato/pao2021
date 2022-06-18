@@ -1,7 +1,6 @@
 #ifndef DOT_CHART_H
 #define DOT_CHART_H
-#include <vector>
-#include "cartesian_chart.h"
+#include <cartesian_chart.h>
 
 class dot_chart: public cartesian_chart
 {

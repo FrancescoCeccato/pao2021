@@ -1,6 +1,6 @@
 #ifndef POLAR_CHART_H
 #define POLAR_CHART_H
-#include "comparison_chart.h"
+#include <comparison_chart.h>
 
 
 class polar_chart: public comparison_chart

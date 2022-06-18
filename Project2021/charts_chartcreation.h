@@ -32,12 +32,9 @@ public:
      explicit Charts_ChartCreation(QWidget *parent = nullptr);
      void set_chart_presenter(presenter_chart_view* ccw);
 
-signals:
-
 public slots:
      void set_chart();
      void set_checkBox();
-
 };
 
 #endif // CHARTS_CHARTCREATION_H

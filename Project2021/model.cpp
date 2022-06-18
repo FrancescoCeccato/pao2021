@@ -1,11 +1,10 @@
-#include "model.h"
+#include <model.h>
 #include <simple_bar_chart.h>
 #include <stacked_bar_chart.h>
 #include <pie_chart.h>
 #include <polar_chart.h>
 #include <dot_chart.h>
 #include <time_chart.h>
-#include <iostream>
 
 model::model(){}
 

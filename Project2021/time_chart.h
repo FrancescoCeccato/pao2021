@@ -1,7 +1,6 @@
 #ifndef TIME_CHART_H
 #define TIME_CHART_H
-#include <set>
-#include "cartesian_chart.h"
+#include <cartesian_chart.h>
 
 class time_chart: public cartesian_chart
 {

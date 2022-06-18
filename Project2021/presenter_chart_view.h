@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QFileDialog>
+#include <dialog_entrance.h>
 #include <charts_main_window.h>
 #include <charts_chartcreation.h>
 #include <charts_comparisonchart_editor.h>
@@ -10,7 +11,6 @@
 #include <model.h>
 #include <charts_xmlexport.h>
 #include <charts_xmlimport.h>
-#include <dialog_entrance.h>
 
 class presenter_chart_view : public QObject
 {

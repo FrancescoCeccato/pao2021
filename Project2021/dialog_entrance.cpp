@@ -1,4 +1,4 @@
-#include "dialog_entrance.h"
+#include <dialog_entrance.h>
 #include <presenter_chart_view.h>
 
 #define BTN_SIDE 200

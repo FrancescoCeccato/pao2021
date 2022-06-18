@@ -4,7 +4,7 @@
 #include <QMenuBar>
 #include <QtMath>
 #include <vector>
-#include <iostream>
+#include <charts_main_window.h>
 #include <presenter_chart_view.h>
 #include <comparison_chart.h>
 #include <cartesian_chart.h>
@@ -14,7 +14,6 @@
 #include <polar_chart.h>
 #include <time_chart.h>
 #include <dot_chart.h>
-#include <charts_main_window.h>
 
 
 #define BTN_SIDE 100

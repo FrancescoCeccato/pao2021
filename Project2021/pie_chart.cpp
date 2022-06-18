@@ -1,8 +1,6 @@
-#include <vector>
 #include <algorithm>
-#include <stdexcept>
-#include "pie_chart.h"
-#include "cmath"
+#include <pie_chart.h>
+
 
 pie_chart::pie_chart(const std::string& title): comparison_chart(1,title){}
 

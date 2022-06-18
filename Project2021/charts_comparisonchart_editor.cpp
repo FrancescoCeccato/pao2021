@@ -1,9 +1,7 @@
-#include "charts_comparisonchart_editor.h"
+#include <charts_comparisonchart_editor.h>
 #include <presenter_chart_view.h>
-#include <charts_main_window.h>
-#include "iostream"
-#include "vector"
-#include "stacked_bar_chart.h"
+#include <vector>
+#include <stacked_bar_chart.h>
 
 Charts_Comparisonchart_Editor::Charts_Comparisonchart_Editor(QWidget *parent)
     : QWidget{parent}
@@ -60,8 +58,6 @@ void Charts_Comparisonchart_Editor::set_chart_presenter(presenter_chart_view* cc
     connect(okButton, SIGNAL(clicked()), c, SLOT(add_entry_comparison()));
     connect(spinBox,  SIGNAL(valueChanged(int)), c, SLOT(populateRow()));
 }
-
-void Charts_Comparisonchart_Editor::set_mainchart_view(Charts_Main_Window* cmw){charts_mw = cmw;}
 
 void Charts_Comparisonchart_Editor::set_grids(comparison_chart* cc){
     gridLabelEntries->clear();

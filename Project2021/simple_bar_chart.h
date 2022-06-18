@@ -1,6 +1,6 @@
 #ifndef SIMPLE_BAR_CHART_H
 #define SIMPLE_BAR_CHART_H
-#include "bar_chart.h"
+#include <bar_chart.h>
 
 class simple_bar_chart: public bar_chart
 {

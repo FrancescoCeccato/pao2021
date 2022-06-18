@@ -1,6 +1,5 @@
-#include "stacked_bar_chart.h"
-#include "algorithm"
-#include <stdexcept>
+#include <algorithm>
+#include <stacked_bar_chart.h>
 
 stacked_bar_chart::stacked_bar_chart(uint amt, bool seg, const std::string& title, bool h): bar_chart(amt,title,h), segmented(seg) {}
 

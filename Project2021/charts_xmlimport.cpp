@@ -1,16 +1,13 @@
-#include "charts_xmlimport.h"
+#include <charts_xmlimport.h>
 #include <QFileInfo>
 #include <typeinfo>
 #include <typeindex>
-#include "pie_chart.h"
-#include "polar_chart.h"
-#include "simple_bar_chart.h"
-#include "stacked_bar_chart.h"
-#include "simple_bar_chart.h"
-#include "time_chart.h"
-#include "dot_chart.h"
-
-
+#include <simple_bar_chart.h>
+#include <stacked_bar_chart.h>
+#include <pie_chart.h>
+#include <polar_chart.h>
+#include <time_chart.h>
+#include <dot_chart.h>
 
 Charts_XmlImport::Charts_XmlImport(const QString& s,const QString& f): sourceFolder(s),filename(f) {
         mmap = {
