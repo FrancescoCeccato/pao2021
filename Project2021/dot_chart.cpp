@@ -1,6 +1,6 @@
 #include <algorithm>
 #include <math.h>
-#include "dot_chart.h"
+#include <dot_chart.h>
 
 dot_chart::dot_chart(const std::string& title, const std::string& x, const std::string& y): cartesian_chart(title,x,y) {}
 
@@ -85,6 +85,11 @@ float dot_chart::covariance() const {
 
 std::vector<std::string> dot_chart::chart_info()const{
     std::vector<std::string> info = chart::chart_info();
+    info.push_back("La media delle coordinate x è " + std::to_string(mean_x()));
+    info.push_back("La media delle coordinate y è " + std::to_string(mean_y()));
+    info.push_back("La varianza delle coordinate x è " + std::to_string(variance_x()));
+    info.push_back("La varianza delle coordinate y è " + std::to_string(variance_y()));
+    info.push_back("La covarianza dei punti del grafico è " + std::to_string(covariance()));
     return info;
 }
 

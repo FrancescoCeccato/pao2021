@@ -1,6 +1,5 @@
-#include <iostream>
 #include <algorithm>
-#include "time_chart.h"
+#include <time_chart.h>
 
 time_chart::time_chart(const std::string& title, const std::string& x, const std::string& y): cartesian_chart(title,x,y) {}
 
@@ -22,9 +21,6 @@ std::vector<std::pair<float,float>> time_chart::get_points() const {
     for(auto it = points.begin(); it != points.end(); it++){
         v.push_back(std::pair<float,float>(it->x,it->y));
     }
-    std::sort(v.begin(),v.end(),
-              [](const std::pair<const float, const float>& p1, const std::pair<const float, const float>& p2) {
-                                return p1.first < p2.first; });
     return v;
 }
 
@@ -56,14 +52,33 @@ float time_chart::give_balance(float a,float b) const {
 }
 
 float time_chart::give_min() const {
-    return points.begin()->y;
+    if(points.size()!= 0)
+        return std::min_element(points.begin(),points.end())->y;
+    else
+        return 0;
 }
+
 float time_chart::give_max() const {
-    return points.rbegin()->y;
+     if(points.size()!= 0)
+         return std::max_element(points.begin(),points.end())->y;
+     else
+         return 0;
+}
+
+float time_chart::average() const{
+    float avg = 0.0;
+    for(auto it = points.begin(); it != points.end(); it++){
+        avg = avg + it->y;
+    }
+    return points.size()!=0 ? avg/points.size() : 0;
 }
 
 std::vector<std::string> time_chart::chart_info()const{
     std::vector<std::string> info = chart::chart_info();
+    info.push_back("Ci sono " + std::to_string(get_points_amount()) + " punti in questo grafico.");
+    info.push_back("Il minimo di questo grafico è: " + std::to_string(give_min()));
+    info.push_back("Il massimo di questo grafico è: " + std::to_string(give_max()));
+    info.push_back("La quota media del grafico ha ordinata: " + std::to_string(average()));
     return info;
 }
 

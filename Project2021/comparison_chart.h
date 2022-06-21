@@ -1,8 +1,7 @@
 #ifndef COMPARISON_CHART_H
 #define COMPARISON_CHART_H
-#include <vector>
 #include <string>
-#include "chart.h"
+#include <chart.h>
 
 class comparison_chart: public chart
 {
@@ -13,25 +12,24 @@ public:
         std::string label;
         double* values;
         uint n_values;
-
-        double give_sum() const;
-
     public:
         entry(uint, double*, const std::string& ="");
         ~entry();
         operator double() const;
+        double give_sum() const;
 
         double give_value(uint) const;
+        std::vector<double> give_values() const;
+        void set_values(double*);
+        void set_nvalues(uint);
 
         std::string give_label() const;
         void set_label(const std::string&);
 
-        std::vector<double> give_values() const;
         std::vector<double> give_percentages() const;
-        void set_values(double*);
     };
 protected:
-    std::vector<entry> entries;
+    std::vector<entry*> entries;
     uint values_per_entry;
 
     virtual void insert_entry(uint, double*, const std::string& = "", bool = false) = 0;
@@ -39,10 +37,9 @@ protected:
 
 public:
     comparison_chart(uint, const std::string&);
-
     uint get_nvalues() const;
     uint get_entries_size() const;
-
+    void set_amt(uint);
     void add_entry(double*,const std::string& = "");
     void update_entry(uint,double*, const std::string&);
     void delete_entry(uint);

@@ -17,5 +17,10 @@ struct point_not_found: public charts_exception
     const char* what() const noexcept override;
 };
 
+struct chart_not_valid: public charts_exception
+{
+    const char* what() const noexcept override;
+};
+
 
 #endif // CHARTS_EXCEPTION_H
