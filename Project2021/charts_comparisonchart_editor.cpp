@@ -24,7 +24,7 @@ Charts_Comparisonchart_Editor::Charts_Comparisonchart_Editor(QWidget *parent)
     gridLabelEntries = new QTableWidget(1,20);
     gridLabelCategories->setFixedWidth(120);
     gridLabelEntries->setFixedHeight(100);
-    signalLabel = new QLabel("Eccezione fatale!");
+    signalLabel = new QLabel();
     signalLabel->setStyleSheet("QLabel { background-color : transparent; color : red; }");
     okButton = new QPushButton("IMPOSTA");
     okButton->setCursor(Qt::CursorShape::PointingHandCursor);
@@ -60,6 +60,7 @@ void Charts_Comparisonchart_Editor::set_chart_presenter(presenter_chart_view* cc
 }
 
 void Charts_Comparisonchart_Editor::set_grids(comparison_chart* cc){
+    signalLabel->setText("");
     gridLabelEntries->clear();
     gridLabelCategories->clear();
     gridValues->clear();

@@ -8,7 +8,7 @@ Dialog_Entrance::Dialog_Entrance(QWidget *parent)
 {
     QVBoxLayout* main = new QVBoxLayout();
     QPalette pal = QPalette();
-    pal.setColor(QPalette::Window, QColor(135,235,255));
+    pal.setColor(QPalette::Window, QColor(200,235,255));
 
     QHBoxLayout* container = new QHBoxLayout();
     QVBoxLayout* lLeft = new QVBoxLayout();

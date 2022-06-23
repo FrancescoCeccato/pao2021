@@ -19,7 +19,7 @@ double pie_chart::give_slice_percentage(uint index) const {
         return 0;
 }
 
-std::pair<double, std::string> pie_chart::give_max() const {
+std::pair<double, std::string> pie_chart::max() const {
     std::pair<double,std::string> max;
     for(uint i = 0; i<entries.size(); ++i){
         if(give_slice_percentage(i) > max.first){
@@ -36,7 +36,7 @@ void pie_chart::insert_entry(uint index, double *val, const std::string &label, 
 
 std::vector<std::string> pie_chart::chart_info()const{
     std::vector<std::string> info = chart::chart_info();
-    info.push_back("L'entrata con il valore piu alto è " + give_max().second + ": " + std::to_string(give_max().first) + "%");
+    info.push_back("L'entrata con il valore piu alto è " + max().second + ": " + std::to_string(max().first) + "%");
     return info;
 }
 

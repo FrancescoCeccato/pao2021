@@ -13,5 +13,9 @@ const char* point_not_found::what() const noexcept {
 }
 
 const char* chart_not_valid::what() const noexcept {
-    return "Scegliere un tipo di grafico valido.";
+    return "Una o più informazioni(titolo/tipologia grafico) per la creazione del grafico non sono state selezionate.";
+}
+
+const char* no_chart_selected::what() const noexcept{
+    return "Nessun file è stato selezionato per l'apertura.";
 }

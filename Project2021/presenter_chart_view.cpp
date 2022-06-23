@@ -1,7 +1,8 @@
 #include <presenter_chart_view.h>
 #include <comparison_chart.h>
 #include <charts_exception.h>
-
+#include <set>
+#include <vector>
 
 presenter_chart_view::presenter_chart_view(QObject *parent): QObject{parent} {}
 
@@ -12,6 +13,28 @@ void presenter_chart_view::set_comparisoneditor_view(Charts_Comparisonchart_Edit
 void presenter_chart_view::set_cartesianeditor_view(Charts_Cartesianchart_AddPoints* cap){ cart_editor = cap;}
 void presenter_chart_view::set_dialogentrance_view(Dialog_Entrance * d){de = d;}
 
+void presenter_chart_view::create_views(){
+    Charts_Main_Window* mw = new Charts_Main_Window();
+    set_mainchart_view(mw);
+    charts_mw->set_chart_presenter(this);
+    charts_mw->showMaximized();
+    Charts_Cartesianchart_AddPoints* cca = new Charts_Cartesianchart_AddPoints();
+    set_cartesianeditor_view(cca);
+    cart_editor->set_chart_presenter(this);
+    Charts_Comparisonchart_Editor* cce = new Charts_Comparisonchart_Editor();
+    cce->setWindowModality(Qt::ApplicationModal);
+    set_comparisoneditor_view(cce);
+    comp_editor->set_chart_presenter(this);
+    charts_mw->show_charts(mod->get_chart());
+    charts_mw->show_chart_info(mod->chart_info());
+    charts_mw->showParent_list_values(mod->get_chart());
+    if(type != 5){
+        charts_mw->TC_SpinBox1->setEnabled(false);
+        charts_mw->TC_SpinBox2->setEnabled(false);
+        charts_mw->TC_Calculate->setEnabled(false);
+    }
+}
+
 void presenter_chart_view::add_charts(){
     try{
         bool h = charts_creation->checkBox1->isChecked(), seg = charts_creation->checkBox2->isChecked();
@@ -20,42 +43,32 @@ void presenter_chart_view::add_charts(){
                 y = charts_creation->axisY->text().toStdString();
         type = charts_creation->selected;
         uint amt = 1;
-        if (type>=1 && type<=6)
+        if (type>=1 && type<=6 && title != "")
         {
-            model* m = new model();
-            set_model(m);
             mod->add_charts(type, title, amt, h, seg, x, y);
-            Charts_Main_Window* mw = new Charts_Main_Window();
-            set_mainchart_view(mw);
-            charts_mw->set_chart_presenter(this);
-            charts_mw->showMaximized();
-            charts_mw->show_charts(mod->get_chart());
-            charts_mw->show_chart_info(mod->chart_info());
+            create_views();
             charts_creation->close();
             delete charts_creation;
-            if(type != 5){
-                charts_mw->TC_SpinBox1->setEnabled(false);
-                charts_mw->TC_SpinBox2->setEnabled(false);
-                charts_mw->TC_Calculate->setEnabled(false);
-            }
-            Charts_Cartesianchart_AddPoints* cca = new Charts_Cartesianchart_AddPoints();
-            set_cartesianeditor_view(cca);
-            cart_editor->set_chart_presenter(this);
-            Charts_Comparisonchart_Editor* cce = new Charts_Comparisonchart_Editor();
-            set_comparisoneditor_view(cce);
-            comp_editor->set_chart_presenter(this);
         }else
             throw chart_not_valid();
-    }catch(std::exception& ex){
+    }
+    catch(std::exception& ex){
         charts_creation->labelDescription->setText(ex.what());
     }
 }
 
 void presenter_chart_view::add_entry_comparison(){
+    comp_editor->signalLabel->setText("");
     mod->set_amt(comp_editor->spinBox->value());
     bool stop = false;
-    if(type == 2)
-        mod->set_categories(get_categories());
+    if(type == 2){
+        std::pair<std::vector<std::string>,bool> cat = get_categories();
+        if(cat.second)
+            stop = true;
+        else
+            mod->set_categories(cat.first);
+    }
+    std::set<std::string> s;
     for(uint i = 0; i<20 && !stop;++i){
         stop = true;
         for(int j = 0; j<comp_editor->spinBox->value() && stop; ++j){
@@ -64,10 +77,16 @@ void presenter_chart_view::add_entry_comparison(){
                 stop = false;
         }
         if(!stop){
-            mod->add_entry_comparison(get_entries_value(i), get_label(i),i);
-        }else if(stop){
+            if(!s.insert(get_label(i)).second){
+                comp_editor->signalLabel->setText("Due o più etichette coincidono!");
+                stop = true;
+            }
+            else{
+                comp_editor->signalLabel->setText("");
+                mod->add_entry_comparison(get_entries_value(i), get_label(i),i);
+            }
+        }else
             mod->delete_entry_comparison(i);
-        }
     }
     charts_mw->show_charts(mod->get_chart());
     charts_mw->showParent_list_values(mod->get_chart());
@@ -115,16 +134,28 @@ std::string presenter_chart_view::get_label(uint index){
     return label;
 }
 
-std::vector<std::string> presenter_chart_view::get_categories(){
+std::pair<std::vector<std::string>,bool> presenter_chart_view::get_categories(){
     std::vector<std::string> categories;
-    for(int i = 0; i<comp_editor->spinBox->value();++i){
+    std::set<std::string> set_categories;
+    bool stop = false;
+    for(int i = 0; i<comp_editor->spinBox->value() && !stop;++i){
         if(comp_editor->gridLabelCategories->item(i, 0)){
-            categories.push_back(comp_editor->gridLabelCategories->item(i, 0)->text().toStdString());
+            if(comp_editor->gridLabelCategories->item(i, 0)->text().toStdString() == ""){
+                comp_editor->signalLabel->setText("Una o più categorie non sono state impostate!");
+                stop = true;
+            }
+            else if(!set_categories.insert(comp_editor->gridLabelCategories->item(i, 0)->text().toStdString()).second){
+                comp_editor->signalLabel->setText("Due o più categorie coincidono!");
+                stop = true;
+            }
+            else
+                categories.push_back(comp_editor->gridLabelCategories->item(i, 0)->text().toStdString());
         }else{
-            categories.push_back("");
+            comp_editor->signalLabel->setText("Una o più categorie non sono state impostate!");
+            stop = true;
         }
     }
-    return categories;
+    return std::pair<std::vector<std::string>,bool>(categories,stop);
 }
 
 void presenter_chart_view::open_settings(){
@@ -194,21 +225,26 @@ void presenter_chart_view::give_balance(){
 }
 
 void presenter_chart_view::set_description(){
-    uint code = type;
+    uint code = charts_creation->selected;
     charts_creation->labelDescription->setText(QString::fromStdString(model::chart_description(code)));
 }
 
 void presenter_chart_view::save(){
-    QString directory = QFileDialog::getSaveFileName(charts_mw, tr("Salva grafico"),
-                               QDir::currentPath(),
-                               tr("XML files (*.xml)"));
-    QString nome_file = QFileInfo(directory).fileName();
-    if(nome_file == ""){
+    QFileDialog sfd(charts_mw, tr("Salva grafico"),
+                    QDir::currentPath(),
+                    tr("XML files (*.xml)"));
+    sfd.setWindowModality(Qt::WindowModal);
+    sfd.setAcceptMode(QFileDialog::AcceptSave);
+    sfd.setDefaultSuffix(".xml");
+    QString filename;
+    if(sfd.exec() == QDialog::Accepted)
+        filename = sfd.selectedFiles().first();
+    if(filename == ""){
         charts_mw->statusBar()->showMessage("Salvataggio annullato.");
     }else{
-        Charts_XmlExport c_export(mod->get_chart(),directory,nome_file);
+        Charts_XmlExport c_export(mod->get_chart(),filename);
         c_export.exportContent();
-        charts_mw->statusBar()->showMessage(directory);
+        charts_mw->statusBar()->showMessage(filename);
     }
 
 }
@@ -220,41 +256,38 @@ void presenter_chart_view::load(){
             w = de;
         else
             w = charts_mw;
-        QString directory = QFileDialog::getOpenFileName(w, tr("Carica grafico"),
-                                                         QDir::currentPath(),
-                                                         tr("XML files (*.xml)"));
-        QString nome_file = QFileInfo(directory).fileName();
-        Charts_XmlImport c_import(directory,nome_file);
+        QFileDialog sfd(w, tr("Carica grafico"),
+                        QDir::currentPath(),
+                        tr("XML files (*.xml)"));
+        sfd.setWindowModality(Qt::WindowModal);
+        sfd.setAcceptMode(QFileDialog::AcceptOpen);
+        QString filename;
+        if(sfd.exec() == QDialog::Accepted)
+            filename = sfd.selectedFiles().first();
+        else
+            throw no_chart_selected();
+        Charts_XmlImport c_import(filename);
         std::pair<uint,chart*> ch = c_import.importContent();
-        if(de->isActiveWindow()){
-            Charts_Main_Window* mw = new Charts_Main_Window();
-            set_mainchart_view(mw);
-            charts_mw->showMaximized();
-            charts_mw->set_chart_presenter(this);
-            Charts_Cartesianchart_AddPoints* cca = new Charts_Cartesianchart_AddPoints();
-            set_cartesianeditor_view(cca);
-            cart_editor->set_chart_presenter(this);
-            Charts_Comparisonchart_Editor* cce = new Charts_Comparisonchart_Editor();
-            set_comparisoneditor_view(cce);
-            comp_editor->set_chart_presenter(this);
-            de->close();
-        }
-        model* m = new model();
-        set_model(m);
         mod->set_chart(ch.second);
         type = ch.first+1;
+        if(w == de){
+            create_views();
+            de->close();
+        }
         charts_mw->show_charts(mod->get_chart());
         charts_mw->show_chart_info(mod->chart_info());
         charts_mw->showParent_list_values(mod->get_chart());
-        if(ch.first != 5){
+        if(type != 5){
             charts_mw->TC_SpinBox1->setEnabled(false);
             charts_mw->TC_SpinBox2->setEnabled(false);
             charts_mw->TC_Calculate->setEnabled(false);
         }
-        charts_mw->statusBar()->showMessage(directory);
+        charts_mw->statusBar()->showMessage(filename);
     }catch(std::ios_base::failure& ex){
         QMessageBox::about(w,"Errore",ex.what());
     }catch(std::logic_error& ex){
+        QMessageBox::about(w,"Errore",ex.what());
+    }catch(std::exception& ex){
         QMessageBox::about(w,"Errore",ex.what());
     }
 }

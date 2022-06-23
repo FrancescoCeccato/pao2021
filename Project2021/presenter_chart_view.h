@@ -34,10 +34,11 @@ public:
     void close(bool);
     static uint type;
 private:
+    void create_views();
     double getCellNumericValue(uint row, uint col);
     double* get_entries_value(uint);
     std::string get_label(uint);
-    std::vector<std::string> get_categories();
+    std::pair<std::vector<std::string>,bool> get_categories();
 
 public slots:
     void add_charts();

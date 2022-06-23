@@ -32,7 +32,7 @@ std::pair<double,std::string> stacked_bar_chart::max() const{
 
 std::vector<double> stacked_bar_chart::mean_per_category() const{
     std::vector<double> mean_categ;
-    for(uint i=0; i<get_nvalues()&&entries.size()!= 0;++i){
+    for(uint i=0; i<get_nvalues() && entries.size()!= 0;++i){
         mean_categ.push_back(give_mean(i));
     }
     return mean_categ;

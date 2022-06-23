@@ -18,7 +18,7 @@ public:
     std::vector<std::string> get_categories() const;
 
     bool is_segmented() const;
-    std::pair<double,std::string> max() const;
+    std::pair<double,std::string> max() const override;
     std::vector<double> mean_per_category() const;
 };
 

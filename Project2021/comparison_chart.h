@@ -37,7 +37,6 @@ protected:
 
 public:
     comparison_chart(uint, const std::string&);
-
     uint get_nvalues() const;
     uint get_entries_size() const;
     void set_amt(uint);
@@ -47,6 +46,7 @@ public:
     std::string give_entry_label(uint) const;
     std::vector<double> give_entry_values(uint) const;
     std::vector<double> give_entry_percentages(uint) const;
+    virtual std::pair<double,std::string> max() const = 0;
 };
 
 #endif // COMPARISON_CHART_H

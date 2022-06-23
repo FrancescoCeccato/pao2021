@@ -45,7 +45,7 @@ double simple_bar_chart::midrange() const {
     return 0;
 }
 
-double simple_bar_chart::max() const{
+/*double simple_bar_chart::max() const{
     if(entries.size() != 0) {
         std::vector<double> v;
         for(uint i = 0; i<entries.size(); i++)
@@ -53,6 +53,17 @@ double simple_bar_chart::max() const{
         return *(std::max_element(v.begin(), v.end()));
     }
     return 0;
+}*/
+
+std::pair<double, std::string> simple_bar_chart::max() const {
+    std::pair<double,std::string> max;
+    for(uint i = 0; i<entries.size(); ++i){
+        if(*entries[i] > max.first){
+            max.first = *entries[i];
+            max.second = entries[i]->give_label();
+        }
+    }
+    return max;
 }
 
 void simple_bar_chart::insert_entry(uint index, double *val, const std::string &label, bool overwrite) {

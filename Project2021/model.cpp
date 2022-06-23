@@ -6,9 +6,10 @@
 #include <dot_chart.h>
 #include <time_chart.h>
 
-model::model(){}
+model::model():c(nullptr){}
 
 void model::add_charts(uint code, std::string title, uint amt, bool h, bool seg, std::string x, std::string y){
+    delete c;
     switch (code) {
     case 1:
         c = new simple_bar_chart(title,h);
@@ -73,7 +74,10 @@ chart* model::get_chart() const{
 }
 
 void model::set_chart(chart * ch){
-    c = ch;
+    if(c != ch){
+        delete c;
+        c = ch;
+    }
 }
 
 std::vector<std::string> model::chart_info(){

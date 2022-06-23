@@ -11,7 +11,7 @@ public:
     pie_chart(const std::string& ="");
 
     double give_slice_percentage(uint) const;
-    std::pair<double, std::string> give_max() const;
+    std::pair<double, std::string> max() const override;
 
     std::vector<std::string> chart_info() const override;
     static std::string description();

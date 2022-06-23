@@ -12,7 +12,7 @@ private:
 public:
     polar_chart(const std::string& ="");
 
-    std::pair<int,std::string> find_max() const;
+    std::pair<double,std::string> max() const override;
     int midrange() const;
     double mean() const;
     double give_completion_percentage() const;

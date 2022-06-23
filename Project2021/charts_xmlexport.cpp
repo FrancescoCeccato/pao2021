@@ -7,7 +7,7 @@
 #include <dot_chart.h>
 #include <QSaveFile>
 
-Charts_XmlExport::Charts_XmlExport(chart* c, const QString& d, const QString& f) : ch(c), destinationFolder(d), filename(f) {
+Charts_XmlExport::Charts_XmlExport(chart* c, const QString& f) : ch(c), filename(f) {
     mmap = {
         {0,&Charts_XmlExport::writeBarChartDocument},
         {1,&Charts_XmlExport::writeStackedBarChartDocument},
@@ -23,7 +23,7 @@ void Charts_XmlExport::exportContent() {
     (this->*mmap[tmap[typeid(*ch)]]) ();
     finalizeDocument();
 
-    QSaveFile file(destinationFolder);
+    QSaveFile file(filename);
     file.open(QIODevice::WriteOnly);
     file.write(qPrintable(doc.toString()));
     file.commit();

@@ -12,7 +12,6 @@ private:
     typedef chart*(Charts_XmlImport::*ConstMethod)() const;
     typedef std::map<uint,ConstMethod> MethodMap;
 
-    QString sourceFolder;
     QString filename;
 
     QDomDocument doc;
@@ -30,7 +29,7 @@ private:
     MethodMap mmap;
 
 public:
-    Charts_XmlImport(const QString&, const QString&);
+    Charts_XmlImport(const QString&);
 
     std::pair<uint, chart*> importContent();
 };

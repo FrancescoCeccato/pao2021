@@ -15,7 +15,7 @@ public:
     double midrange() const;
     std::vector<std::string> chart_info() const override;
     static std::string description();
-    double max() const;
+    std::pair<double,std::string> max() const override;
 };
 
 #endif // SIMPLE_BAR_CHART_H

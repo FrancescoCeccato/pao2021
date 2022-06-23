@@ -14,7 +14,7 @@ typedef std::map<uint,void(Charts_XmlExport::*)()> MethodMap;
 typedef std::map<std::type_index, uint> TypeMap;
 
 public:
-    Charts_XmlExport(chart*, const QString&, const QString&);
+    Charts_XmlExport(chart*, const QString&);
     void exportContent();
 
 private:
@@ -22,7 +22,6 @@ private:
     QDomDocument doc;
     QDomElement container;
 
-    QString destinationFolder;
     QString filename;
 
     MethodMap mmap;

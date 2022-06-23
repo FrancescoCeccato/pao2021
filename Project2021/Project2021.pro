@@ -52,8 +52,7 @@ HEADERS += \
     stacked_bar_chart.h \
     time_chart.h
 
-FORMS += \
-    test.ui
+FORMS +=
 
 TRANSLATIONS += \
     Project2021_it_IT.ts
