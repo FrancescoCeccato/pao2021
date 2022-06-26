@@ -52,10 +52,6 @@ HEADERS += \
     stacked_bar_chart.h \
     time_chart.h
 
-FORMS +=
-
-TRANSLATIONS += \
-    Project2021_it_IT.ts
 CONFIG += lrelease
 CONFIG += embed_translations
 

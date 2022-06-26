@@ -238,7 +238,7 @@ void presenter_chart_view::save(){
     sfd.setDefaultSuffix(".xml");
     QString filename;
     if(sfd.exec() == QDialog::Accepted)
-        filename = sfd.selectedFiles().first();
+        filename = sfd.selectedFiles().at(0);
     if(filename == ""){
         charts_mw->statusBar()->showMessage("Salvataggio annullato.");
     }else{
@@ -263,7 +263,7 @@ void presenter_chart_view::load(){
         sfd.setAcceptMode(QFileDialog::AcceptOpen);
         QString filename;
         if(sfd.exec() == QDialog::Accepted)
-            filename = sfd.selectedFiles().first();
+            filename = sfd.selectedFiles().at(0);
         else
             throw no_chart_selected();
         Charts_XmlImport c_import(filename);
@@ -274,6 +274,7 @@ void presenter_chart_view::load(){
             create_views();
             de->close();
         }
+        charts_mw->valuesList->setCurrentItem(nullptr);
         charts_mw->show_charts(mod->get_chart());
         charts_mw->show_chart_info(mod->chart_info());
         charts_mw->showParent_list_values(mod->get_chart());
